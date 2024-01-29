@@ -1,4 +1,6 @@
-package fr.insaRouen.iti.prog.asiaventure.elements;
+package fr.insaRouen.iti.prog.asiaventure;
+
+import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 
 public class Monde {
     private final String nom;

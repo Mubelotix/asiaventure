@@ -1,6 +1,6 @@
 package fr.insaRouen.iti.prog.asiaventure.elements;
 
-// import fr.insaRouen.iti.prog.asiaventure.elements.Monde;
+import fr.insaRouen.iti.prog.asiaventure.Monde;
 
 public class Entite {
     private final Monde monde;
