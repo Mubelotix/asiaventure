@@ -21,13 +21,7 @@ public class Entite {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Entite(");
-        sb.append(this.getNom());
-        sb.append(", ");
-        sb.append(this.getMonde());
-        sb.append(")");
-        return sb.toString();
+        return String.format("Entite(%s, %s)", this.getNom(), this.getMonde().getNom());
     }
 
     public boolean equals(Object autre) {
