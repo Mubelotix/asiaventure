@@ -40,4 +40,8 @@ public class Entite {
         Entite autreEntite = (Entite) autre;
         return this.getNom().equals(autreEntite.getNom()) && this.getMonde().equals(autreEntite.getMonde());
     }
+
+    public int hashCode() {
+        return 13 * this.getNom().hashCode() + 17 * this.getMonde().hashCode();
+    }
 }
