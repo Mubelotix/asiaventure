@@ -16,4 +16,14 @@ public class Entite {
     private String getNom() {
         return this.nom;
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Entite(");
+        sb.append(this.getNom());
+        sb.append(", ");
+        sb.append(this.getMonde());
+        sb.append(")");
+        return sb.toString();
+    }
 }
