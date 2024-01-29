@@ -19,6 +19,10 @@ public class Entite {
         return this.nom;
     }
 
+    public Entite deepCopy() {
+        return new Entite(this.getNom(), this.getMonde());
+    }
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Entite(");

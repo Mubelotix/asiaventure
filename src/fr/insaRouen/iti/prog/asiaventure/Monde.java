@@ -22,4 +22,11 @@ public class Monde {
         }
         return null;
     }
+
+    public void ajouter(Entite entite) {
+        Entite[] newEntites = new Entite[this.entites.length + 1];
+        System.arraycopy(this.entites, 0, newEntites, 0, this.entites.length);
+        newEntites[this.entites.length] = entite.deepCopy();
+        this.entites = newEntites;
+    }
 }
