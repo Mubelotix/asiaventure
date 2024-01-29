@@ -25,14 +25,10 @@ public class Entite {
     }
 
     public boolean equals(Object autre) {
-        if (autre == null) {
-            return false;
-        }
-        if (!(autre instanceof Entite)) {
-            return false;
-        }
-        Entite autreEntite = (Entite) autre;
-        return this.getNom().equals(autreEntite.getNom()) && this.getMonde().equals(autreEntite.getMonde());
+        return (autre != null)
+            && (this.getClass() == autre.getClass())
+            && this.getNom().equals(((Entite)autre).getNom())
+            && this.getMonde().equals(((Entite)autre).getMonde());
     }
 
     public int hashCode() {
