@@ -1,7 +1,7 @@
 package fr.insaRouen.iti.prog.asiaventure.elements;
 
 public class Entite {
-    private Monde monde;
+    private final Monde monde;
     public final String nom;
 
     public Entite(String nom, Monde monde) {
@@ -9,11 +9,11 @@ public class Entite {
         this.nom = nom;
     }
 
-    private Monde getMonde() {
+    public Monde getMonde() {
         return this.monde;
     }
 
-    private String getNom() {
+    public String getNom() {
         return this.nom;
     }
 
