@@ -9,6 +9,7 @@ public class Entite {
     public Entite(String nom, Monde monde) {
         this.monde = monde;
         this.nom = nom;
+        monde.ajouter(this);
     }
 
     public Monde getMonde() {
@@ -17,10 +18,6 @@ public class Entite {
 
     public String getNom() {
         return this.nom;
-    }
-
-    public Entite deepCopy() {
-        return new Entite(this.getNom(), this.getMonde());
     }
 
     public String toString() {

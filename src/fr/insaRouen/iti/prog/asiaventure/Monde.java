@@ -26,7 +26,7 @@ public class Monde {
     public void ajouter(Entite entite) {
         Entite[] newEntites = new Entite[this.entites.length + 1];
         System.arraycopy(this.entites, 0, newEntites, 0, this.entites.length);
-        newEntites[this.entites.length] = entite.deepCopy();
+        newEntites[this.entites.length] = entite;
         this.entites = newEntites;
     }
 }
