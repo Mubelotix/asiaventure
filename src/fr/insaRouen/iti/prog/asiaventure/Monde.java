@@ -8,6 +8,7 @@ public class Monde {
     
     public Monde(String nom) {
         this.nom = nom;
+        this.entites = new Entite[0];
     }
 
     public String getNom() {
@@ -28,5 +29,18 @@ public class Monde {
         System.arraycopy(this.entites, 0, newEntites, 0, this.entites.length);
         newEntites[this.entites.length] = entite;
         this.entites = newEntites;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("World(nom: ");
+        sb.append(this.getNom());
+        sb.append(", entites: [");
+        for (int i = 0; i < this.entites.length; i++) {
+            sb.append(this.entites[i].getNom());
+            sb.append(", ");
+        }
+        sb.append("])");
+        return sb.toString();
     }
 }
