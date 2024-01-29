@@ -2,7 +2,7 @@ package fr.insaRouen.iti.prog.asiaventure.elements;
 
 public class Entite {
     private Monde monde;
-    public String nom;
+    public final String nom;
 
     public Entite(String nom, Monde monde) {
         this.monde = monde;
@@ -25,5 +25,16 @@ public class Entite {
         sb.append(this.getMonde());
         sb.append(")");
         return sb.toString();
+    }
+
+    public boolean equals(Object autre) {
+        if (autre == null) {
+            return false;
+        }
+        if (!(autre instanceof Entite)) {
+            return false;
+        }
+        Entite autreEntite = (Entite) autre;
+        return this.getNom().equals(autreEntite.getNom()) && this.getMonde().equals(autreEntite.getMonde());
     }
 }
