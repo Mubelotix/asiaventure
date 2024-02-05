@@ -1,6 +1,5 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
@@ -119,7 +118,7 @@ public /*abstract*/ class Vivant extends Entite {
      * @param nomObjet Le nom de l'objet.
      * @return Vrai si le vivant possède l'objet, faux sinon.
      */
-    public Boolean contientObjet(String nomObjet) {
+    public boolean contientObjet(String nomObjet) {
         return Objet.contientObjetArray(this.objets, nomObjet);
     }
 
@@ -128,7 +127,7 @@ public /*abstract*/ class Vivant extends Entite {
      * @param objet L'objet.
      * @return Vrai si le vivant possède l'objet, faux sinon.
      */
-    public Boolean contientObjet(Objet objet) {
+    public boolean contientObjet(Objet objet) {
         return this.contientObjet(objet.getNom());
     }
 
@@ -191,7 +190,7 @@ public /*abstract*/ class Vivant extends Entite {
     /**
      * Vérifie si un tableau de vivants contient un vivant.
      */
-    public static Boolean contientVivantArray(Vivant[] vivants, String nomVivant) {
+    public static boolean contientVivantArray(Vivant[] vivants, String nomVivant) {
         for (int i = 0; i < vivants.length; i++) {
             if (vivants[i].getNom().equals(nomVivant))
                 return true;

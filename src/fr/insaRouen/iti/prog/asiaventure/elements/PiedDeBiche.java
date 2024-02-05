@@ -7,7 +7,7 @@ public class PiedDeBiche extends Objet {
         super(nom, monde);
     }
 
-    public Boolean estDeplacable() {
+    public boolean estDeplacable() {
         return true;
     }
 }

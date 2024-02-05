@@ -20,10 +20,9 @@ public class Main {
 
         EntiteTest pdb2 = new EntiteTest("nom",monde);
         System.out.println(pdb2.toString());
-        //assert pdb2 == pdb;
 
         ElementStructurelTest es = new ElementStructurelTest("es", monde);
-        System.out.println(monde);
+        System.out.println(es);
 
         testPiece();
     }
@@ -84,7 +83,7 @@ class ObjetTest extends Objet{
         super(nom, monde);
     }
 
-    public Boolean estDeplacable(){
+    public boolean estDeplacable(){
         return false;
     }
 }

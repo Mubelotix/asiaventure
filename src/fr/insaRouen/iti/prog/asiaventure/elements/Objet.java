@@ -7,7 +7,7 @@ public abstract class Objet extends Entite {
         super(nom, monde);
     }
 
-    public abstract Boolean estDeplacable();
+    public abstract boolean estDeplacable();
 
     // -- Static utility methods --
 
@@ -42,7 +42,7 @@ public abstract class Objet extends Entite {
         return newObjets;
     }
 
-    public static Boolean contientObjetArray(Objet[] objets, String nomObjet) {
+    public static boolean contientObjetArray(Objet[] objets, String nomObjet) {
         for (int i = 0; i < objets.length; i++) {
             if (objets[i].getNom().equals(nomObjet))
                 return true;

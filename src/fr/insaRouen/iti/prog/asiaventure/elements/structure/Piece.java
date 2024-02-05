@@ -23,7 +23,7 @@ public class Piece extends ElementStructurel {
      * @param nomObjet Le nom de l'objet.
      * @return Vrai si la pièce contient l'objet, faux sinon.
      */
-    public Boolean contientObjet(String nomObjet) {
+    public boolean contientObjet(String nomObjet) {
         return Objet.contientObjetArray(this.objets, nomObjet);
     }
 
@@ -31,7 +31,7 @@ public class Piece extends ElementStructurel {
      * @param objet L'objet.
      * @return Vrai si la pièce contient l'objet, faux sinon.
      */
-    public Boolean contientObjet(Objet objet) {
+    public boolean contientObjet(Objet objet) {
         return this.contientObjet(objet.getNom());
     }
 
@@ -39,7 +39,7 @@ public class Piece extends ElementStructurel {
      * @param nomVivant Le nom du vivant.
      * @return Vrai si la pièce contient le vivant, faux sinon.
      */
-    public Boolean contientVivant(String nomVivant) {
+    public boolean contientVivant(String nomVivant) {
         return Vivant.contientVivantArray(this.vivants, nomVivant);
     }
 
@@ -47,7 +47,7 @@ public class Piece extends ElementStructurel {
      * @param vivant Le vivant.
      * @return Vrai si la pièce contient le vivant, faux sinon.
      */
-    public Boolean contientVivant(Vivant vivant) {
+    public boolean contientVivant(Vivant vivant) {
         return this.contientVivant(vivant.getNom());
     }
 
