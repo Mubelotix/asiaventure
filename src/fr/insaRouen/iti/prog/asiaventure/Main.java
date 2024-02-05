@@ -50,6 +50,26 @@ public class Main {
         vivant1.entrer(piece2);
         assert !piece1.contientVivant("vivant1");
         assert piece2.contientVivant("vivant1");
+
+        // Same thing with an Objet
+        ObjetTest objet1 = new ObjetTest("objet1", monde);
+        piece1.deposer(objet1);
+        assert piece1.contientObjet("objet1");
+        assert piece1.getObjets().length == 1;
+        
+        // Pick up the Objet
+        vivant1.entrer(piece1);
+        vivant1.prendreObjet("objet1");
+        assert !piece1.contientObjet("objet1");
+        assert piece1.getObjets().length == 0;
+        assert vivant1.getObjets().length == 1;
+
+        // Move the Objet to another Piece
+        vivant1.entrer(piece2);
+        vivant1.deposer("objet1");
+        assert !piece1.contientObjet("objet1");
+        assert piece2.contientObjet("objet1");
+        assert vivant1.getObjets().length == 0;
     }
 }
 
