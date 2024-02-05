@@ -2,8 +2,7 @@ package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.elements.Objet;
-import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
-import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;;
+import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 /** Une pièce est un élément structurel du monde qui contient des objets et des vivants. */
 public class Piece extends ElementStructurel {
@@ -82,5 +81,9 @@ public class Piece extends ElementStructurel {
 
     public Vivant sortirVivant(String nomVivant) {
         return Vivant.retirerVivantArray(this.vivants, nomVivant);
+    }
+
+    public Vivant sortirVivant(Vivant vivant) {
+        return this.sortirVivant(vivant.getNom());
     }
 }
