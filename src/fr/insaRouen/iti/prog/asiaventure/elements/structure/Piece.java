@@ -21,11 +21,7 @@ public class Piece extends ElementStructurel {
      * @return Vrai si la pièce contient l'objet, faux sinon.
      */
     public Boolean contientObjet(String nomObjet) {
-        for (int i = 0; i < this.objets.length; i++) {
-            if (this.objets[i].getNom().equals(nomObjet))
-                return true;
-        }
-        return false;
+        return Objet.contientObjetArray(this.objets, nomObjet);
     }
 
     /** Vérifie si la pièce contient un objet.
@@ -39,46 +35,29 @@ public class Piece extends ElementStructurel {
     /** Ajoute un objet dans la pièce.
      * @param objet L'objet à ajouter.
      */
-    public void deposerObjet(Objet objet) {
-        Objet[] newObjets = new Objet[this.objets.length + 1];
-        System.arraycopy(this.objets, 0, newObjets, 0, this.objets.length);
-        newObjets[this.objets.length] = objet;
-        this.objets = newObjets;
+    public void deposer(Objet objet) {
+        Objet.ajouterObjetArray(this.objets, objet);
     }
 
     /** Récupère tous les objet de la pièce.
      * @return Les objets de la pièce.
      */
     public Objet[] getObjets() {
-        return this.objets;
+        return Objet.cloneArray(this.objets);
     }
 
     /** Récupère un objet de la pièce.
      * @param nomObjet Le nom de l'objet.
      * @return L'objet.
      */
-    public void retirerObjet(String nomObjet) {
-        // Locate the object in the array
-        int index = -1;
-        for (int i = 0; i < this.objets.length; i++) {
-            if (this.objets[i].getNom().equals(nomObjet)) {
-                index = i;
-                break;
-            }
-        }
-        
-        // Copy what's before and after the object
-        Objet[] newObjets = new Objet[this.objets.length - 1];
-        System.arraycopy(this.objets, 0, newObjets, 0, index);
-        System.arraycopy(this.objets, index + 1, newObjets, index, this.objets.length - index - 1);
-
-        this.objets = newObjets;
+    public Objet retirer(String nomObjet) {
+        return Objet.retirerObjetArray(this.objets, nomObjet);
     }
 
     /** Récupère un objet de la pièce.
      * @param objet L'objet.
      */
-    public void retirerObjet(Objet objet) {
-        this.retirerObjet(objet.getNom());
+    public void retirer(Objet objet) {
+        this.retirer(objet.getNom());
     }
 }
