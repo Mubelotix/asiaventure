@@ -7,12 +7,7 @@ public abstract class Objet extends Entite {
         super(nom, monde);
     }
 
-    public abstract Boolean estDeplacable() ;
-    
-
-    public Objet clone() {
-        return new Objet(this.getNom(), this.getMonde());
-    }
+    public abstract Boolean estDeplacable();
 
     public static void ajouterObjetArray(Objet[] objets, Objet objet) {
         Objet[] newArray = new Objet[objets.length + 1];
@@ -50,9 +45,7 @@ public abstract class Objet extends Entite {
 
     public static Objet[] cloneArray(Objet[] objets) {
         Objet[] cloneObjets = new Objet[objets.length];
-        for (int i = 0; i < objets.length; i++) {
-            cloneObjets[i] = objets[i].clone();
-        }
+        System.arraycopy(objets, 0, cloneObjets, 0, objets.length);
         return cloneObjets;
     }
 }
