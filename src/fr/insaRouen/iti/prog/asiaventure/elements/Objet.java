@@ -2,14 +2,13 @@ package fr.insaRouen.iti.prog.asiaventure.elements;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 
-public class Objet extends Entite {
+public abstract class Objet extends Entite {
     public Objet(String nom, Monde monde) {
         super(nom, monde);
     }
 
-    public Boolean estDeplacable() {
-        return false;
-    }
+    public abstract Boolean estDeplacable() ;
+    
 
     public Objet clone() {
         return new Objet(this.getNom(), this.getMonde());

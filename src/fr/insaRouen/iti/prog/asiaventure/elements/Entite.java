@@ -2,7 +2,7 @@ package fr.insaRouen.iti.prog.asiaventure.elements;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 
-public class Entite {
+public abstract class Entite {
     private final Monde monde;
     public final String nom;
 
@@ -28,7 +28,7 @@ public class Entite {
         return (autre != null)
             && (this.getClass() == autre.getClass())
             && this.getNom().equals(((Entite)autre).getNom())
-            && this.getMonde().equals(((Entite)autre).getMonde());
+            && this.getMonde().equals(((Entite)autre).getMonde()); /// == par defaut
     }
 
     public int hashCode() {
