@@ -33,10 +33,18 @@ public class Piece extends ElementStructurel {
         return this.contientObjet(objet.getNom());
     }
 
+    /** Vérifie si la pièce contient un vivant.
+     * @param nomVivant Le nom du vivant.
+     * @return Vrai si la pièce contient le vivant, faux sinon.
+     */
     public Boolean contientVivant(String nomVivant) {
         return Vivant.contientVivantArray(this.vivants, nomVivant);
     }
 
+    /** Vérifie si la pièce contient un vivant.
+     * @param vivant Le vivant.
+     * @return Vrai si la pièce contient le vivant, faux sinon.
+     */
     public Boolean contientVivant(Vivant vivant) {
         return this.contientVivant(vivant.getNom());
     }
@@ -48,6 +56,9 @@ public class Piece extends ElementStructurel {
         Objet.ajouterObjetArray(this.objets, objet);
     }
 
+    /** Ajoute un vivant dans la pièce.
+     * @param vivant Le vivant à ajouter.
+     */
     public void entrer(Vivant vivant) {
         Vivant.ajouterVivantArray(this.vivants, vivant);
     }
@@ -59,11 +70,14 @@ public class Piece extends ElementStructurel {
         return Objet.cloneArray(this.objets);
     }
 
+    /** Récupère tous les vivants de la pièce.
+     * @return Les vivants de la pièce.
+     */
     public Vivant[] getVivants() {
         return Vivant.cloneArray(this.vivants);
     }
 
-    /** Récupère un objet de la pièce.
+    /** Retire un objet de la pièce.
      * @param nomObjet Le nom de l'objet.
      * @return L'objet.
      */
@@ -71,7 +85,7 @@ public class Piece extends ElementStructurel {
         return Objet.retirerObjetArray(this.objets, nomObjet);
     }
 
-    /** Récupère un objet de la pièce.
+    /** Retire un objet de la pièce.
      * @param objet L'objet.
      * @return L'objet.
      */
@@ -79,10 +93,20 @@ public class Piece extends ElementStructurel {
         return this.retirer(objet.getNom());
     }
 
+    /** Retire un vivant de la pièce.
+     * @param nomVivant Le nom du vivant.
+     * @return Le vivant.
+     */
     public Vivant sortirVivant(String nomVivant) {
-        return Vivant.retirerVivantArray(this.vivants, nomVivant);
+        Vivant vivant = Vivant.retirerVivantArray(this.vivants, nomVivant);
+        vivant.sortir();
+        return vivant;
     }
 
+    /** Retire un vivant de la pièce.
+     * @param vivant Le vivant.
+     * @return Le vivant.
+     */
     public Vivant sortirVivant(Vivant vivant) {
         return this.sortirVivant(vivant.getNom());
     }

@@ -38,6 +38,13 @@ public abstract class Vivant extends Entite {
         return this.piece;
     }
 
+    public void sortir() {
+        if (this.piece.contientVivant(this.getNom())) {
+            this.piece.sortirVivant(this);
+        }
+        this.piece = null;
+    }
+
     public int getPointsVie() {
         return this.pointsVie;
     }
