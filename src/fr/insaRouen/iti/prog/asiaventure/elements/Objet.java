@@ -11,21 +11,24 @@ public abstract class Objet extends Entite {
 
     // -- Static utility methods --
 
-    public static void ajouterObjetArray(Objet[] objets, Objet objet) {
+    public static Objet[] ajouterObjetArray(Objet[] objets, Objet objet) {
         Objet[] newArray = new Objet[objets.length + 1];
         System.arraycopy(objets, 0, newArray, 0, objets.length);
         newArray[objets.length] = objet;
-        objets = newArray;
+        return newArray;
     }
 
-    public static Objet retirerObjetArray(Objet[] objets, String nomObjet) {
-        // Locate the object in the array
-        int index = -1;
+    public static int locateObjetArray(Objet[] objets, String nomObjet) {
         for (int i = 0; i < objets.length; i++) {
-            if (objets[i].getNom().equals(nomObjet)) {
-                index = i;
-                break;
-            }
+            if (objets[i].getNom().equals(nomObjet))
+                return i;
+        }
+        return -1;
+    }
+
+    public static Objet[] retirerObjetArray(Objet[] objets, int index) {
+        if (index == -1) {
+            return objets;
         }
         
         // Copy what's before and after the object
@@ -33,8 +36,7 @@ public abstract class Objet extends Entite {
         System.arraycopy(objets, 0, newObjets, 0, index);
         System.arraycopy(objets, index + 1, newObjets, index, objets.length - index - 1);
 
-        objets = newObjets;
-        return objets[index];
+        return newObjets;
     }
 
     public static Boolean contientObjetArray(Objet[] objets, String nomObjet) {

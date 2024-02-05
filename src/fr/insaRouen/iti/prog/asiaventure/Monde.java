@@ -33,7 +33,7 @@ public class Monde {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("World(nom: ");
+        sb.append("Monde(nom: ");
         sb.append(this.getNom());
         sb.append(", entites: [");
         for (int i = 0; i < this.entites.length; i++) {

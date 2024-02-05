@@ -1,6 +1,8 @@
 #!/bin/sh
 
+rm -rf classes
+
 javac -classpath ./classes -d ./classes/ -sourcepath ./src/ ./src/fr/insaRouen/iti/prog/asiaventure/Main.java 
 cd classes
-java fr.insaRouen.iti.prog.asiaventure.Main
+java -ea fr.insaRouen.iti.prog.asiaventure.Main
 cd ..

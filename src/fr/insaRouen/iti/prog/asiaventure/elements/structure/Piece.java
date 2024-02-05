@@ -15,6 +15,8 @@ public class Piece extends ElementStructurel {
      */
     public Piece(String nom, Monde monde) {
         super(nom, monde);
+        this.objets = new Objet[0];
+        this.vivants = new Vivant[0];
     }
 
     /** Vérifie si la pièce contient un objet.
@@ -53,14 +55,15 @@ public class Piece extends ElementStructurel {
      * @param objet L'objet à ajouter.
      */
     public void deposer(Objet objet) {
-        Objet.ajouterObjetArray(this.objets, objet);
+        this.objets = Objet.ajouterObjetArray(this.objets, objet);
     }
 
     /** Ajoute un vivant dans la pièce.
      * @param vivant Le vivant à ajouter.
      */
     public void entrer(Vivant vivant) {
-        Vivant.ajouterVivantArray(this.vivants, vivant);
+        this.vivants = Vivant.ajouterVivantArray(this.vivants, vivant);
+        vivant.entrer(this);
     }
 
     /** Récupère tous les objet de la pièce.
@@ -82,7 +85,10 @@ public class Piece extends ElementStructurel {
      * @return L'objet.
      */
     public Objet retirer(String nomObjet) {
-        return Objet.retirerObjetArray(this.objets, nomObjet);
+        int index = Objet.locateObjetArray(this.objets, nomObjet);
+        Objet objet = this.objets[index];
+        this.objets = Objet.retirerObjetArray(this.objets, index);
+        return objet;
     }
 
     /** Retire un objet de la pièce.
@@ -98,7 +104,9 @@ public class Piece extends ElementStructurel {
      * @return Le vivant.
      */
     public Vivant sortirVivant(String nomVivant) {
-        Vivant vivant = Vivant.retirerVivantArray(this.vivants, nomVivant);
+        int index = Vivant.locateVivantArray(this.vivants, nomVivant);
+        Vivant vivant = this.vivants[index];
+        this.vivants = Vivant.retirerVivantArray(this.vivants, index);
         vivant.sortir();
         return vivant;
     }
@@ -109,5 +117,23 @@ public class Piece extends ElementStructurel {
      */
     public Vivant sortirVivant(Vivant vivant) {
         return this.sortirVivant(vivant.getNom());
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Monde(nom: ");
+        sb.append(this.getNom());
+        sb.append(", objets: [");
+        for (int i = 0; i < this.objets.length; i++) {
+            sb.append(this.objets[i].getNom());
+            sb.append(", ");
+        }
+        sb.append(", vivants: [");
+        for (int i = 0; i < this.vivants.length; i++) {
+            sb.append(this.vivants[i].getNom());
+            sb.append(", ");
+        }
+        sb.append("])");
+        return sb.toString();
     }
 }

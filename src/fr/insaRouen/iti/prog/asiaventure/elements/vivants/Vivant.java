@@ -1,5 +1,7 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 import fr.insaRouen.iti.prog.asiaventure.elements.Objet;
@@ -9,7 +11,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
  * Classe abstraite Vivant, héritant de la classe Entite.
  * Se trouve dans une pièce et dipose d'un équipement.
  */
-public abstract class Vivant extends Entite {
+public /*abstract*/ class Vivant extends Entite {
     int pointsVie;
     int pointsForce;
     Piece piece;
@@ -29,8 +31,12 @@ public abstract class Vivant extends Entite {
         this.pointsVie = pointsVie;
         this.pointsForce = pointsForce;
         this.piece = piece;
-        this.objets = objets;
-        this.piece.entrer(this);
+        if (objets == null) {
+            this.objets = new Objet[0];
+        } else {
+            this.objets = Objet.cloneArray(objets);
+        }
+        this.entrer(piece);
     }
 
     /**
@@ -38,7 +44,9 @@ public abstract class Vivant extends Entite {
      * @param nomObjet Le nom de l'objet à déposer.
      */
     public void deposer(String nomObjet) {
-        Objet objet = Objet.retirerObjetArray(this.objets, nomObjet);
+        int index = Objet.locateObjetArray(this.objets, nomObjet);
+        Objet objet = this.objets[index];
+        this.objets = Objet.retirerObjetArray(this.objets, index);
         this.piece.deposer(objet);
     }
 
@@ -47,8 +55,7 @@ public abstract class Vivant extends Entite {
      * @param objet L'objet à déposer.
      */
     public void deposer(Objet objet) {
-        Objet.retirerObjetArray(this.objets, objet.getNom());
-        this.piece.deposer(objet);
+        deposer(objet.getNom());
     }
 
     /**
@@ -71,10 +78,21 @@ public abstract class Vivant extends Entite {
      * Fais quitter la pièce au vivant. Il peut alors se trouver dans les limbes.
      */
     public void sortir() {
-        if (this.piece.contientVivant(this.getNom())) {
+        if (this.piece != null && this.piece.contientVivant(this.getNom())) {
             this.piece.sortirVivant(this);
         }
         this.piece = null;
+    }
+
+    /**
+     * Fait entrer le vivant dans une pièce.
+    */
+    public void entrer(Piece piece) {
+        if (this.piece == null && !piece.contientVivant(this.getNom())) {
+            this.sortir();
+            piece.entrer(this);
+        }
+        this.piece = piece;
     }
 
     /**
@@ -117,7 +135,7 @@ public abstract class Vivant extends Entite {
      */
     public void prendreObjet(String nomObjet) {
         Objet objet = this.piece.retirer(nomObjet);
-        Objet.ajouterObjetArray(this.objets, objet);
+        this.objets = Objet.ajouterObjetArray(this.objets, objet);
     }
 
     /**
@@ -133,24 +151,27 @@ public abstract class Vivant extends Entite {
     /**
      * Ajoute un vivant dans un tableau de vivants.
      */
-    public static void ajouterVivantArray(Vivant[] vivants, Vivant vivant) {
+    public static Vivant[] ajouterVivantArray(Vivant[] vivants, Vivant vivant) {
         Vivant[] newArray = new Vivant[vivants.length + 1];
         System.arraycopy(vivants, 0, newArray, 0, vivants.length);
         newArray[vivants.length] = vivant;
-        vivants = newArray;
+        return newArray;
+    }
+
+    public static int locateVivantArray(Vivant[] vivants, String nomVivant) {
+        for (int i = 0; i < vivants.length; i++) {
+            if (vivants[i].getNom().equals(nomVivant))
+                return i;
+        }
+        return -1;
     }
 
     /**
      * Retire un vivant d'un tableau de vivants.
      */
-    public static Vivant retirerVivantArray(Vivant[] vivants, String nomVivant) {
-        // Locate the object in the array
-        int index = -1;
-        for (int i = 0; i < vivants.length; i++) {
-            if (vivants[i].getNom().equals(nomVivant)) {
-                index = i;
-                break;
-            }
+    public static Vivant[] retirerVivantArray(Vivant[] vivants, int index) {
+        if (index == -1) {
+            return vivants;
         }
         
         // Copy what's before and after the object
@@ -158,8 +179,7 @@ public abstract class Vivant extends Entite {
         System.arraycopy(vivants, 0, newVivants, 0, index);
         System.arraycopy(vivants, index + 1, newVivants, index, vivants.length - index - 1);
 
-        vivants = newVivants;
-        return vivants[index];
+        return newVivants;
     }
 
     /**
@@ -180,5 +200,9 @@ public abstract class Vivant extends Entite {
         Vivant[] cloneVivants = new Vivant[vivants.length];
         System.arraycopy(vivants, 0, cloneVivants, 0, vivants.length);
         return cloneVivants;
+    }
+
+    public String toString() {
+        return String.format("Vivant(%s, %s)", this.getNom(), this.piece.getNom());
     }
 }
