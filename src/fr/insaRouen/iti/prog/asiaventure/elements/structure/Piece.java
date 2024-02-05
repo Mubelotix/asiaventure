@@ -48,7 +48,7 @@ public class Piece extends ElementStructurel {
         Objet.ajouterObjetArray(this.objets, objet);
     }
 
-    public void entree(Vivant vivant) {
+    public void entrer(Vivant vivant) {
         Vivant.ajouterVivantArray(this.vivants, vivant);
     }
 

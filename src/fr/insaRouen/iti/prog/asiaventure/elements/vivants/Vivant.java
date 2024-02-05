@@ -11,13 +11,13 @@ public abstract class Vivant extends Entite {
     Piece piece;
     Objet[] objets;
 
-    public Vivant(String nom, Monde monde, int pointsVie, int pointsForce, Piece piece, Objet[] objets) {
+    public Vivant(String nom, Monde monde, int pointsVie, int pointsForce, Piece piece, Objet... objets) {
         super(nom, monde);
         this.pointsVie = pointsVie;
         this.pointsForce = pointsForce;
-        // TODO add to piece
         this.piece = piece;
         this.objets = objets;
+        this.piece.entrer(this);
     }
 
     public void deposer(String nomObjet) {
