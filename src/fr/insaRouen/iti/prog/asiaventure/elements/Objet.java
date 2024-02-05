@@ -9,6 +9,8 @@ public abstract class Objet extends Entite {
 
     public abstract Boolean estDeplacable();
 
+    // -- Static utility methods --
+
     public static void ajouterObjetArray(Objet[] objets, Objet objet) {
         Objet[] newArray = new Objet[objets.length + 1];
         System.arraycopy(objets, 0, newArray, 0, objets.length);
