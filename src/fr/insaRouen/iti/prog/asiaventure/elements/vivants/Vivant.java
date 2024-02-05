@@ -5,7 +5,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 import fr.insaRouen.iti.prog.asiaventure.elements.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 
-public class Vivant extends Entite {
+public abstract class Vivant extends Entite {
     int pointsVie;
     int pointsForce;
     Piece piece;
@@ -61,5 +61,45 @@ public class Vivant extends Entite {
 
     public void prendreObjet(Objet objet) {
         prendreObjet(objet.getNom());
+    }
+
+    public static void ajouterVivantArray(Vivant[] vivants, Vivant vivant) {
+        Vivant[] newArray = new Vivant[vivants.length + 1];
+        System.arraycopy(vivants, 0, newArray, 0, vivants.length);
+        newArray[vivants.length] = vivant;
+        vivants = newArray;
+    }
+
+    public static Vivant retirerVivantArray(Vivant[] vivants, String nomVivant) {
+        // Locate the object in the array
+        int index = -1;
+        for (int i = 0; i < vivants.length; i++) {
+            if (vivants[i].getNom().equals(nomVivant)) {
+                index = i;
+                break;
+            }
+        }
+        
+        // Copy what's before and after the object
+        Vivant[] newVivants = new Vivant[vivants.length - 1];
+        System.arraycopy(vivants, 0, newVivants, 0, index);
+        System.arraycopy(vivants, index + 1, newVivants, index, vivants.length - index - 1);
+
+        vivants = newVivants;
+        return vivants[index];
+    }
+
+    public static Boolean contientVivantArray(Vivant[] vivants, String nomVivant) {
+        for (int i = 0; i < vivants.length; i++) {
+            if (vivants[i].getNom().equals(nomVivant))
+                return true;
+        }
+        return false;
+    }
+
+    public static Vivant[] cloneArray(Vivant[] vivants) {
+        Vivant[] cloneVivants = new Vivant[vivants.length];
+        System.arraycopy(vivants, 0, cloneVivants, 0, vivants.length);
+        return cloneVivants;
     }
 }
