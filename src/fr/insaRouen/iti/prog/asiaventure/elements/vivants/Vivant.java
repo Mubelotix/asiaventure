@@ -36,7 +36,7 @@ public /*abstract*/ class Vivant extends Entite {
         } else {
             this.objets = Objet.cloneArray(objets);
         }
-        this.entrer(piece);
+        piece.entrer(this);
     }
 
     /**
@@ -79,7 +79,7 @@ public /*abstract*/ class Vivant extends Entite {
      */
     public void sortir() {
         if (this.piece != null && this.piece.contientVivant(this.getNom())) {
-            this.piece.sortirVivant(this);
+            this.piece.sortirVivant(this.getNom());
         }
         this.piece = null;
     }
@@ -88,11 +88,14 @@ public /*abstract*/ class Vivant extends Entite {
      * Fait entrer le vivant dans une pièce.
     */
     public void entrer(Piece piece) {
-        if (this.piece == null && !piece.contientVivant(this.getNom())) {
-            this.sortir();
-            piece.entrer(this);
+        if (this.piece == piece) {
+            return;
+        }
+        if (this.piece != null) {
+            this.piece.sortirVivant(this.getNom());
         }
         this.piece = piece;
+        piece.entrer(this);
     }
 
     /**
@@ -152,6 +155,9 @@ public /*abstract*/ class Vivant extends Entite {
      * Ajoute un vivant dans un tableau de vivants.
      */
     public static Vivant[] ajouterVivantArray(Vivant[] vivants, Vivant vivant) {
+        if (locateVivantArray(vivants, vivant.getNom()) != -1) {
+            return vivants;
+        }
         Vivant[] newArray = new Vivant[vivants.length + 1];
         System.arraycopy(vivants, 0, newArray, 0, vivants.length);
         newArray[vivants.length] = vivant;

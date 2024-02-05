@@ -12,6 +12,9 @@ public abstract class Objet extends Entite {
     // -- Static utility methods --
 
     public static Objet[] ajouterObjetArray(Objet[] objets, Objet objet) {
+        if (locateObjetArray(objets, objet.getNom()) != -1) {
+            return objets;
+        }
         Objet[] newArray = new Objet[objets.length + 1];
         System.arraycopy(objets, 0, newArray, 0, objets.length);
         newArray[objets.length] = objet;
@@ -30,7 +33,7 @@ public abstract class Objet extends Entite {
         if (index == -1) {
             return objets;
         }
-        
+
         // Copy what's before and after the object
         Objet[] newObjets = new Objet[objets.length - 1];
         System.arraycopy(objets, 0, newObjets, 0, index);
