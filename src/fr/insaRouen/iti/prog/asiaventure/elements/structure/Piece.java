@@ -4,13 +4,22 @@ import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.elements.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 
+/** Une pièce est un élément structurel du monde qui contient des objets et des vivants. */
 public class Piece extends ElementStructurel {
     private Objet[] objets;
 
+    /** Crée une pièce avec son nom et un monde.
+     * @param nom Le nom de la pièce.
+     * @param monde Le monde de la pièce.
+     */
     public Piece(String nom, Monde monde) {
         super(nom, monde);
     }
 
+    /** Vérifie si la pièce contient un objet.
+     * @param nomObjet Le nom de l'objet.
+     * @return Vrai si la pièce contient l'objet, faux sinon.
+     */
     public Boolean contientObjet(String nomObjet) {
         for (int i = 0; i < this.objets.length; i++) {
             if (this.objets[i].getNom().equals(nomObjet))
@@ -19,10 +28,17 @@ public class Piece extends ElementStructurel {
         return false;
     }
 
+    /** Vérifie si la pièce contient un objet.
+     * @param objet L'objet.
+     * @return Vrai si la pièce contient l'objet, faux sinon.
+     */
     public Boolean contientObjet(Objet objet) {
         return this.contientObjet(objet.getNom());
     }
 
+    /** Ajoute un objet dans la pièce.
+     * @param objet L'objet à ajouter.
+     */
     public void deposerObjet(Objet objet) {
         Objet[] newObjets = new Objet[this.objets.length + 1];
         System.arraycopy(this.objets, 0, newObjets, 0, this.objets.length);
@@ -30,10 +46,17 @@ public class Piece extends ElementStructurel {
         this.objets = newObjets;
     }
 
+    /** Récupère tous les objet de la pièce.
+     * @return Les objets de la pièce.
+     */
     public Objet[] getObjets() {
         return this.objets;
     }
 
+    /** Récupère un objet de la pièce.
+     * @param nomObjet Le nom de l'objet.
+     * @return L'objet.
+     */
     public void retirerObjet(String nomObjet) {
         // Locate the object in the array
         int index = -1;
@@ -52,6 +75,9 @@ public class Piece extends ElementStructurel {
         this.objets = newObjets;
     }
 
+    /** Récupère un objet de la pièce.
+     * @param objet L'objet.
+     */
     public void retirerObjet(Objet objet) {
         this.retirerObjet(objet.getNom());
     }
