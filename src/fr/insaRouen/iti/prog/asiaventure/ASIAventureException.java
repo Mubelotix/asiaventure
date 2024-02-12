@@ -11,4 +11,8 @@ public class ASIAventureException extends Exception {
         super();
         this.msg = msg;
     }
+
+    public String toString() {
+        return String.format("%s(%s)", this.getClass().getName(), this.msg);
+    }
 }
