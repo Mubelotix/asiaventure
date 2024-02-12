@@ -49,23 +49,23 @@ public class Main {
         assert piece2.contientVivant("vivant1");
 
         // Same thing with an Objet
-        ObjetTest objet1 = new ObjetTest("objet1", monde);
-        piece1.deposer(objet1);
-        assert piece1.contientObjet("objet1");
+        PiedDeBiche pdb1 = new PiedDeBiche("pdb1", monde);
+        piece1.deposer(pdb1);
+        assert piece1.contientObjet("pdb1");
         assert piece1.getObjets().length == 1;
         
         // Pick up the Objet
         vivant1.entrer(piece1);
-        vivant1.prendre("objet1");
-        assert !piece1.contientObjet("objet1");
+        vivant1.prendre("pdb1");
+        assert !piece1.contientObjet("pdb1");
         assert piece1.getObjets().length == 0;
         assert vivant1.getObjets().length == 1;
 
         // Move the Objet to another Piece
         vivant1.entrer(piece2);
-        vivant1.deposer("objet1");
-        assert !piece1.contientObjet("objet1");
-        assert piece2.contientObjet("objet1");
+        vivant1.deposer("pdb1");
+        assert !piece1.contientObjet("pdb1");
+        assert piece2.contientObjet("pdb1");
         assert vivant1.getObjets().length == 0;
     }
 }
@@ -76,13 +76,13 @@ class EntiteTest extends Entite{
     }
 }
 
-class ObjetTest extends Objet{
+class ObjetTest extends Objet {
     public ObjetTest(String nom, Monde monde){
         super(nom, monde);
     }
 
     public boolean estDeplacable(){
-        return false;
+        return true;
     }
 }
 
