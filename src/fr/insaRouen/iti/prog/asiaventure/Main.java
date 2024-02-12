@@ -53,6 +53,13 @@ public class Main {
             assert false : "Le nom de la pièce est déjà utilisé";
         } catch (NomDEntiteDejaUtiliseDansLeMondeException e) {}
 
+        // Utilisation de la méthode Monde.ajouter
+        try {
+            Monde monde2 = new Monde("monde2");
+            monde2.ajouter(piece1);
+            assert false : "La pièce est déjà dans un autre monde";
+        } catch (EntiteDejaDansUnAutreMondeException e) {}
+
         // Make sure we can't edit the array from the outside
         Vivant[] vivants = piece1.getVivants();
         vivants[0] = null;
