@@ -54,7 +54,7 @@ public /*abstract*/ class Vivant extends Entite {
      * @param objet L'objet à déposer.
      */
     public void deposer(Objet objet) {
-        deposer(objet.getNom());
+        this.deposer(objet.getNom());
     }
 
     /**

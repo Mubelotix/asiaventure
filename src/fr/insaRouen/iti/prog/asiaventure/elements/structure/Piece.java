@@ -6,8 +6,8 @@ import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 /** Une pièce est un élément structurel du monde qui contient des objets et des vivants. */
 public class Piece extends ElementStructurel {
-    private Objet[] objets;
-    private Vivant[] vivants;
+    private Objet[] objets = new Objet[0];
+    private Vivant[] vivants = new Vivant[0];
 
     /** Crée une pièce avec son nom et un monde.
      * @param nom Le nom de la pièce.
@@ -15,8 +15,6 @@ public class Piece extends ElementStructurel {
      */
     public Piece(String nom, Monde monde) {
         super(nom, monde);
-        this.objets = new Objet[0];
-        this.vivants = new Vivant[0];
     }
 
     /** Vérifie si la pièce contient un objet.
