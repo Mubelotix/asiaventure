@@ -8,7 +8,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ASIAventureException {
         Monde monde = new Monde("monde");
         System.out.println(monde);
 
@@ -25,7 +25,7 @@ public class Main {
         testPiece();
     }
 
-    public static void testPiece() {
+    public static void testPiece() throws ASIAventureException {
         Monde monde = new Monde("monde");
         Piece piece1 = new Piece("piece1", monde);
         Piece piece2 = new Piece("piece2", monde);
