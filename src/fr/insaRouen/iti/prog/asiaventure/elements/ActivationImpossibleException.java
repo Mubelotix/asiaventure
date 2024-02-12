@@ -1,8 +1,6 @@
 package fr.insaRouen.iti.prog.asiaventure.elements;
 
-import fr.insaRouen.iti.prog.asiaventure.ASIAventureException;
-
-public class ActivationImpossibleException extends ASIAventureException {
+public class ActivationImpossibleException extends ActivationException {
     public ActivationImpossibleException() {
         super();
     }
