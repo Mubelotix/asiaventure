@@ -86,11 +86,11 @@ public class Piece extends ElementStructurel {
     public Objet retirer(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         int index = Objet.locateObjetArray(this.objets, nomObjet);
         if (index == -1) {
-            throw new ObjetAbsentDeLaPieceException(nomObjet);
+            throw new ObjetAbsentDeLaPieceException(String.format("L'objet %s est absent de la pièce %s", nomObjet, this.getNom()));
         }
         Objet objet = this.objets[index];
         if (!objet.estDeplacable()) {
-            throw new ObjetNonDeplacableException(nomObjet);
+            throw new ObjetNonDeplacableException(String.format("L'objet %s n'est pas déplaçable", nomObjet));
         }
         this.objets = Objet.retirerObjetArray(this.objets, index);
         return objet;
@@ -111,7 +111,7 @@ public class Piece extends ElementStructurel {
     public Vivant sortir(String nomVivant) throws VivantAbsentDeLaPieceException {
         int index = Vivant.locateVivantArray(this.vivants, nomVivant);
         if (index == -1) {
-            throw new VivantAbsentDeLaPieceException(nomVivant);
+            throw new VivantAbsentDeLaPieceException(String.format("Le vivant %s est absent de la pièce %s", nomVivant, this.getNom()));
         }
         Vivant vivant = this.vivants[index];
         this.vivants = Vivant.retirerVivantArray(this.vivants, index);
