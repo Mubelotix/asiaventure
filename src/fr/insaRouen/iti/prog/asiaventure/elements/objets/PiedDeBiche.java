@@ -1,7 +1,6 @@
-package fr.insaRouen.iti.prog.asiaventure.elements;
+package fr.insaRouen.iti.prog.asiaventure.elements.objets;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
-import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 
 public class PiedDeBiche extends Objet {
     public PiedDeBiche(String nom, Monde monde) {
