@@ -97,13 +97,13 @@ public class Main {
 }
 
 class EntiteTest extends Entite{
-    public EntiteTest(String nom, Monde monde){
+    public EntiteTest(String nom, Monde monde) throws ASIAventureException{
         super(nom, monde);
     }
 }
 
-class ObjetTest extends Objet {
-    public ObjetTest(String nom, Monde monde){
+class ObjetTest extends Objet{
+    public ObjetTest(String nom, Monde monde) throws ASIAventureException{
         super(nom, monde);
     }
 
@@ -113,13 +113,13 @@ class ObjetTest extends Objet {
 }
 
 class VivantTest extends Vivant{
-    public VivantTest(String nom, Monde monde,  int pointsVie, int pointsForce, Piece piece, Objet... objets){
+    public VivantTest(String nom, Monde monde,  int pointsVie, int pointsForce, Piece piece, Objet... objets) throws ASIAventureException{
         super(nom, monde, pointsVie, pointsForce, piece, objets);
     }
 }
 
 class ElementStructurelTest extends ElementStructurel{
-    public ElementStructurelTest(String nom, Monde monde){
+    public ElementStructurelTest(String nom, Monde monde) throws ASIAventureException{
         super(nom, monde);
     }
 }

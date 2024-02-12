@@ -1,6 +1,7 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
+import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
@@ -14,7 +15,7 @@ public class Piece extends ElementStructurel {
      * @param nom Le nom de la pièce.
      * @param monde Le monde de la pièce.
      */
-    public Piece(String nom, Monde monde) {
+    public Piece(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
     }
 

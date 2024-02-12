@@ -1,15 +1,22 @@
 package fr.insaRouen.iti.prog.asiaventure.elements;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
+import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insaRouen.iti.prog.asiaventure.EntiteDejaDansUnAutreMondeException;;
+
 
 public abstract class Entite {
     private final Monde monde;
     public final String nom;
 
-    public Entite(String nom, Monde monde) {
+    public Entite(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         this.monde = monde;
         this.nom = nom;
-        monde.ajouter(this);
+        try{
+            monde.ajouter(this);
+        }catch(EntiteDejaDansUnAutreMondeException e){
+            throw new Error("impossible");
+        }
     }
 
     public Monde getMonde() {

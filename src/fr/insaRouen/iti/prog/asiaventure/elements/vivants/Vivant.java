@@ -1,7 +1,9 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
 
+import fr.insaRouen.iti.prog.asiaventure.EntiteDejaDansUnAutreMondeException;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
+import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
@@ -28,7 +30,7 @@ public /*abstract*/ class Vivant extends Entite {
      * @param piece La pièce où se trouve le vivant.
      * @param objets Les objets que possède le vivant.
      */
-    public Vivant(String nom, Monde monde, int pointsVie, int pointsForce, Piece piece, Objet... objets) {
+    public Vivant(String nom, Monde monde, int pointsVie, int pointsForce, Piece piece, Objet... objets) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
         this.pointsVie = pointsVie;
         this.pointsForce = pointsForce;
