@@ -4,7 +4,10 @@ package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
 
 /**
  * Classe abstraite Vivant, héritant de la classe Entite.
@@ -78,7 +81,11 @@ public /*abstract*/ class Vivant extends Entite {
      */
     public void sortir() {
         if (this.piece != null && this.piece.contientVivant(this.getNom())) {
-            this.piece.sortirVivant(this.getNom());
+            try {
+                this.piece.sortir(this.getNom());
+            } catch (VivantAbsentDeLaPieceException e) {
+                // Already out, so we can ignore it safely
+            }
         }
         this.piece = null;
     }
@@ -91,7 +98,11 @@ public /*abstract*/ class Vivant extends Entite {
             return;
         }
         if (this.piece != null) {
-            this.piece.sortirVivant(this.getNom());
+            try {
+                this.piece.sortir(this.getNom());
+            } catch (VivantAbsentDeLaPieceException e) {
+                // Already out, so we can ignore it safely
+            }
         }
         this.piece = piece;
         piece.entrer(this);
@@ -135,7 +146,7 @@ public /*abstract*/ class Vivant extends Entite {
      * Fait prendre un objet de sa pièce au vivant.
      * @param nomObjet Le nom de l'objet.
      */
-    public void prendreObjet(String nomObjet) {
+    public void prendreObjet(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         Objet objet = this.piece.retirer(nomObjet);
         this.objets = Objet.ajouterObjetArray(this.objets, objet);
     }
@@ -144,7 +155,7 @@ public /*abstract*/ class Vivant extends Entite {
      * Fait prendre un objet de sa pièce au vivant.
      * @param objet L'objet.
      */
-    public void prendreObjet(Objet objet) {
+    public void prendreObjet(Objet objet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         prendreObjet(objet.getNom());
     }
 

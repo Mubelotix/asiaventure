@@ -2,6 +2,7 @@ package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 /** Une pièce est un élément structurel du monde qui contient des objets et des vivants. */
@@ -82,9 +83,15 @@ public class Piece extends ElementStructurel {
      * @param nomObjet Le nom de l'objet.
      * @return L'objet.
      */
-    public Objet retirer(String nomObjet) {
+    public Objet retirer(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         int index = Objet.locateObjetArray(this.objets, nomObjet);
+        if (index == -1) {
+            throw new ObjetAbsentDeLaPieceException(nomObjet);
+        }
         Objet objet = this.objets[index];
+        if (!objet.estDeplacable()) {
+            throw new ObjetNonDeplacableException(nomObjet);
+        }
         this.objets = Objet.retirerObjetArray(this.objets, index);
         return objet;
     }
@@ -93,7 +100,7 @@ public class Piece extends ElementStructurel {
      * @param objet L'objet.
      * @return L'objet.
      */
-    public Objet retirer(Objet objet) {
+    public Objet retirer(Objet objet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         return this.retirer(objet.getNom());
     }
 
@@ -101,8 +108,11 @@ public class Piece extends ElementStructurel {
      * @param nomVivant Le nom du vivant.
      * @return Le vivant.
      */
-    public Vivant sortirVivant(String nomVivant) {
+    public Vivant sortir(String nomVivant) throws VivantAbsentDeLaPieceException {
         int index = Vivant.locateVivantArray(this.vivants, nomVivant);
+        if (index == -1) {
+            throw new VivantAbsentDeLaPieceException(nomVivant);
+        }
         Vivant vivant = this.vivants[index];
         this.vivants = Vivant.retirerVivantArray(this.vivants, index);
         vivant.sortir();
@@ -113,8 +123,8 @@ public class Piece extends ElementStructurel {
      * @param vivant Le vivant.
      * @return Le vivant.
      */
-    public Vivant sortirVivant(Vivant vivant) {
-        return this.sortirVivant(vivant.getNom());
+    public Vivant sortir(Vivant vivant) throws VivantAbsentDeLaPieceException {
+        return this.sortir(vivant.getNom());
     }
 
     public String toString() {
