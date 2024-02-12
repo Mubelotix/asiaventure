@@ -56,7 +56,7 @@ public class Main {
         
         // Pick up the Objet
         vivant1.entrer(piece1);
-        vivant1.prendreObjet("objet1");
+        vivant1.prendre("objet1");
         assert !piece1.contientObjet("objet1");
         assert piece1.getObjets().length == 0;
         assert vivant1.getObjets().length == 1;

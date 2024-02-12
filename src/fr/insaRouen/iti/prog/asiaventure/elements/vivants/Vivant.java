@@ -41,6 +41,23 @@ public /*abstract*/ class Vivant extends Entite {
         piece.entrer(this);
     }
 
+    /** 
+     * Fait prendre un objet de sa pièce au vivant.
+     * @param nomObjet Le nom de l'objet.
+     */
+    public void prendre(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
+        Objet objet = this.piece.retirer(nomObjet);
+        this.objets = Objet.ajouterObjetArray(this.objets, objet);
+    }
+
+    /**
+     * Fait prendre un objet de sa pièce au vivant.
+     * @param objet L'objet.
+     */
+    public void prendre(Objet objet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
+        prendre(objet.getNom());
+    }
+
     /**
      * Dépose un objet de son inventaire dans la pièce où il se trouve.
      * @param nomObjet Le nom de l'objet à déposer.
@@ -140,23 +157,6 @@ public /*abstract*/ class Vivant extends Entite {
      */
     public boolean contientObjet(Objet objet) {
         return this.contientObjet(objet.getNom());
-    }
-
-    /** 
-     * Fait prendre un objet de sa pièce au vivant.
-     * @param nomObjet Le nom de l'objet.
-     */
-    public void prendreObjet(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
-        Objet objet = this.piece.retirer(nomObjet);
-        this.objets = Objet.ajouterObjetArray(this.objets, objet);
-    }
-
-    /**
-     * Fait prendre un objet de sa pièce au vivant.
-     * @param objet L'objet.
-     */
-    public void prendreObjet(Objet objet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
-        prendreObjet(objet.getNom());
     }
 
     // -- Static utility methods --
