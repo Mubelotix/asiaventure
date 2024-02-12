@@ -2,7 +2,6 @@ package fr.insaRouen.iti.prog.asiaventure.elements.objets;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
-import fr.insaRouen.iti.prog.asiaventure.EntiteDejaDansUnAutreMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 
 /**
