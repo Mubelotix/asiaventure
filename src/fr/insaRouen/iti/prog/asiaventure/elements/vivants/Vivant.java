@@ -62,8 +62,11 @@ public /*abstract*/ class Vivant extends Entite {
      * Dépose un objet de son inventaire dans la pièce où il se trouve.
      * @param nomObjet Le nom de l'objet à déposer.
      */
-    public void deposer(String nomObjet) {
+    public void deposer(String nomObjet) throws ObjetNonPossedeParLeVivantException {
         int index = Objet.locateObjetArray(this.objets, nomObjet);
+        if (index == -1) {
+            throw new ObjetNonPossedeParLeVivantException(String.format("L'objet %s n'est pas possédé par le vivant %s", nomObjet, this.getNom()));
+        }
         Objet objet = this.objets[index];
         this.objets = Objet.retirerObjetArray(this.objets, index);
         this.piece.deposer(objet);
@@ -73,7 +76,7 @@ public /*abstract*/ class Vivant extends Entite {
      * Dépose un objet de son inventaire dans la pièce où il se trouve.
      * @param objet L'objet à déposer.
      */
-    public void deposer(Objet objet) {
+    public void deposer(Objet objet) throws ObjetNonPossedeParLeVivantException {
         this.deposer(objet.getNom());
     }
 
