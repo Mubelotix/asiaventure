@@ -1,6 +1,7 @@
-package fr.insaRouen.iti.prog.asiaventure.elements;
+package fr.insaRouen.iti.prog.asiaventure.elements.objets;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
+import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 
 public abstract class Objet extends Entite {
     public Objet(String nom, Monde monde) {

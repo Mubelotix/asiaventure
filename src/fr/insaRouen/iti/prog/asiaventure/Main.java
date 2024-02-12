@@ -1,13 +1,11 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
 import fr.insaRouen.iti.prog.asiaventure.elements.PiedDeBiche;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ElementStructurel;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
-import fr.insaRouen.iti.prog.asiaventure.elements.Objet;
-
-
 
 public class Main {
     public static void main(String[] args) {
