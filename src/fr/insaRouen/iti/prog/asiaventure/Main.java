@@ -1,9 +1,12 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ElementStructurel;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
+import fr.insaRouen.iti.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 
@@ -61,12 +64,35 @@ public class Main {
         assert piece1.getObjets().length == 0;
         assert vivant1.getObjets().length == 1;
 
+        // Essayer pareil avec un objet non déplaçable et s'assurer de l'exception
+        ObjetTest obj1 = new ObjetTest("objetTest", monde);
+        piece1.deposer(obj1);
+        assert piece1.contientObjet("objetTest");
+        assert piece1.getObjets().length == 1;
+        assert !obj1.estDeplacable();
+        try {
+            vivant1.prendre("objetTest");
+            assert false : "L'objet n'est pas déplaçable mais a été pris";
+        } catch (ObjetNonDeplacableException e) {}
+
+        // Esayer de prendre un objet qui n'est pas dans la pièce
+        try {
+            vivant1.prendre("pdb1");
+            assert false : "L'objet n'est pas dans la pièce mais a été pris";
+        } catch (ObjetAbsentDeLaPieceException e) {}
+
         // Move the Objet to another Piece
         vivant1.entrer(piece2);
         vivant1.deposer("pdb1");
         assert !piece1.contientObjet("pdb1");
         assert piece2.contientObjet("pdb1");
         assert vivant1.getObjets().length == 0;
+
+        // Essayer de déposer un objet qu'on ne possède pas
+        try {
+            vivant1.deposer("pdb1");
+            assert false : "L'objet n'est pas possédé par le vivant mais a été déposé";
+        } catch (ObjetNonPossedeParLeVivantException e) {}
     }
 }
 
@@ -82,7 +108,7 @@ class ObjetTest extends Objet {
     }
 
     public boolean estDeplacable(){
-        return true;
+        return false;
     }
 }
 
