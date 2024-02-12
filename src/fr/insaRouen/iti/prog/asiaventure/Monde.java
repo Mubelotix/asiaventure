@@ -19,12 +19,13 @@ public class Monde {
         for (int i = 0; i < this.entites.length; i++) {
             if (this.entites[i].getNom().equals(nom)) {
                 return this.entites[i];
-            }
+            }            assert false : "La pièce est déjà dans un autre monde";
+
         }
         return null;
     }
 
-    private boolean nomEntiteDejaUtilise(Entite entite){
+    public boolean nomEntiteDejaUtilise(Entite entite){
         for(int i = 0; i < this.entites.length; i++ ){
             if (this.entites[i].getNom().equals(entite.getNom())) {
                 return true;
@@ -34,12 +35,13 @@ public class Monde {
     }
 
     public void ajouter(Entite entite) throws NomDEntiteDejaUtiliseDansLeMondeException, EntiteDejaDansUnAutreMondeException{
-        if(entite.getMonde().getNom().equals(this.getNom())) {
-            throw new EntiteDejaDansUnAutreMondeException(String.format("Pour le monde %s, impossible d'ajouter %s car cette entité est déja present dans %s", entite.getMonde().getNom(), entite.getNom(), this.getNom()));
+        if(!entite.getMonde().getNom().equals(this.getNom())){
+           throw new EntiteDejaDansUnAutreMondeException(String.format("Pour le monde %s, impossible d'ajouter %s car cette entité est déja present dans %s", entite.getMonde().getNom(), entite.getNom(), this.getNom()));
         }
         if (this.nomEntiteDejaUtilise(entite)) {
             throw new NomDEntiteDejaUtiliseDansLeMondeException(String.format("Monde : %s, Entite déjà utilisé : %s", this.getNom(), entite.getNom()));
         }
+        
         Entite[] newEntites = new Entite[this.entites.length + 1];
         System.arraycopy(this.entites, 0, newEntites, 0, this.entites.length);
         newEntites[this.entites.length] = entite;
