@@ -14,10 +14,10 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.VivantAbsentDeLaPiec
  * Se trouve dans une pièce et dipose d'un équipement.
  */
 public /*abstract*/ class Vivant extends Entite {
-    int pointsVie;
-    int pointsForce;
-    Piece piece;
-    Objet[] objets;
+    private int pointsVie;
+    private int pointsForce;
+    private Piece piece;
+    private Objet[] objets;
 
     /**
      * Crée un vivant avec son nom, un monde, des points de vie, des points de force, une pièce et des objets.
