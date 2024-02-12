@@ -12,9 +12,9 @@ public abstract class Entite {
     public Entite(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         this.monde = monde;
         this.nom = nom;
-        try{
+        try {
             monde.ajouter(this);
-        }catch(EntiteDejaDansUnAutreMondeException e){
+        } catch(EntiteDejaDansUnAutreMondeException e) {
             throw new Error("impossible");
         }
     }

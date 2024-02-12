@@ -222,6 +222,10 @@ public /*abstract*/ class Vivant extends Entite {
     }
 
     public String toString() {
-        return String.format("Vivant(%s, %s)", this.getNom(), this.piece.getNom());
+        if (this.piece == null) {
+            return String.format("Vivant(%s, null)", this.getNom());
+        } else {
+            return String.format("Vivant(%s, %s)", this.getNom(), this.piece.getNom());
+        }
     }
 }

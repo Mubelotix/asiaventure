@@ -26,7 +26,7 @@ public class Monde {
 
     public boolean nomEntiteDejaUtilise(Entite entite){
         for(int i = 0; i < this.entites.length; i++ ){
-            if(this.entites[i] == entite){
+            if (this.entites[i].getNom() == entite.getNom()) {
                 return true;
             }
         }
@@ -34,8 +34,8 @@ public class Monde {
     }
 
     public void ajouter(Entite entite) throws NomDEntiteDejaUtiliseDansLeMondeException, EntiteDejaDansUnAutreMondeException{
-        if(this.nomEntiteDejaUtilise(entite)){
-            throw new NomDEntiteDejaUtiliseDansLeMondeException(String.format("Monde : %s, Entite déjà utilisé : %s", this.getNom(), entite));
+        if (this.nomEntiteDejaUtilise(entite)) {
+            throw new NomDEntiteDejaUtiliseDansLeMondeException(String.format("Monde : %s, Entite déjà utilisé : %s", this.getNom(), entite.getNom()));
         }
         if(entite.getMonde().getNom() != this.getNom()){
             throw new EntiteDejaDansUnAutreMondeException(String.format("Pour le monde %s, impossible d'ajouter %s car cette entité est déja present dans %s", entite.getMonde().getNom(), entite.getNom(), this.getNom()));

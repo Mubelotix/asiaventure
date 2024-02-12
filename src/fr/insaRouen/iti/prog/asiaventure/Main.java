@@ -41,6 +41,18 @@ public class Main {
         assert piece1.getObjets().length == 0;
         assert piece1.getVivants().length == 1;
 
+        // Ajout d'un vivant dont le nom est déjà utilisé
+        try {
+            Vivant vivant2 = new Vivant("vivant1", monde, 42, 1, piece1);
+            assert false : "Le nom du vivant est déjà utilisé";
+        } catch (NomDEntiteDejaUtiliseDansLeMondeException e) {}
+
+        // Ajout d'une pièce dont le nom est déjà utilisé
+        try {
+            Piece piece3 = new Piece("piece1", monde);
+            assert false : "Le nom de la pièce est déjà utilisé";
+        } catch (NomDEntiteDejaUtiliseDansLeMondeException e) {}
+
         // Make sure we can't edit the array from the outside
         Vivant[] vivants = piece1.getVivants();
         vivants[0] = null;
