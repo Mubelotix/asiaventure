@@ -25,7 +25,7 @@ public class Monde {
         return null;
     }
 
-    public boolean nomEntiteDejaUtilise(Entite entite){
+    private boolean nomEntiteDejaUtilise(Entite entite){
         for(int i = 0; i < this.entites.length; i++ ){
             if (this.entites[i].getNom().equals(entite.getNom())) {
                 return true;
