@@ -1,6 +1,6 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
-public class NomDEntiteDejaUtiliseDansLeMondeException extends ASIAventureException{
+public class NomDEntiteDejaUtiliseDansLeMondeException extends MondeException{
     
     public NomDEntiteDejaUtiliseDansLeMondeException(){
     }
