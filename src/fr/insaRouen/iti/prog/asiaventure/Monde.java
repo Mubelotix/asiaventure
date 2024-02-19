@@ -19,8 +19,7 @@ public class Monde {
         for (int i = 0; i < this.entites.length; i++) {
             if (this.entites[i].getNom().equals(nom)) {
                 return this.entites[i];
-            }            assert false : "La pièce est déjà dans un autre monde";
-
+            }
         }
         return null;
     }

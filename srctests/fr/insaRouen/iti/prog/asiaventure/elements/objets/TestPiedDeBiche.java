@@ -6,7 +6,6 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
-import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
 
 public class TestPiedDeBiche {
     Monde monde;
