@@ -1,4 +1,4 @@
-package srctests.fr.insaRouen.iti.prog.asiaventure.elements;
+package fr.insaRouen.iti.prog.asiaventure.elements;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,10 +8,11 @@ import org.junit.Test;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
+
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class EntiteTest extends Entite{
+class EntiteTest extends Entite {
     public EntiteTest(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
     }

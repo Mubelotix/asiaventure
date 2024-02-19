@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "/usr/share/java/*"
+    ],
+    "java.project.sourcePaths": [
+        "src",
+        "srctests"
+    ]   
+}

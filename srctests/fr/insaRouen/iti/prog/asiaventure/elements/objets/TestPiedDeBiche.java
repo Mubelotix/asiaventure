@@ -1,4 +1,4 @@
-package srctests.fr.insaRouen.iti.prog.asiaventure.elements.objets;
+package fr.insaRouen.iti.prog.asiaventure.elements.objets;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.Before;

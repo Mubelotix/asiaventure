@@ -1,4 +1,4 @@
-package srctests.fr.insaRouen.iti.prog.asiaventure.elements.objets;
+package fr.insaRouen.iti.prog.asiaventure.elements.objets;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

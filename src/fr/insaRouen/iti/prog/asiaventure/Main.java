@@ -8,7 +8,6 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPiece
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
-import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 
 public class Main {
     public static void main(String[] args) throws ASIAventureException {
@@ -19,8 +18,8 @@ public class Main {
         System.out.println(monde);
         assert pdb.estDeplacable();
 
-        EntiteTest pdb2 = new EntiteTest("nom",monde);
-        System.out.println(pdb2.toString());
+        // EntiteTest pdb2 = new EntiteTest("nom",monde);
+        // System.out.println(pdb2.toString());
 
         ElementStructurelTest es = new ElementStructurelTest("es", monde);
         System.out.println(es);
@@ -112,12 +111,6 @@ public class Main {
             vivant1.deposer("pdb1");
             assert false : "L'objet n'est pas possédé par le vivant mais a été déposé";
         } catch (ObjetNonPossedeParLeVivantException e) {}
-    }
-}
-
-class EntiteTest extends Entite{
-    public EntiteTest(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
-        super(nom, monde);
     }
 }
 
