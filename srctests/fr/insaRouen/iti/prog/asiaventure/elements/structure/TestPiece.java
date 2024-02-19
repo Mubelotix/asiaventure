@@ -25,7 +25,7 @@ class ObjetTest extends Objet {
     }
 }
 
-public class PieceTest {
+public class TestPiece {
     Monde monde;
     Piece piece1;
     Piece piece2;
