@@ -7,6 +7,7 @@ public class PiedDeBiche extends Objet {
         super(nom, monde);
     }
 
+    @Override
     public boolean estDeplacable() {
         return true;
     }
