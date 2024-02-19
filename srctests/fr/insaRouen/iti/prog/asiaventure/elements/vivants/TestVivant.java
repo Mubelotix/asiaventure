@@ -25,7 +25,6 @@ class VivantTest extends Vivant{
     public VivantTest(String nom, Monde monde,  int pointsVie, int pointsForce, Piece piece, Objet... objets) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde, pointsVie, pointsForce, piece, objets);
     }
-
 }
 
 
@@ -35,18 +34,17 @@ public class TestVivant{
     VivantTest vivant;
     Piece piece;
 
-
     @Before
     public void initialisation() throws NomDEntiteDejaUtiliseDansLeMondeException {
         this.monde = new Monde("monde");
         this.objet = new ObjetTest("objet", this.monde);
         this.piece = new Piece("piece", this.monde);
-        this.vivant = new VivantTest("vivant",this.monde, 15, 14, this.piece, this.objet);
+        this.vivant = new VivantTest("vivant", this.monde, 15, 14, this.piece, this.objet);
     }
 
     @Test
     public void testEgalite(){
-        assertThat(this.vivant.getNom(),IsEqual.equalTo("vivant"));
+        assertThat(this.vivant.getNom(), IsEqual.equalTo("vivant"));
         assertThat(this.vivant.getPointsForce(), IsEqual.equalTo(14));
         assertThat(this.vivant.getPointsVie(), IsEqual.equalTo(15));
         assertThat(this.vivant.getObjets()[0].getNom(), IsEqual.equalTo("objet"));
@@ -62,6 +60,8 @@ public class TestVivant{
 
     @Test
     public void testSortirEntrer(){
+        this.vivant.sortir();
+        assertThat(this.vivant.getPiece(),IsNull.nullValue());
         this.vivant.sortir();
         assertThat(this.vivant.getPiece(),IsNull.nullValue());
         this.vivant.entrer(this.piece);
