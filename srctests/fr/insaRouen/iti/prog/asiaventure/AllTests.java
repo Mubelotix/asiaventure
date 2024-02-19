@@ -1,15 +1,15 @@
-package srctests;
+package srctests.fr.insaRouen.iti.prog.asiaventure;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
+import srctests.fr.insaRouen.iti.prog.asiaventure.elements.AllTestElements;
+
 @RunWith(Suite.class)
 @SuiteClasses({
     AllTestElements.class,
-    AllTestObjets.class,
-    AllTestStructure.class,
-    TestEntite.class,
+    TestMonde.class,
 })
 
-public class AllTestElements {}
+public class AllTests {}

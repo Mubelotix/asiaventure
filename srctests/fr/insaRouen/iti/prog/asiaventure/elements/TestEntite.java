@@ -1,4 +1,4 @@
-package srctests;
+package srctests.fr.insaRouen.iti.prog.asiaventure.elements;
 
 import org.junit.After;
 import org.junit.Before;
