@@ -26,12 +26,12 @@ public class TestEntite {
 
     @Test
     public void testNom() {
-        assertThat(entite.getNom(), is("entite"));
+        assertThat(this.entite.getNom(), is("entite"));
     }
 
     @Test
     public void testMonde() {
-        assertThat(entite.getMonde(), equalTo(this.monde));
+        assertThat(this.entite.getMonde(), equalTo(this.monde));
     }
 
     @Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
