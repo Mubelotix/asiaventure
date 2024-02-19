@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.Is;
+import static org.hamcrest.core.IsEqual;
+
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
@@ -15,36 +17,66 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPiece
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
 
+class ObjetTest extends Objet {
+    public ObjetTest(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+        super(nom, monde);
+    }
 
-class TestVivant extends Vivant{
-    public TestVivant(String nom, Monde monde,  int pointsVie, int pointsForce, Piece piece, Objet... objets) throws NomDEntiteDejaUtiliseDansLeMondeException {
+    public boolean estDeplacable(){
+        return false;
+    }
+}
+
+class VivantTest extends Vivant{
+    public VivantTest(String nom, Monde monde,  int pointsVie, int pointsForce, Piece piece, Objet... objets) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde, pointsVie, pointsForce, piece, objets);
     }
 
 }
 
-public class VivantTest{
+
+public class TestVivant{
     Monde monde;
-    Objet objet;
-    TestVivant vivant;
+    ObjetTest objet;
+    VivantTest vivant;
     Piece piece;
 
 
     @Before
     public void initialisation() throws NomDEntiteDejaUtiliseDansLeMondeException {
         this.monde = new Monde("monde");
-        this.objet = new Objet("objet", this.monde);
+        this.objet = new ObjetTest("objet", this.monde);
         this.piece = new Piece("piece", this.monde);
-        this.nom = "humain":
-        this.pointsForce = 14;
-        this.pointsVie = 15;
+        this.vivant = new VivantTest("vivant",this.monde, 15, 14, this.piece, this.objet);
+        
 
     }
 
     @Test
-    public void testVivant(){
-        
+    public void testEgalite(){
+        assertThat(this.vivant.getNom(),IsEqual.equalTo("humain"));
+        assertThat(this.vivant.getPointsForce(), IsEqual.equalTo(14));
+        assertThat(this.vivant.getPointsVie(), IsEqual.equalTo(15));
+        assertThat(this.vivant.getObjets().getNom(), IsEqual.equalTo("objet"));
+        assertThat(this.vivant.getPiece().getNom(), IsEqual.equalTo("piece"));
     }
+
+    @Test
+    public void testObjets(){
+        assertThat(this.vivant.contientObjet(this.objet), Is.is(true));
+        ObjetTest obj = new ObjetTest("tarte");
+        assertThat(this.vivant.contientObjet(obj), Is.is(false));
+    }
+
+    @Test
+    public void testSortirEntrer(){
+        this.vivant.sortir();
+        assertThat(this.vivant.getPiece(),Is.is(null));
+        this.vivant.entrer(this.piece);
+        assertThat(this.vivant.getPiece(),IsEqual.equalTo(this.piece));
+    }
+
+
 
 
 }
