@@ -1,15 +1,11 @@
 package fr.insaRouen.iti.prog.asiaventure.elements;
 
-import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
-import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
-import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
-
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class EntiteTest extends Entite {
@@ -31,6 +27,11 @@ public class TestEntite {
     @Test
     public void testNom() {
         assertThat(entite.getNom(), is("entite"));
+    }
+
+    @Test
+    public void testMonde() {
+        assertThat(entite.getMonde(), equalTo(this.monde));
     }
 
     @Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
