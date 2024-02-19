@@ -27,7 +27,6 @@ class VivantTest extends Vivant{
     }
 }
 
-
 public class TestVivant{
     Monde monde;
     ObjetTest objet;
