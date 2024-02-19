@@ -38,7 +38,7 @@ public class TestPiece {
     }
 
     @Test
-    public void ajouterVivant() throws Exception {
+    public void ajouterVivant() throws NomDEntiteDejaUtiliseDansLeMondeException {
         Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
         this.piece1.entrer(vivant1);
 
@@ -48,25 +48,25 @@ public class TestPiece {
     }
 
     @Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
-    public void ajouterVivantNomDejaUtilise() throws Exception {
+    public void ajouterVivantNomDejaUtilise() throws NomDEntiteDejaUtiliseDansLeMondeException {
         new Vivant("vivant1", this.monde, 42, 1, this.piece1);
         new Vivant("vivant1", this.monde, 42, 1, this.piece1);
     }
 
     @Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
-    public void ajouterPieceNomDejaUtilise() throws Exception {
+    public void ajouterPieceNomDejaUtilise() throws NomDEntiteDejaUtiliseDansLeMondeException {
         new Piece("piece", this.monde);
         new Piece("piece", this.monde);
     }
 
     @Test(expected = EntiteDejaDansUnAutreMondeException.class)
-    public void ajouterPieceDansAutreMonde() throws Exception {
+    public void ajouterPieceDansAutreMonde() throws NomDEntiteDejaUtiliseDansLeMondeException, EntiteDejaDansUnAutreMondeException {
         Monde monde2 = new Monde("monde2");
         monde2.ajouter(this.piece1);
     }
 
     @Test
-    public void testVivantsIsCloned() throws Exception {
+    public void testVivantsIsCloned() throws NomDEntiteDejaUtiliseDansLeMondeException {
         Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
         this.piece1.entrer(vivant1);
 
@@ -76,7 +76,7 @@ public class TestPiece {
     }
 
     @Test
-    public void testChangerVivantDePiece() throws Exception {
+    public void testChangerVivantDePiece() throws NomDEntiteDejaUtiliseDansLeMondeException {
         Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
         this.piece1.entrer(vivant1);
         assertThat(this.piece1.contientVivant("vivant1"), is(true));
@@ -88,7 +88,7 @@ public class TestPiece {
     }
 
     @Test
-    public void deposerObjet() throws Exception {
+    public void deposerObjet() throws NomDEntiteDejaUtiliseDansLeMondeException {
         PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
         this.piece1.deposer(pdb1);
         assertThat(this.piece1.contientObjet("pdb1"), is(true));
@@ -96,7 +96,7 @@ public class TestPiece {
     }
 
     @Test
-    public void bougerObjetDePiece() throws Exception {
+    public void bougerObjetDePiece() throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonPossedeParLeVivantException, ObjetNonDeplacableException {
         PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
         Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
         this.piece1.deposer(pdb1);

@@ -71,7 +71,7 @@ public class TestVivant{
     }
 
     @Test
-    public void prendreObjet() throws Exception {
+    public void prendreObjet() throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
         this.piece.deposer(pdb1);
         this.vivant.prendre("pdb1");
@@ -81,19 +81,19 @@ public class TestVivant{
     }
 
     @Test(expected = ObjetNonDeplacableException.class)
-    public void prendreObjetNonDeplacable() throws Exception {
+    public void prendreObjetNonDeplacable() throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         ObjetTest obj1 = new ObjetTest("objetTest", this.monde);
         this.piece.deposer(obj1);
         this.vivant.prendre("objetTest");
     }
 
     @Test(expected = ObjetAbsentDeLaPieceException.class)
-    public void prendreObjetAbsent() throws Exception {
+    public void prendreObjetAbsent() throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         this.vivant.prendre("pdb1");
     }
 
     @Test(expected = ObjetNonPossedeParLeVivantException.class)
-    public void deposerObjetNonPossede() throws Exception {
+    public void deposerObjetNonPossede() throws NomDEntiteDejaUtiliseDansLeMondeException, ObjetNonPossedeParLeVivantException {
         PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
         this.vivant.deposer(pdb1);
     }
