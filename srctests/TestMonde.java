@@ -11,7 +11,7 @@ import fr.insaRouen.iti.prog.asiaventure.Monde;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class MondeTests {
+public class TestMonde {
     Monde monde;
 
     @Before
