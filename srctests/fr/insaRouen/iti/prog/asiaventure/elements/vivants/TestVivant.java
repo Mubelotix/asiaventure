@@ -9,6 +9,9 @@ import org.hamcrest.core.IsNull;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 
 class ObjetTest extends Objet {
@@ -65,5 +68,33 @@ public class TestVivant{
         assertThat(this.vivant.getPiece(),IsNull.nullValue());
         this.vivant.entrer(this.piece);
         assertThat(this.vivant.getPiece(),IsEqual.equalTo(this.piece));
+    }
+
+    @Test
+    public void prendreObjet() throws Exception {
+        PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
+        this.piece.deposer(pdb1);
+        this.vivant.prendre("pdb1");
+        assertThat(this.piece.contientObjet("pdb1"), Is.is(false));
+        assertThat(this.piece.getObjets().length, Is.is(0));
+        assertThat(this.vivant.getObjets().length, Is.is(2));
+    }
+
+    @Test(expected = ObjetNonDeplacableException.class)
+    public void prendreObjetNonDeplacable() throws Exception {
+        ObjetTest obj1 = new ObjetTest("objetTest", this.monde);
+        this.piece.deposer(obj1);
+        this.vivant.prendre("objetTest");
+    }
+
+    @Test(expected = ObjetAbsentDeLaPieceException.class)
+    public void prendreObjetAbsent() throws Exception {
+        this.vivant.prendre("pdb1");
+    }
+
+    @Test(expected = ObjetNonPossedeParLeVivantException.class)
+    public void deposerObjetNonPossede() throws Exception {
+        PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
+        this.vivant.deposer(pdb1);
     }
 }

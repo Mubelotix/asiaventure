@@ -96,31 +96,6 @@ public class TestPiece {
     }
 
     @Test
-    public void prendreObjet() throws Exception {
-        PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
-        this.piece1.deposer(pdb1);
-        Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
-        vivant1.prendre("pdb1");
-        assertThat(this.piece1.contientObjet("pdb1"), is(false));
-        assertThat(this.piece1.getObjets().length, is(0));
-        assertThat(vivant1.getObjets().length, is(1));
-    }
-
-    @Test(expected = ObjetNonDeplacableException.class)
-    public void prendreObjetNonDeplacable() throws Exception {
-        ObjetTest obj1 = new ObjetTest("objetTest", this.monde);
-        Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
-        this.piece1.deposer(obj1);
-        vivant1.prendre("objetTest");
-    }
-
-    @Test(expected = ObjetAbsentDeLaPieceException.class)
-    public void prendreObjetAbsent() throws Exception {
-        Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
-        vivant1.prendre("pdb1");
-    }
-
-    @Test
     public void bougerObjetDePiece() throws Exception {
         PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
         Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
@@ -132,12 +107,5 @@ public class TestPiece {
         assertThat(this.piece1.contientObjet("pdb1"), is(false));
         assertThat(this.piece2.contientObjet("pdb1"), is(true));
         assertThat(vivant1.getObjets().length, is(0));
-    }
-
-    @Test(expected = ObjetNonPossedeParLeVivantException.class)
-    public void deposerObjetNonPossede() throws Exception {
-        PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
-        Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
-        vivant1.deposer(pdb1);
     }
 }
