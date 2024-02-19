@@ -12,7 +12,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.vivants.AllTestVivants;
 @SuiteClasses({
     //AllTestVivants.class,
     AllTestObjets.class,
-    //AllTestStructure.class,
+    AllTestStructure.class,
     TestEntite.class,
 })
 

@@ -126,6 +126,8 @@ public class PieceTest {
         Vivant vivant1 = new Vivant("vivant1", monde, 42, 1, piece1);
         piece1.deposer(pdb1);
         vivant1.entrer(piece1);
+        vivant1.prendre("pdb1");
+        vivant1.entrer(piece2);
         vivant1.deposer("pdb1");
         assertThat(piece1.contientObjet("pdb1"), is(false));
         assertThat(piece2.contientObjet("pdb1"), is(true));
@@ -135,6 +137,7 @@ public class PieceTest {
     @Test(expected = ObjetNonPossedeParLeVivantException.class)
     public void deposerObjetNonPossede() throws Exception {
         PiedDeBiche pdb1 = new PiedDeBiche("pdb1", monde);
-        piece1.deposer(pdb1);
+        Vivant vivant1 = new Vivant("vivant1", monde, 42, 1, piece1);
+        vivant1.deposer(pdb1);
     }
 }
