@@ -38,12 +38,15 @@ public class Porte extends ElementStructurel implements Activable {
     }
 
     public void activer() throws ActivationImpossibleException {
-        if (this.etat == Etat.OUVERT) {
-            this.etat = Etat.FERME;
-        } else if (this.etat == Etat.FERME) {
-            this.etat = Etat.OUVERT;
-        } else {
-            throw new ActivationImpossibleException("La porte est fermée.");
+        switch(this.etat) {
+            case OUVERT:
+                this.etat = Etat.FERME;
+                break;
+            case FERME:
+                this.etat = Etat.OUVERT;
+                break;
+            default:
+                throw new ActivationImpossibleException("La porte est fermée.");
         }
     }
 
