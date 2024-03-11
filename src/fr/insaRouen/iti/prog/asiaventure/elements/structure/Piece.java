@@ -30,6 +30,14 @@ public class Piece extends ElementStructurel {
         return this.objets.containsKey(nomObjet);
     }
 
+    /** Vérifie si la pièce contient un objet.
+     * @param objet L'objet.
+     * @return Vrai si la pièce contient l'objet, faux sinon.
+     */
+    public boolean contientObjet(Objet objet) {
+        return this.contientObjet(objet.getNom());
+    }
+
     /**
      * Vérifie si la pièce contient une porte.
      * @param porte La porte.
@@ -65,14 +73,6 @@ public class Piece extends ElementStructurel {
             throw new PorteInexistanteDansLaPieceException(String.format("La porte %s n'existe pas dans la piece %s", nomPorte, this.getNom()));
         }
         return this.portes.get(nomPorte);
-    }
-
-    /** Vérifie si la pièce contient un objet.
-     * @param objet L'objet.
-     * @return Vrai si la pièce contient l'objet, faux sinon.
-     */
-    public boolean contientObjet(Objet objet) {
-        return this.contientObjet(objet.getNom());
     }
 
     /** Vérifie si la pièce contient un vivant.
