@@ -10,6 +10,9 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.VivantAbsentDeLaPieceException;
 
 /**
@@ -92,6 +95,14 @@ public /*abstract*/ class Vivant extends Entite {
             cloneObjets.put(entry.getKey(), entry.getValue());
         }
         return cloneObjets;
+    }
+
+    public void franchir(String nomPorte) throws PorteFermeException, PorteInexistanteDansLaPieceException {
+        
+    }
+
+    public void franchir(Porte porte) throws PorteFermeException, PorteInexistanteDansLaPieceException {
+        this.franchir(porte.getNom());
     }
 
     /**
