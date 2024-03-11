@@ -3,6 +3,7 @@ package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
 import org.hamcrest.core.IsNull;
@@ -13,6 +14,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableExcep
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 
 class ObjetTest extends Objet {
     public ObjetTest(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -58,6 +60,19 @@ public class TestVivant{
         assertThat(this.vivant.possede(this.objet), Is.is(true));
         ObjetTest obj = new ObjetTest("tarte", this.monde);
         assertThat(this.vivant.possede(obj), Is.is(false));
+    }
+
+    @Test
+    public void testVivantFranchitPorte() throws Exception {
+        Monde monde = new Monde("monde");
+        Piece pA = new Piece("pA", monde);
+        Piece pB = new Piece("pB", monde);
+        Porte porte = new Porte("porte", monde, pA, pB);
+        VivantTest vivant = new VivantTest("vivant", monde, 15, 14, pA);
+
+        assertThat(vivant.getPiece(), equalTo(pA));
+        vivant.franchir(porte);
+        assertThat(vivant.getPiece(), equalTo(pB));
     }
 
     @Test
