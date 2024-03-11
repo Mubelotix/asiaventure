@@ -5,7 +5,10 @@ import java.util.Map;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
+import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
+import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
@@ -85,20 +88,13 @@ public /*abstract*/ class Vivant extends Entite {
         this.deposer(objet.getNom());
     }
 
-    /**
-     * Récupère tous les objets de l'inventaire du vivant.
-     * @return Les objets de l'inventaire du vivant.
-     */
-    public Map<String, Objet> getObjets() {
-        HashMap<String, Objet> cloneObjets = new HashMap<String, Objet>();
-        for (Map.Entry<String, Objet> entry : this.objets.entrySet()) {
-            cloneObjets.put(entry.getKey(), entry.getValue());
-        }
-        return cloneObjets;
-    }
-
     public void franchir(String nomPorte) throws PorteFermeException, PorteInexistanteDansLaPieceException {
-        
+        Porte porte = this.piece.getPorte(nomPorte);
+        if (!porte.getEtat().equals(Etat.OUVERT)) {
+            throw new PorteFermeException();
+        }
+        Piece piece2 = porte.getPieceAutreCote(this.piece);
+        this.entrer(piece2);
     }
 
     public void franchir(Porte porte) throws PorteFermeException, PorteInexistanteDansLaPieceException {
@@ -111,6 +107,34 @@ public /*abstract*/ class Vivant extends Entite {
      */
     public Piece getPiece() {
         return this.piece;
+    }
+
+    public void activerActivable(Activable activable) throws ActivationException {
+        activable.activer();
+    }
+
+    public void activerActivableAvecObjet(Activable activable, Objet objet) throws ActivationException {
+        activable.activableAvec(objet);
+    }
+
+    /**
+     * Récupère tous les objets de l'inventaire du vivant.
+     * @return Les objets de l'inventaire du vivant.
+     */
+    public Map<String, Objet> getObjets() {
+        HashMap<String, Objet> cloneObjets = new HashMap<String, Objet>();
+        for (Map.Entry<String, Objet> entry : this.objets.entrySet()) {
+            cloneObjets.put(entry.getKey(), entry.getValue());
+        }
+        return cloneObjets;
+    }
+    
+    public Objet getObjet(String nomObjet) {
+        return this.objets.get(nomObjet);
+    }
+
+    public boolean possede(Objet obj) {
+        return this.objets.containsKey(obj.getNom());
     }
 
     /**
@@ -159,6 +183,10 @@ public /*abstract*/ class Vivant extends Entite {
      */
     public int getPointsForce() {
         return this.pointsForce;
+    }
+
+    public boolean estMort() {
+        return this.pointsVie == 0;
     }
 
     /** 
