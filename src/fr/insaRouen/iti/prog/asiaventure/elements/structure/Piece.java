@@ -133,16 +133,15 @@ public class Piece extends ElementStructurel {
      * @return L'objet.
      */
     public Objet retirer(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
-        try {
-            Objet objet = this.objets.get(nomObjet);
-            if (!objet.estDeplacable()) {
-                throw new ObjetNonDeplacableException(String.format("L'objet %s n'est pas déplaçable", nomObjet));
-            }
-            this.objets.remove(nomObjet);
-            return objet;
-        } catch (NullPointerException e) {
+        Objet objet = this.objets.get(nomObjet);
+        if (objet == null) {
             throw new ObjetAbsentDeLaPieceException(String.format("L'objet %s est absent de la pièce %s", nomObjet, this.getNom()));
         }
+        if (!objet.estDeplacable()) {
+            throw new ObjetNonDeplacableException(String.format("L'objet %s n'est pas déplaçable", nomObjet));
+        }
+        this.objets.remove(nomObjet);
+        return objet;
     }
 
     /** Retire un objet de la pièce.
@@ -182,7 +181,7 @@ public class Piece extends ElementStructurel {
             sb.append(entry.getKey());
             sb.append(", ");
         }
-        sb.append("], vivants: [");
+        sb.append("], vivants: ["); // TODO: keyset
         for (Map.Entry<String, Vivant> entry : this.vivants.entrySet()) {
             sb.append(entry.getKey());
             sb.append(", ");
