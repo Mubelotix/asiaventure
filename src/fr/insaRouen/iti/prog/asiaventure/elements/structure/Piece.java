@@ -19,7 +19,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
 public class Piece extends ElementStructurel {
     private final Map<String, Objet> objets = new HashMap<String, Objet>();
     private final Map<String, Vivant> vivants = new HashMap<String, Vivant>();
-    private final Map<String, Porte> portes = new HashMap<String, Porte>;
+    private final Map<String, Porte> portes = new HashMap<String, Porte>();
 
     /** Crée une pièce avec son nom et un monde.
      * @param nom Le nom de la pièce.
