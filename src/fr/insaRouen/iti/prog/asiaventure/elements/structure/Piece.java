@@ -177,15 +177,9 @@ public class Piece extends ElementStructurel {
         sb.append("Piece(nom: ");
         sb.append(this.getNom());
         sb.append(", objets: [");
-        for (String key : this.objets.keySet()) {
-            sb.append(key);
-            sb.append(", ");
-        }
+        sb.append(String.format("%s", this.objets.keySet()));
         sb.append("], vivants: [");
-        for (String key : this.vivants.keySet()) {
-            sb.append(key);
-            sb.append(", ");
-        }
+        sb.append(this.vivants.keySet());
         sb.append("])");
         return sb.toString();
     }
