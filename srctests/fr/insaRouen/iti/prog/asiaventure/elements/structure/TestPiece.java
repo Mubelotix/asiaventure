@@ -13,6 +13,8 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableExcep
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
+
 import static org.hamcrest.core.Is.is;
 
 import java.util.Map;
@@ -31,12 +33,15 @@ public class TestPiece {
     Monde monde;
     Piece piece1;
     Piece piece2;
+    Piece piece3;
 
     @Before
     public void initialisation() throws NomDEntiteDejaUtiliseDansLeMondeException {
         this.monde = new Monde("monde");
         this.piece1 = new Piece("piece1", this.monde);
         this.piece2 = new Piece("piece2", this.monde);
+        this.piece2 = new Piece("piece3", this.monde);
+
     }
 
     @Test
@@ -109,5 +114,17 @@ public class TestPiece {
         assertThat(this.piece1.contientObjet("pdb1"), is(false));
         assertThat(this.piece2.contientObjet("pdb1"), is(true));
         assertThat(vivant1.getObjets().isEmpty(), is(true));
-    }
+    }/*
+
+    @Test
+    public void TestContientPorte() throws NomDEntiteDejaUtiliseDansLeMondeException{
+        Porte p1 = new Porte("porte10", this.monde, piece1, piece2);
+        assertThat(this.piece1.aLaPorte(p1), is(true));
+        assertThat(this.piece2.aLaPorte(p1.getNom()), is(true));
+        assertThat(this.piece3.aLaPorte(p1), is(false));
+        assertThat(this.piece3.aLaPorte(p1.getNom()), is(false));
+        this.piece3.addPorte(p1);
+        assertThat(this.piece3.aLaPorte(p1), is(true));
+
+    }*/
 }

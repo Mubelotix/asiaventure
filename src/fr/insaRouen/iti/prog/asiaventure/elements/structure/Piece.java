@@ -43,6 +43,10 @@ public class Piece extends ElementStructurel {
 
     }
 
+    protected void addPorte(Porte porte){
+        this.portes.put(porte.getNom(), porte);
+    }
+
     public Porte getPorte(String nomPorte) throws PorteInexistanteDansLaPieceException{
         if(!this.aLaPorte(nomPorte)){
             throw new PorteInexistanteDansLaPieceException(String.format("la porte %s nexiste pas dans la piece %s", nomPorte, this.getNom()));
