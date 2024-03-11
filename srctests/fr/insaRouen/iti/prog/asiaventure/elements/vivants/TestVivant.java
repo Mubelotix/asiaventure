@@ -15,6 +15,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
 
 class ObjetTest extends Objet {
     public ObjetTest(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -73,6 +74,19 @@ public class TestVivant{
         assertThat(vivant.getPiece(), equalTo(pA));
         vivant.franchir(porte);
         assertThat(vivant.getPiece(), equalTo(pB));
+    }
+
+    @Test(expected = PorteFermeException.class)
+    public void testVivantFranchitPorteFermee() throws Exception {
+        Monde monde = new Monde("monde");
+        Piece pA = new Piece("pA", monde);
+        Piece pB = new Piece("pB", monde);
+        Porte porte = new Porte("porte", monde, pA, pB);
+        VivantTest vivant = new VivantTest("vivant", monde, 15, 14, pA);
+
+        porte.activer(); // Fermer la porte
+        assertThat(vivant.getPiece(), equalTo(pA));
+        vivant.franchir(porte);
     }
 
     @Test
