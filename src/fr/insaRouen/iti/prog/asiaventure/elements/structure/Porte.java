@@ -3,7 +3,6 @@ package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
-import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleAvecObjetException;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
@@ -45,6 +44,18 @@ public class Porte extends ElementStructurel implements Activable {
     }
 
     public Object getSerrure() {
-        return null; // TODO: serrure
+        return this.serrure;
+    }
+
+    public Piece getPieceAutreCote(Piece piece) {
+        if (piece.equals(pieceA)) {
+            return this.pieceB;
+        } else {
+            return this.pieceA;
+        }
+    }
+
+    public String toString() {
+        return String.format("Porte(nom: %s, monde: %s, etat: %s, serrure: %s, pieceA: %s, pieceB: %s)", this.getNom(), this.getMonde().getNom(), this.getEtat(), this.serrure, this.pieceA, this.pieceB);
     }
 }
