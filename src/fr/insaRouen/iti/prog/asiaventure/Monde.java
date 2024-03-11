@@ -1,14 +1,17 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collection;
+import java.util.Iterator;
 
-public class Monde {
+public class Monde{
     private final String nom;
-    private Entite[] entites;
+    private Map<String, Entite> entites = new HashMap<>();
     
     public Monde(String nom) {
         this.nom = nom;
-        this.entites = new Entite[0];
     }
 
     public String getNom() {
@@ -16,21 +19,14 @@ public class Monde {
     }
 
     public Entite getEntite(String nom) {
-        for (int i = 0; i < this.entites.length; i++) {
-            if (this.entites[i].getNom().equals(nom)) {
-                return this.entites[i];
-            }
+        if(this.entites.isEmpty()){
+            return null;
         }
-        return null;
+        return this.entites.get(nom);
     }
 
     private boolean nomEntiteDejaUtilise(Entite entite){
-        for(int i = 0; i < this.entites.length; i++ ){
-            if (this.entites[i].getNom().equals(entite.getNom())) {
-                return true;
-            }
-        }
-        return false;
+        return this.entites.containsKey(entite.getNom());
     }
 
     public void ajouter(Entite entite) throws NomDEntiteDejaUtiliseDansLeMondeException, EntiteDejaDansUnAutreMondeException{
@@ -41,10 +37,7 @@ public class Monde {
             throw new NomDEntiteDejaUtiliseDansLeMondeException(String.format("Monde : %s, Entite déjà utilisé : %s", this.getNom(), entite.getNom()));
         }
         
-        Entite[] newEntites = new Entite[this.entites.length + 1];
-        System.arraycopy(this.entites, 0, newEntites, 0, this.entites.length);
-        newEntites[this.entites.length] = entite;
-        this.entites = newEntites;
+       this.entites.put(entite.getNom(), entite);
     }
 
     public String toString() {
@@ -52,8 +45,8 @@ public class Monde {
         sb.append("Monde(nom: ");
         sb.append(this.getNom());
         sb.append(", entites: [");
-        for (int i = 0; i < this.entites.length; i++) {
-            sb.append(this.entites[i].getNom());
+        for (String key : this.entites.keySet()) {
+            sb.append(key);
             sb.append(", ");
         }
         sb.append("])");

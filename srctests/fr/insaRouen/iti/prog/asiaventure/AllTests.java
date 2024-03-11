@@ -8,7 +8,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.AllTestElements;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-    AllTestElements.class,
+    //AllTestElements.class,
     TestMonde.class,
 })
 

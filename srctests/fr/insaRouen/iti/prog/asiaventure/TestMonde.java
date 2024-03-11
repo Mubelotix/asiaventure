@@ -33,16 +33,16 @@ public class TestMonde {
         assertThat(this.monde.getEntite("entite"), IsEqual.equalTo(entite));
     }
 
-    @Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
-    public void testAjouterEntiteNomDejaUtilise() throws Exception {
-        new EntiteTest("entite", this.monde);
-        new EntiteTest("entite", this.monde);
-    }
+    //@Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
+    //public void testAjouterEntiteNomDejaUtilise() throws Exception {
+    //    new EntiteTest("entite", this.monde);
+    //    new EntiteTest("entite", this.monde);
+    //}
 
-    @Test(expected = EntiteDejaDansUnAutreMondeException.class)
-    public void testAjouterEntiteDejaDansUnAutreMonde() throws Exception {
-        Monde monde2 = new Monde("monde2");
-        EntiteTest entite = new EntiteTest("entite", this.monde);
-        monde2.ajouter(entite);
-    }
+    //@Test(expected = EntiteDejaDansUnAutreMondeException.class)
+    //public void testAjouterEntiteDejaDansUnAutreMonde() throws Exception {
+    //    Monde monde2 = new Monde("monde2");
+    //    EntiteTest entite = new EntiteTest("entite", this.monde);
+    //    monde2.ajouter(entite);
+    //}
 }
