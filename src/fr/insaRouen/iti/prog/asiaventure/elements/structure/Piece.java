@@ -2,15 +2,11 @@ package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
-
-
-
 
 /** Une pièce est un élément structurel du monde qui contient des objets et des vivants. */
 public class Piece extends ElementStructurel {
@@ -34,20 +30,38 @@ public class Piece extends ElementStructurel {
         return this.objets.containsKey(nomObjet);
     }
 
-    public boolean aLaPorte(Porte porte){
+    /**
+     * Vérifie si la pièce contient une porte.
+     * @param porte La porte.
+     * @return Vrai si la pièce contient la porte, faux sinon.
+     */
+    public boolean aLaPorte(Porte porte) {
         return this.aLaPorte(porte.getNom());
     }
 
-    public boolean aLaPorte(String nomPorte){
+    /**
+     * Vérifie si la pièce contient une porte.
+     * @param nomPorte Le nom de la porte.
+     * @return Vrai si la pièce contient la porte, faux sinon.
+     */
+    public boolean aLaPorte(String nomPorte) {
         return this.portes.containsKey(nomPorte);
     }
 
+    /** Ajoute une porte à la pièce.
+     * @param porte La porte à ajouter.
+     */
     protected void addPorte(Porte porte) {
         this.portes.put(porte.getNom(), porte);
     }
 
-    public Porte getPorte(String nomPorte) throws PorteInexistanteDansLaPieceException{
-        if(!this.aLaPorte(nomPorte)) {
+    /** Récupère une porte de la pièce.
+     * @param nomPorte Le nom de la porte.
+     * @return La porte.
+     * @throws PorteInexistanteDansLaPieceException Si la porte n'existe pas dans la pièce.
+     */
+    public Porte getPorte(String nomPorte) throws PorteInexistanteDansLaPieceException {
+        if (!this.aLaPorte(nomPorte)) {
             throw new PorteInexistanteDansLaPieceException(String.format("La porte %s n'existe pas dans la piece %s", nomPorte, this.getNom()));
         }
         return this.portes.get(nomPorte);
