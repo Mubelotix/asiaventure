@@ -15,6 +15,8 @@ import fr.insaRouen.iti.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVi
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 import static org.hamcrest.core.Is.is;
 
+import java.util.Map;
+
 class ObjetTest extends Objet {
     public ObjetTest(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
@@ -43,8 +45,8 @@ public class TestPiece {
         this.piece1.entrer(vivant1);
 
         assertThat(this.piece1.contientVivant("vivant1"), is(true));
-        assertThat(this.piece1.getVivants().length, is(1));
-        assertThat(this.piece1.getObjets().length, is(0));
+        assertThat(this.piece1.getVivants().size(), is(1));
+        assertThat(this.piece1.getObjets().isEmpty(), is(true));
     }
 
     @Test(expected = NomDEntiteDejaUtiliseDansLeMondeException.class)
@@ -70,8 +72,8 @@ public class TestPiece {
         Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
         this.piece1.entrer(vivant1);
 
-        Vivant[] vivants = this.piece1.getVivants();
-        vivants[0] = null;
+        Map<String, Vivant> vivants = this.piece1.getVivants();
+        vivants.remove(vivant1.getNom());
         assertThat(this.piece1.contientVivant("vivant1"), is(true));
     }
 
@@ -92,7 +94,7 @@ public class TestPiece {
         PiedDeBiche pdb1 = new PiedDeBiche("pdb1", this.monde);
         this.piece1.deposer(pdb1);
         assertThat(this.piece1.contientObjet("pdb1"), is(true));
-        assertThat(this.piece1.getObjets().length, is(1));
+        assertThat(this.piece1.getObjets().size(), is(1));
     }
 
     @Test

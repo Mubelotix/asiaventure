@@ -20,7 +20,7 @@ public /*abstract*/ class Vivant extends Entite {
     private int pointsVie;
     private int pointsForce;
     private Piece piece;
-    private Map<String, Objet> objets = new HashMap<String, Objet>();
+    private final Map<String, Objet> objets = new HashMap<String, Objet>();
 
     /**
      * Crée un vivant avec son nom, un monde, des points de vie, des points de force, une pièce et des objets.

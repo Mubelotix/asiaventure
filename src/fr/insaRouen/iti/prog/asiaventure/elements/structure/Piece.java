@@ -1,15 +1,19 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
+import fr.insaRouen.iti.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 /** Une pièce est un élément structurel du monde qui contient des objets et des vivants. */
 public class Piece extends ElementStructurel {
-    private Objet[] objets = new Objet[0];
-    private Vivant[] vivants = new Vivant[0];
+    private final Map<String, Objet> objets = new HashMap<String, Objet>();
+    private final Map<String, Vivant> vivants = new HashMap<String, Vivant>();
 
     /** Crée une pièce avec son nom et un monde.
      * @param nom Le nom de la pièce.
@@ -24,7 +28,7 @@ public class Piece extends ElementStructurel {
      * @return Vrai si la pièce contient l'objet, faux sinon.
      */
     public boolean contientObjet(String nomObjet) {
-        return Objet.contientObjetArray(this.objets, nomObjet);
+        return this.objets.containsKey(nomObjet);
     }
 
     /** Vérifie si la pièce contient un objet.
@@ -40,7 +44,7 @@ public class Piece extends ElementStructurel {
      * @return Vrai si la pièce contient le vivant, faux sinon.
      */
     public boolean contientVivant(String nomVivant) {
-        return Vivant.contientVivantArray(this.vivants, nomVivant);
+        return this.vivants.containsKey(nomVivant);
     }
 
     /** Vérifie si la pièce contient un vivant.
@@ -55,29 +59,37 @@ public class Piece extends ElementStructurel {
      * @param objet L'objet à ajouter.
      */
     public void deposer(Objet objet) {
-        this.objets = Objet.ajouterObjetArray(this.objets, objet);
+        this.objets.put(objet.getNom(), objet);
     }
 
     /** Ajoute un vivant dans la pièce.
      * @param vivant Le vivant à ajouter.
      */
     public void entrer(Vivant vivant) {
-        this.vivants = Vivant.ajouterVivantArray(this.vivants, vivant);
+        this.vivants.put(vivant.getNom(), vivant);
         vivant.entrer(this);
     }
 
     /** Récupère tous les objet de la pièce.
      * @return Les objets de la pièce.
      */
-    public Objet[] getObjets() {
-        return Objet.cloneArray(this.objets);
+    public Map<String, Objet> getObjets() {
+        HashMap<String, Objet> clone = new HashMap<String, Objet>();
+        for (Map.Entry<String, Objet> entry : this.objets.entrySet()) {
+            clone.put(entry.getKey(), entry.getValue());
+        }
+        return clone;
     }
 
     /** Récupère tous les vivants de la pièce.
      * @return Les vivants de la pièce.
      */
-    public Vivant[] getVivants() {
-        return Vivant.cloneArray(this.vivants);
+    public Map<String, Vivant> getVivants() {
+        HashMap<String, Vivant> clone = new HashMap<String, Vivant>();
+        for (Map.Entry<String, Vivant> entry : this.vivants.entrySet()) {
+            clone.put(entry.getKey(), entry.getValue());
+        }
+        return clone;
     }
 
     /** Retire un objet de la pièce.
@@ -85,16 +97,16 @@ public class Piece extends ElementStructurel {
      * @return L'objet.
      */
     public Objet retirer(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
-        int index = Objet.locateObjetArray(this.objets, nomObjet);
-        if (index == -1) {
+        try {
+            Objet objet = this.objets.get(nomObjet);
+            if (!objet.estDeplacable()) {
+                throw new ObjetNonDeplacableException(String.format("L'objet %s n'est pas déplaçable", nomObjet));
+            }
+            this.objets.remove(nomObjet);
+            return objet;
+        } catch (NullPointerException e) {
             throw new ObjetAbsentDeLaPieceException(String.format("L'objet %s est absent de la pièce %s", nomObjet, this.getNom()));
         }
-        Objet objet = this.objets[index];
-        if (!objet.estDeplacable()) {
-            throw new ObjetNonDeplacableException(String.format("L'objet %s n'est pas déplaçable", nomObjet));
-        }
-        this.objets = Objet.retirerObjetArray(this.objets, index);
-        return objet;
     }
 
     /** Retire un objet de la pièce.
@@ -110,14 +122,11 @@ public class Piece extends ElementStructurel {
      * @return Le vivant.
      */
     public Vivant sortir(String nomVivant) throws VivantAbsentDeLaPieceException {
-        int index = Vivant.locateVivantArray(this.vivants, nomVivant);
-        if (index == -1) {
+        try {
+            return this.vivants.remove(nomVivant);
+        } catch (NullPointerException e) {
             throw new VivantAbsentDeLaPieceException(String.format("Le vivant %s est absent de la pièce %s", nomVivant, this.getNom()));
         }
-        Vivant vivant = this.vivants[index];
-        this.vivants = Vivant.retirerVivantArray(this.vivants, index);
-        vivant.sortir();
-        return vivant;
     }
 
     /** Retire un vivant de la pièce.
@@ -133,13 +142,13 @@ public class Piece extends ElementStructurel {
         sb.append("Monde(nom: ");
         sb.append(this.getNom());
         sb.append(", objets: [");
-        for (int i = 0; i < this.objets.length; i++) {
-            sb.append(this.objets[i].getNom());
+        for (Map.Entry<String, Objet> entry : this.objets.entrySet()) {
+            sb.append(entry.getKey());
             sb.append(", ");
         }
         sb.append(", vivants: [");
-        for (int i = 0; i < this.vivants.length; i++) {
-            sb.append(this.vivants[i].getNom());
+        for (Map.Entry<String, Vivant> entry : this.vivants.entrySet()) {
+            sb.append(entry.getKey());
             sb.append(", ");
         }
         sb.append("])");
