@@ -8,11 +8,18 @@ import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
+
+
+
 
 /** Une pièce est un élément structurel du monde qui contient des objets et des vivants. */
 public class Piece extends ElementStructurel {
     private final Map<String, Objet> objets = new HashMap<String, Objet>();
     private final Map<String, Vivant> vivants = new HashMap<String, Vivant>();
+    private final Map<String, Porte> portes = new HashMap<String, Porte>;
 
     /** Crée une pièce avec son nom et un monde.
      * @param nom Le nom de la pièce.
@@ -28,6 +35,15 @@ public class Piece extends ElementStructurel {
      */
     public boolean contientObjet(String nomObjet) {
         return this.objets.containsKey(nomObjet);
+    }
+
+    public boolean aLaPorte(Porte porte){
+        return this.aLaPorte(porte.getNom());
+    }
+
+    public boolean aLaPorte(String nomPorte){
+        return this.objets.containsKey(nomPorte);
+
     }
 
     /** Vérifie si la pièce contient un objet.
