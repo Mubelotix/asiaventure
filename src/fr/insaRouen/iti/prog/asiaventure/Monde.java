@@ -3,8 +3,6 @@ package fr.insaRouen.iti.prog.asiaventure;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Collection;
-import java.util.Iterator;
 
 public class Monde{
     private final String nom;
