@@ -1,7 +1,7 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-
+import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,7 +13,6 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableExcep
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
-import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 
 import static org.hamcrest.core.Is.is;
 
@@ -80,6 +79,12 @@ public class TestPiece {
         Map<String, Vivant> vivants = this.piece1.getVivants();
         vivants.remove(vivant1.getNom());
         assertThat(this.piece1.contientVivant("vivant1"), is(true));
+    }
+
+    @Test
+    public void testGetPorte() throws NomDEntiteDejaUtiliseDansLeMondeException, PorteInexistanteDansLaPieceException {
+        Porte porte = new Porte("porte", this.monde, this.piece1, this.piece2);
+        assertThat(this.piece1.getPorte("porte"), equalTo(porte));
     }
 
     @Test
