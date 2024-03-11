@@ -144,11 +144,11 @@ public class Piece extends ElementStructurel {
      * @return Le vivant.
      */
     public Vivant sortir(String nomVivant) throws VivantAbsentDeLaPieceException {
-        try {
-            return this.vivants.remove(nomVivant);
-        } catch (NullPointerException e) {
+        Vivant vivant = this.vivants.remove(nomVivant);
+        if(vivant == null){
             throw new VivantAbsentDeLaPieceException(String.format("Le vivant %s est absent de la pièce %s", nomVivant, this.getNom()));
         }
+        return vivant;
     }
 
     /** Retire un vivant de la pièce.

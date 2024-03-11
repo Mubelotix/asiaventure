@@ -114,7 +114,7 @@ public class TestPiece {
         assertThat(this.piece1.contientObjet("pdb1"), is(false));
         assertThat(this.piece2.contientObjet("pdb1"), is(true));
         assertThat(vivant1.getObjets().isEmpty(), is(true));
-    }/*
+    }
 
     @Test
     public void TestContientPorte() throws NomDEntiteDejaUtiliseDansLeMondeException{
@@ -126,5 +126,5 @@ public class TestPiece {
         this.piece3.addPorte(p1);
         assertThat(this.piece3.aLaPorte(p1), is(true));
 
-    }*/
+    }
 }
