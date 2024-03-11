@@ -39,20 +39,20 @@ public class Porte extends ElementStructurel implements Activable {
 
     public void activer() throws ActivationImpossibleException {
         if (this.etat == Etat.OUVERT) {
-            this.etat = Etat.DEVEROUILLE;
-        } else if (this.etat == Etat.DEVEROUILLE) {
+            this.etat = Etat.FERME;
+        } else if (this.etat == Etat.FERME) {
             this.etat = Etat.OUVERT;
         } else {
-            throw new ActivationImpossibleException();
+            throw new ActivationImpossibleException("La porte est fermée.");
         }
     }
 
     public void activerAvec(Objet obj) throws ActivationImpossibleException, ActivationImpossibleAvecObjetException {
-        throw new ActivationImpossibleAvecObjetException();
+        throw new ActivationImpossibleAvecObjetException("La porte ne peut pas être activée avec un objet.");
     }
 
     public Etat getEtat() {
-        return this.etat; // TODO: Clone
+        return this.etat;
     }
 
     public Object getSerrure() {
