@@ -154,14 +154,14 @@ public class Piece extends ElementStructurel {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Monde(nom: ");
+        sb.append("Piece(nom: ");
         sb.append(this.getNom());
         sb.append(", objets: [");
         for (Map.Entry<String, Objet> entry : this.objets.entrySet()) {
             sb.append(entry.getKey());
             sb.append(", ");
         }
-        sb.append(", vivants: [");
+        sb.append("], vivants: [");
         for (Map.Entry<String, Vivant> entry : this.vivants.entrySet()) {
             sb.append(entry.getKey());
             sb.append(", ");

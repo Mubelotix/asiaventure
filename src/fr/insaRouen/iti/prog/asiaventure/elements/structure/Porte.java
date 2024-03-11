@@ -17,13 +17,13 @@ public class Porte extends ElementStructurel implements Activable {
     public Porte(String nom, Monde monde, Piece pieceA, Piece pieceB) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
         this.pieceA = pieceA;
-        this.pieceA = pieceB;
+        this.pieceB = pieceB;
     }
 
     public Porte(String nom, Monde monde, Object serrure, Piece pieceA, Piece pieceB) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
         this.pieceA = pieceA;
-        this.pieceA = pieceB;
+        this.pieceB = pieceB;
         this.serrure = serrure;
     }
 
@@ -48,7 +48,7 @@ public class Porte extends ElementStructurel implements Activable {
     }
 
     public Piece getPieceAutreCote(Piece piece) {
-        if (piece.equals(pieceA)) {
+        if (piece.getNom().equals(this.pieceA.getNom())) {
             return this.pieceB;
         } else {
             return this.pieceA;
