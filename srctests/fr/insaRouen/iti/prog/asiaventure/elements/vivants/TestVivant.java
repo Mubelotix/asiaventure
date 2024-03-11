@@ -55,9 +55,9 @@ public class TestVivant{
 
     @Test
     public void testObjets() throws Exception {
-        assertThat(this.vivant.contientObjet(this.objet), Is.is(true));
+        assertThat(this.vivant.possede(this.objet), Is.is(true));
         ObjetTest obj = new ObjetTest("tarte", this.monde);
-        assertThat(this.vivant.contientObjet(obj), Is.is(false));
+        assertThat(this.vivant.possede(obj), Is.is(false));
     }
 
     @Test

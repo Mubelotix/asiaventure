@@ -11,4 +11,8 @@ public class PiedDeBiche extends Objet {
     public boolean estDeplacable() {
         return true;
     }
+
+    public String toString() {
+        return String.format("PiedDeBiche(nom: %s, monde: %s)", this.getNom(), this.getMonde().getNom());
+    }
 }
