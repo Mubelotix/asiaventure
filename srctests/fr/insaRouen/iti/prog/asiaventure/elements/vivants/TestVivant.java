@@ -49,7 +49,7 @@ public class TestVivant{
         assertThat(this.vivant.getNom(), IsEqual.equalTo("vivant"));
         assertThat(this.vivant.getPointsForce(), IsEqual.equalTo(14));
         assertThat(this.vivant.getPointsVie(), IsEqual.equalTo(15));
-        assertThat(this.vivant.getObjets()[0].getNom(), IsEqual.equalTo("objet"));
+        assertThat(this.vivant.getObjets().get("objet"), IsEqual.equalTo(this.objet));
         assertThat(this.vivant.getPiece().getNom(), IsEqual.equalTo("piece"));
     }
 
@@ -77,7 +77,7 @@ public class TestVivant{
         this.vivant.prendre("pdb1");
         assertThat(this.piece.contientObjet("pdb1"), Is.is(false));
         assertThat(this.piece.getObjets().length, Is.is(0));
-        assertThat(this.vivant.getObjets().length, Is.is(2));
+        assertThat(this.vivant.getObjets().size(), Is.is(2));
     }
 
     @Test(expected = ObjetNonDeplacableException.class)

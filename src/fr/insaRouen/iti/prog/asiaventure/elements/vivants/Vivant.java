@@ -1,5 +1,8 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
@@ -17,7 +20,7 @@ public /*abstract*/ class Vivant extends Entite {
     private int pointsVie;
     private int pointsForce;
     private Piece piece;
-    private Objet[] objets;
+    private Map<String, Objet> objets = new HashMap<String, Objet>();
 
     /**
      * Crée un vivant avec son nom, un monde, des points de vie, des points de force, une pièce et des objets.
@@ -33,10 +36,10 @@ public /*abstract*/ class Vivant extends Entite {
         this.pointsVie = pointsVie;
         this.pointsForce = pointsForce;
         this.piece = piece;
-        if (objets == null) {
-            this.objets = new Objet[0];
-        } else {
-            this.objets = Objet.cloneArray(objets);
+        if (objets != null) {
+            for (int i = 0; i < objets.length; i++) {
+                this.objets.put(objets[i].getNom(), objets[i]);
+            }
         }
         piece.entrer(this);
     }
@@ -47,7 +50,7 @@ public /*abstract*/ class Vivant extends Entite {
      */
     public void prendre(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException {
         Objet objet = this.piece.retirer(nomObjet);
-        this.objets = Objet.ajouterObjetArray(this.objets, objet);
+        this.objets.put(objet.getNom(), objet);
     }
 
     /**
@@ -63,13 +66,12 @@ public /*abstract*/ class Vivant extends Entite {
      * @param nomObjet Le nom de l'objet à déposer.
      */
     public void deposer(String nomObjet) throws ObjetNonPossedeParLeVivantException {
-        int index = Objet.locateObjetArray(this.objets, nomObjet);
-        if (index == -1) {
+        try {
+            Objet objet = this.objets.remove(nomObjet);
+            this.piece.deposer(objet);
+        } catch (NullPointerException e) {
             throw new ObjetNonPossedeParLeVivantException(String.format("L'objet %s n'est pas possédé par le vivant %s", nomObjet, this.getNom()));
         }
-        Objet objet = this.objets[index];
-        this.objets = Objet.retirerObjetArray(this.objets, index);
-        this.piece.deposer(objet);
     }
 
     /**
@@ -84,8 +86,12 @@ public /*abstract*/ class Vivant extends Entite {
      * Récupère tous les objets de l'inventaire du vivant.
      * @return Les objets de l'inventaire du vivant.
      */
-    public Objet[] getObjets() {
-        return Objet.cloneArray(this.objets);
+    public Map<String, Objet> getObjets() {
+        HashMap<String, Objet> cloneObjets = new HashMap<String, Objet>();
+        for (Map.Entry<String, Objet> entry : this.objets.entrySet()) {
+            cloneObjets.put(entry.getKey(), entry.getValue());
+        }
+        return cloneObjets;
     }
 
     /**
@@ -150,7 +156,7 @@ public /*abstract*/ class Vivant extends Entite {
      * @return Vrai si le vivant possède l'objet, faux sinon.
      */
     public boolean contientObjet(String nomObjet) {
-        return Objet.contientObjetArray(this.objets, nomObjet);
+        return this.objets.containsKey(nomObjet);
     }
 
     /**

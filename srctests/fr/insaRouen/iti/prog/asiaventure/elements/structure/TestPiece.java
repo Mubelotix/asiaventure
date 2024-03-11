@@ -106,6 +106,6 @@ public class TestPiece {
         vivant1.deposer("pdb1");
         assertThat(this.piece1.contientObjet("pdb1"), is(false));
         assertThat(this.piece2.contientObjet("pdb1"), is(true));
-        assertThat(vivant1.getObjets().length, is(0));
+        assertThat(vivant1.getObjets().isEmpty(), is(true));
     }
 }
