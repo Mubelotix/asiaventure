@@ -63,11 +63,7 @@ public class Porte extends ElementStructurel implements Activable {
     }
 
     public Piece getPieceAutreCote(Piece piece) {
-        if (piece.getNom().equals(this.pieceA.getNom())) {
-            return this.pieceB;
-        } else {
-            return this.pieceA;
-        }
+        return piece.getNom().equals(this.pieceA.getNom()) ? this.pieceB : this.pieceA;
     }
 
     public String toString() {
