@@ -76,7 +76,7 @@ public class TestVivant{
         this.piece.deposer(pdb1);
         this.vivant.prendre("pdb1");
         assertThat(this.piece.contientObjet("pdb1"), Is.is(false));
-        assertThat(this.piece.getObjets().length, Is.is(0));
+        assertThat(this.piece.getObjets().isEmpty(), Is.is(true));
         assertThat(this.vivant.getObjets().size(), Is.is(2));
     }
 
