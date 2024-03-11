@@ -40,7 +40,7 @@ public class TestPiece {
         this.monde = new Monde("monde");
         this.piece1 = new Piece("piece1", this.monde);
         this.piece2 = new Piece("piece2", this.monde);
-        this.piece2 = new Piece("piece3", this.monde);
+        this.piece3 = new Piece("piece3", this.monde);
 
     }
 
