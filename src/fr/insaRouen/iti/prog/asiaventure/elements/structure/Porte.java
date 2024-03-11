@@ -16,12 +16,16 @@ public class Porte extends ElementStructurel implements Activable {
 
     public Porte(String nom, Monde monde, Piece pieceA, Piece pieceB) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
+        this.etat = Etat.OUVERT;
         this.pieceA = pieceA;
         this.pieceB = pieceB;
+        this.pieceA.addPorte(this);
+        this.pieceB.addPorte(this);
     }
 
     public Porte(String nom, Monde monde, Object serrure, Piece pieceA, Piece pieceB) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
+        this.etat = Etat.OUVERT;
         this.pieceA = pieceA;
         this.pieceB = pieceB;
         this.serrure = serrure;

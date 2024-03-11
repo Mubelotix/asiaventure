@@ -39,20 +39,18 @@ public class Piece extends ElementStructurel {
     }
 
     public boolean aLaPorte(String nomPorte){
-        return this.objets.containsKey(nomPorte);
-
+        return this.portes.containsKey(nomPorte);
     }
 
-    protected void addPorte(Porte porte){
+    protected void addPorte(Porte porte) {
         this.portes.put(porte.getNom(), porte);
     }
 
     public Porte getPorte(String nomPorte) throws PorteInexistanteDansLaPieceException{
-        if(!this.aLaPorte(nomPorte)){
-            throw new PorteInexistanteDansLaPieceException(String.format("la porte %s nexiste pas dans la piece %s", nomPorte, this.getNom()));
+        if(!this.aLaPorte(nomPorte)) {
+            throw new PorteInexistanteDansLaPieceException(String.format("La porte %s n'existe pas dans la piece %s", nomPorte, this.getNom()));
         }
         return this.portes.get(nomPorte);
-
     }
 
     /** Vérifie si la pièce contient un objet.

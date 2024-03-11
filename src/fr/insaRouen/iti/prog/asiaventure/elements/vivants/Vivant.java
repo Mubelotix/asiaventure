@@ -43,8 +43,8 @@ public /*abstract*/ class Vivant extends Entite {
         this.pointsForce = pointsForce;
         this.piece = piece;
         if (objets != null) {
-            for (int i = 0; i < objets.length; i++) {
-                this.objets.put(objets[i].getNom(), objets[i]);
+            for (Objet objet : objets) {
+                this.objets.put(objet.getNom(), objet);
             }
         }
         piece.entrer(this);
