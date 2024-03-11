@@ -88,6 +88,12 @@ public /*abstract*/ class Vivant extends Entite {
         this.deposer(objet.getNom());
     }
 
+    /**
+     * Fait franchir une porte au vivant.
+     * @param nomPorte Le nom de la porte à franchir.
+     * @throws PorteFermeException Si la porte est fermée.
+     * @throws PorteInexistanteDansLaPieceException Si la porte n'existe pas dans la pièce.
+     */
     public void franchir(String nomPorte) throws PorteFermeException, PorteInexistanteDansLaPieceException {
         Porte porte = this.piece.getPorte(nomPorte);
         if (!porte.getEtat().equals(Etat.OUVERT)) {
@@ -97,6 +103,12 @@ public /*abstract*/ class Vivant extends Entite {
         this.entrer(piece2);
     }
 
+    /**
+     * Fait franchir une porte au vivant.
+     * @param porte La porte à franchir.
+     * @throws PorteFermeException Si la porte est fermée.
+     * @throws PorteInexistanteDansLaPieceException Si la porte n'existe pas dans la pièce.
+     */
     public void franchir(Porte porte) throws PorteFermeException, PorteInexistanteDansLaPieceException {
         this.franchir(porte.getNom());
     }
@@ -109,10 +121,21 @@ public /*abstract*/ class Vivant extends Entite {
         return this.piece;
     }
 
+    /**
+     * Active un élément activable.
+     * @param activable L'élément activable à activer.
+     * @throws ActivationException Si l'activation est impossible.
+     */
     public void activerActivable(Activable activable) throws ActivationException {
         activable.activer();
     }
 
+    /**
+     * Active un élément activable avec un objet.
+     * @param activable L'élément activable à activer.
+     * @param objet L'objet avec lequel activer l'élément activable.
+     * @throws ActivationException Si l'activation est impossible.
+     */
     public void activerActivableAvecObjet(Activable activable, Objet objet) throws ActivationException {
         activable.activableAvec(objet);
     }
@@ -129,10 +152,20 @@ public /*abstract*/ class Vivant extends Entite {
         return cloneObjets;
     }
     
+    /**
+     * Récupère un objet de l'inventaire du vivant.
+     * @param nomObjet Le nom de l'objet.
+     * @return L'objet.
+     */
     public Objet getObjet(String nomObjet) {
         return this.objets.get(nomObjet);
     }
 
+    /**
+     * Indique si le vivant possède un objet.
+     * @param obj L'objet.
+     * @return Vrai si le vivant possède l'objet, faux sinon.
+     */
     public boolean possede(Objet obj) {
         return this.objets.containsKey(obj.getNom());
     }
@@ -185,8 +218,12 @@ public /*abstract*/ class Vivant extends Entite {
         return this.pointsForce;
     }
 
+    /**
+     * Récupère si le vivant est mort.
+     * @return Vrai si le vivant est mort, faux sinon.
+     */
     public boolean estMort() {
-        return this.pointsVie == 0;
+        return this.pointsVie <= 0;
     }
 
     public String toString() {
