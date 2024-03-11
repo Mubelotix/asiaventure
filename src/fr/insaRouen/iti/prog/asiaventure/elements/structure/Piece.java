@@ -8,9 +8,6 @@ import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
-import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
-import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
-import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
 
 
 
@@ -43,6 +40,14 @@ public class Piece extends ElementStructurel {
 
     public boolean aLaPorte(String nomPorte){
         return this.objets.containsKey(nomPorte);
+
+    }
+
+    public Porte getPorte(String nomPorte) throws PorteInexistanteDansLaPieceException{
+        if(!this.aLaPorte(nomPorte)){
+            throw new PorteInexistanteDansLaPieceException(String.format("la porte %s nexiste pas dans la piece %s", nomPorte, this.getNom()));
+        }
+        return this.portes.get(nomPorte);
 
     }
 
