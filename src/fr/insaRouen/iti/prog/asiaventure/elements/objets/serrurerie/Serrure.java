@@ -38,7 +38,9 @@ public class Serrure extends Objet implements Activable{
         if(! activableAvec(objet)){
             throw new ActivationImpossibleAvecObjetException(String.format("Activation impossible entre l'objet %s et la serrure %s", objet.getNom(), this.getNom()));
         }
-        this.activer();
+        if(this.clef.getNom().equals(objet.getNom())){
+            this.activer();
+        }
     }
 
     public boolean activableAvec(Objet objet){
