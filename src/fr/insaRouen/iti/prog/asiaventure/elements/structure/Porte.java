@@ -4,7 +4,6 @@ import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
-import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleAvecObjetException;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Clef;
