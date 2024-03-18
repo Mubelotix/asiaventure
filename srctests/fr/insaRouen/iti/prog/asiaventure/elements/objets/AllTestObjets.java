@@ -8,6 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
     TestObjet.class,
     TestPiedDeBiche.class,
+    TestSerrure.class,
 })
 
 public class AllTestObjets {}
