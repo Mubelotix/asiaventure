@@ -4,7 +4,7 @@ import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
 public final class Clef extends Objet {
-    protected Clef(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+    public Clef(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
     }
 

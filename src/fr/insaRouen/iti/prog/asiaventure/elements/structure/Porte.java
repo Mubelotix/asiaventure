@@ -10,7 +10,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Clef;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
-import fr.insaRouen.iti.prog.asiaventure.elements.serrurerie.Serrure;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Serrure;
 
 public class Porte extends ElementStructurel implements Activable {
     private boolean ouvert = false;
