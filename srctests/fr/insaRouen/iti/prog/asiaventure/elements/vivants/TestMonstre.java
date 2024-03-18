@@ -11,7 +11,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 
 public class TestMonstre {
     @Test
-    public void testEgalite() throws NomDEntiteDejaUtiliseDansLeMondeException {
+    public void testMonstre() throws NomDEntiteDejaUtiliseDansLeMondeException {
         Monde monde = new Monde("monde");
         Objet obj = new ObjetTest("objet", monde);
         Objet obj2 = new ObjetTest("objet2", monde);

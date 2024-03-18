@@ -71,6 +71,7 @@ public class TestVivant{
         Porte porte = new Porte("porte", monde, pA, pB);
         VivantTest vivant = new VivantTest("vivant", monde, 15, 14, pA);
 
+        porte.activer(); // Ouvrir la porte
         assertThat(vivant.getPiece(), equalTo(pA));
         vivant.franchir(porte);
         assertThat(vivant.getPiece(), equalTo(pB));
@@ -84,7 +85,6 @@ public class TestVivant{
         Porte porte = new Porte("porte", monde, pA, pB);
         VivantTest vivant = new VivantTest("vivant", monde, 15, 14, pA);
 
-        porte.activer(); // Fermer la porte
         assertThat(vivant.getPiece(), equalTo(pA));
         vivant.franchir(porte);
     }
