@@ -7,13 +7,19 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Clef;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
-
+/**
+ * Classe représentant une serrure Serrure 
+ */
 public class Serrure extends Objet implements Activable{
     private Etat etat = Etat.VERROUILLE;
     private static int numero = 0;
     private Clef clef;
     private boolean utilisee = false;
 
+    /**
+     * Constructeur de Serrure 
+     * 
+     */
     public Serrure(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
         super(nom, monde);
         this.clef = new Clef(String.format("clef_%d", numero++), monde);
