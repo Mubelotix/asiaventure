@@ -114,6 +114,13 @@ public class Piece extends ElementStructurel {
         return Collections.unmodifiableMap(this.objets);
     }
 
+    /** Récupère toutes les portes de la pièce.
+     * @return Les portes de la pièce.
+     */
+    public Map<String, Porte> getPortes() {
+        return Collections.unmodifiableMap(this.portes);
+    }
+
     /** Récupère tous les vivants de la pièce.
      * @return Les vivants de la pièce.
      */

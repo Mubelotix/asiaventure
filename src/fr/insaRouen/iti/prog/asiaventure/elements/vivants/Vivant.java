@@ -208,6 +208,14 @@ public /*abstract*/ class Vivant extends Entite {
     }
 
     /**
+     * Modifie les points de vie du vivant.
+     * @param pointsVie Les nouveaux points de vie du vivant.
+     */
+    public void setPointsVie(int pointsVie) {
+        this.pointsVie = pointsVie;
+    }
+
+    /**
      * Récupère les points de force du vivant.
      * @return Les points de force du vivant.
      */
