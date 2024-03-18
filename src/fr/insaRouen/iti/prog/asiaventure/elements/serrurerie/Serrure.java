@@ -1,9 +1,10 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.serrurerie;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
-import fr.insaRouen.iti.prog.asiaventure.EntiteDejaDansUnAutreMondeException;
+import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleAvecObjetException;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
+import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Clef;
@@ -17,7 +18,7 @@ public class Serrure extends Objet implements Activable{
     public Serrure(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
         super(nom, monde);
     }
-
+/*
     public Serrure (Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
         super(String.format("%d", ++numero), monde);
     }
@@ -33,9 +34,9 @@ public class Serrure extends Objet implements Activable{
             throw new ActivationImpossibleAvecObjetException(String.format("Activation impossible entre l'objet %s et la serrure %s", objet.getNom(), this.getNom()));
         }
         if(this.getEtat().equals(Etat.VERROUILLE)){
-            this.etat = Etat.DEVEROUILLE;
+            this.etat = Etat.DEVERROUILLE;
         }else{
-            this.etat = Etat.VEROUILLE;
+            this.etat = Etat.VERROUILLE;
         }
     }
 
@@ -54,9 +55,6 @@ public class Serrure extends Objet implements Activable{
     public Etat getEtat(){
         return this.etat;
     }
-
-
-
 
 }
 
