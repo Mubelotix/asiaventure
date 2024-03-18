@@ -1,4 +1,4 @@
-package fr.insaRouen.iti.prog.asiaventure.elements.objets;
+package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,13 +6,13 @@ import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
-import fr.insaRouen.iti.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
-import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 public class Monstre extends Vivant implements Executable {
     public Monstre(String nom, Monde monde, int pointsVie, int pointsForce, Piece piece) throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -40,6 +40,10 @@ public class Monstre extends Vivant implements Executable {
         } catch(PorteInexistanteDansLaPieceException e) {
         }
 
+        // Take damage
+        this.setPointsVie(this.getPointsVie() - 1);
+        if (this.estMort()) { return; }
+
         // Prendre tous les objets
         for (Objet obj : this.getPiece().getObjets().values()) {
             try {
@@ -50,8 +54,5 @@ public class Monstre extends Vivant implements Executable {
 
             }
         }
-
-        // Take damage
-        this.setPointsVie(this.getPointsVie() - 1);
     }
 }
