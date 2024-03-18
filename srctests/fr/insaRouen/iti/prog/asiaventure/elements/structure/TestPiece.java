@@ -5,6 +5,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.insaRouen.iti.prog.asiaventure.ASIAventureException;
 import fr.insaRouen.iti.prog.asiaventure.EntiteDejaDansUnAutreMondeException;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
@@ -17,6 +18,10 @@ import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 import static org.hamcrest.core.Is.is;
 
 import java.util.Map;
+
+import javax.naming.OperationNotSupportedException;
+
+import java.lang.UnsupportedOperationException;
 
 class ObjetTest extends Objet {
     public ObjetTest(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -71,8 +76,8 @@ public class TestPiece {
         monde2.ajouter(this.piece1);
     }
 
-    @Test
-    public void testVivantsIsCloned() throws NomDEntiteDejaUtiliseDansLeMondeException {
+    @Test(expected = UnsupportedOperationException.class)
+    public void testVivantsIsUnmodifiable() throws ASIAventureException, UnsupportedOperationException {
         Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
         this.piece1.entrer(vivant1);
 

@@ -1,5 +1,6 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -145,11 +146,7 @@ public /*abstract*/ class Vivant extends Entite {
      * @return Les objets de l'inventaire du vivant.
      */
     public Map<String, Objet> getObjets() {
-        HashMap<String, Objet> cloneObjets = new HashMap<String, Objet>();
-        for (Map.Entry<String, Objet> entry : this.objets.entrySet()) {
-            cloneObjets.put(entry.getKey(), entry.getValue());
-        }
-        return cloneObjets;
+        return Collections.unmodifiableMap(this.objets);
     }
     
     /**
