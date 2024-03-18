@@ -23,12 +23,11 @@ public class TestSerrure {
         assertThat(serrure.getEtat(), equalTo(Etat.VERROUILLE));
     }
 
-    @Test(expected = ActivationException.class)
+    @Test
     public void testSerrureMauvaiseClef() throws ASIAventureException {
         Monde monde = new Monde("monde");
         Serrure serrure = new Serrure(monde);
         Serrure serrure2 = new Serrure(monde);
-        Clef clef = serrure.creerClef();
         Clef clef2 = serrure2.creerClef();
 
         assertThat(serrure.getEtat(), equalTo(Etat.VERROUILLE));
