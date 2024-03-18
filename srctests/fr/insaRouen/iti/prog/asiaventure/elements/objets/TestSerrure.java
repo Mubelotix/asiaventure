@@ -5,7 +5,6 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.Test;
 import fr.insaRouen.iti.prog.asiaventure.ASIAventureException;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
-import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Serrure;
 

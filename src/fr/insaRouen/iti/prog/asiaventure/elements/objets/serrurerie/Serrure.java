@@ -3,8 +3,6 @@ package fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleAvecObjetException;
-import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
-import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Clef;
@@ -26,7 +24,7 @@ public class Serrure extends Objet implements Activable{
         this.clef = new Clef(String.format("clef_%d", numero++), monde);
     }
 
-    public final Clef creerClef(){
+    public final Clef creerClef() {
         if(this.utilisee){
             return null;
         }
@@ -34,7 +32,7 @@ public class Serrure extends Objet implements Activable{
         return this.clef;
     }
 
-    public void activerAvec(Objet objet) throws ActivationImpossibleAvecObjetException{
+    public void activerAvec(Objet objet) throws ActivationImpossibleAvecObjetException {
         if(! activableAvec(objet)){
             throw new ActivationImpossibleAvecObjetException(String.format("Activation impossible entre l'objet %s et la serrure %s", objet.getNom(), this.getNom()));
         }
