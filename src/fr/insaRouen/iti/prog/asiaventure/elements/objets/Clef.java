@@ -3,8 +3,8 @@ package fr.insaRouen.iti.prog.asiaventure.elements.objets;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 
-public class PiedDeBiche extends Objet {
-    public PiedDeBiche(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+public final class Clef extends Objet {
+    public Clef(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
     }
 
@@ -14,6 +14,6 @@ public class PiedDeBiche extends Objet {
     }
 
     public String toString() {
-        return String.format("PiedDeBiche(nom: %s, monde: %s)", this.getNom(), this.getMonde().getNom());
+        return String.format("Clef(nom: %s, monde: %s)", this.getNom(), this.getMonde().getNom());
     }
 }
