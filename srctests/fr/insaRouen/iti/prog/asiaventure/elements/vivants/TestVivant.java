@@ -18,12 +18,14 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
 
 class ObjetTest extends Objet {
+    public boolean deplacable = false;
+
     public ObjetTest(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         super(nom, monde);
     }
 
     public boolean estDeplacable(){
-        return false;
+        return this.deplacable;
     }
 }
 

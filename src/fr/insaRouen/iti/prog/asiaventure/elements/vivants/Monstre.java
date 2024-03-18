@@ -23,9 +23,10 @@ public class Monstre extends Vivant implements Executable {
         if (this.estMort()) { return; }
 
         // Déposer tous ses objets
-        for (Objet obj : this.getObjets().values()) {
+        List<String> nomsObj = this.getObjets().keySet().stream().collect(Collectors.toList());
+        for (String nom : nomsObj) {
             try {
-                this.deposer(obj);
+                this.deposer(nom);
             } catch(ObjetNonPossedeParLeVivantException e) {
                 // Then no need to drop it anyway
             }
@@ -33,11 +34,13 @@ public class Monstre extends Vivant implements Executable {
         
         // Changer de pièce
         List<Porte> portes = this.getPiece().getPortes().values().stream().filter(p->p.getEtat()==Etat.OUVERT).collect(Collectors.toList());
-        Porte porte = portes.get((int) (Math.random() * portes.size()));
-        try {
-            this.franchir(porte);
-        } catch(PorteFermeException e) {
-        } catch(PorteInexistanteDansLaPieceException e) {
+        if (!portes.isEmpty()) {
+            Porte porte = portes.get((int) (Math.random() * portes.size()));
+            try {
+                this.franchir(porte);
+            } catch(PorteFermeException e) {
+            } catch(PorteInexistanteDansLaPieceException e) {
+            }
         }
 
         // Take damage
@@ -45,9 +48,10 @@ public class Monstre extends Vivant implements Executable {
         if (this.estMort()) { return; }
 
         // Prendre tous les objets
-        for (Objet obj : this.getPiece().getObjets().values()) {
+        nomsObj = this.getPiece().getObjets().keySet().stream().collect(Collectors.toList());
+        for (String nom : nomsObj) {
             try {
-                this.prendre(obj);
+                this.prendre(nom);
             } catch(ObjetAbsentDeLaPieceException e) {
                 // Then no need to drop it anyway
             } catch(ObjetNonDeplacableException e) {
