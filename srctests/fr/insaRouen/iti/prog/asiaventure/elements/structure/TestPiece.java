@@ -135,6 +135,5 @@ public class TestPiece {
         assertThat(this.piece3.aLaPorte(p1.getNom()), is(false));
         this.piece3.addPorte(p1);
         assertThat(this.piece3.aLaPorte(p1), is(true));
-
     }
 }

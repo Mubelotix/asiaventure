@@ -43,10 +43,10 @@ public class Monde{
         sb.append("Monde(nom: ");
         sb.append(this.getNom());
         sb.append(", entites: [");
-        for (String key : this.entites.keySet()) {
+        this.entites.keySet().stream().forEach(key->{
             sb.append(key);
             sb.append(", ");
-        }
+        });
         sb.append("])");
         return sb.toString();
     }
