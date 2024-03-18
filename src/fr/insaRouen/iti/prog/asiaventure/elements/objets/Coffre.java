@@ -1,4 +1,4 @@
-package fr.insaRouen.iti.prog.asiaventure.elements.objets;
+ package fr.insaRouen.iti.prog.asiaventure.elements.objets;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
