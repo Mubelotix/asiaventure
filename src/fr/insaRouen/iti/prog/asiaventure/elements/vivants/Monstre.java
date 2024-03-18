@@ -2,11 +2,11 @@ package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
-import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
@@ -19,28 +19,20 @@ public class Monstre extends Vivant implements Executable {
         super(nom, monde, pointsVie, pointsForce, piece);
     }
     
-    public void executer() {
+    public void executer() throws PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException, ObjetAbsentDeLaPieceException {
         if (this.estMort()) { return; }
 
         // Déposer tous ses objets
         List<String> nomsObj = this.getObjets().keySet().stream().collect(Collectors.toList());
         for (String nom : nomsObj) {
-            try {
-                this.deposer(nom);
-            } catch(ObjetNonPossedeParLeVivantException e) {
-                // Then no need to drop it anyway
-            }
+            this.deposer(nom);
         }
         
         // Changer de pièce
         List<Porte> portes = this.getPiece().getPortes().values().stream().filter(p->p.getEtat()==Etat.OUVERT).collect(Collectors.toList());
         if (!portes.isEmpty()) {
             Porte porte = portes.get((int) (Math.random() * portes.size()));
-            try {
-                this.franchir(porte);
-            } catch(PorteFermeException e) {
-            } catch(PorteInexistanteDansLaPieceException e) {
-            }
+            this.franchir(porte);
         }
 
         // Take damage
@@ -52,10 +44,8 @@ public class Monstre extends Vivant implements Executable {
         for (String nom : nomsObj) {
             try {
                 this.prendre(nom);
-            } catch(ObjetAbsentDeLaPieceException e) {
-                // Then no need to drop it anyway
             } catch(ObjetNonDeplacableException e) {
-
+                // Laisser l'objet où il est
             }
         }
     }
