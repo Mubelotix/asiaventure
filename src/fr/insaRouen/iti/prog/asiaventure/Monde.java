@@ -2,6 +2,7 @@ package fr.insaRouen.iti.prog.asiaventure;
 
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 import java.util.Map;
+import java.util.Set;
 import java.util.HashMap;
 
 public class Monde{
@@ -21,6 +22,13 @@ public class Monde{
             return null;
         }
         return this.entites.get(nom);
+    }
+
+    public Set<String> getAllNomsEntites() {
+        if(this.entites.isEmpty()){
+            return null;
+        }
+        return this.entites.keySet();
     }
 
     private boolean nomEntiteDejaUtilise(Entite entite){

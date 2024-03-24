@@ -7,13 +7,17 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Clef;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
+
+import java.util.Set;
+
 /**
- * Classe représentant une serrure Serrure 
+ * Classe représentant une serrure 
  */
 public class Serrure extends Objet implements Activable{
     private Etat etat = Etat.VERROUILLE;
     private static int numero = 0;
     private Clef clef;
+    private static String chercherNom ;
     private boolean utilisee = false;
 
     /**
@@ -22,35 +26,49 @@ public class Serrure extends Objet implements Activable{
      */
     public Serrure(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
         super(nom, monde);
-        this.clef = new Clef(String.format("clef_%d", numero++), monde);
+        this.clef = creerClef();
     }
 
     public Serrure (Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
-        super(String.format("serrure_%d", numero++), monde);
-        this.clef = new Clef(String.format("clef_%d", numero++), monde);
+        super(String.format("serrure_%d", numero), monde);
+        this.clef = creerClef();
+        ++numero;
+
     }
 
-    public final Clef creerClef() {
+    public Clef getClef(){
+        return this.clef;
+    }
+
+    public String trouverNomOriginal(){
+        chercherNom = String.format("cle_%d", numero);
+        while(this.getMonde().getAllNomsEntites().contains(chercherNom)){
+            chercherNom = String.format("cle_%d", ++numero);
+
+        }
+        return chercherNom;
+    }
+
+    public final Clef creerClef() throws NomDEntiteDejaUtiliseDansLeMondeException{
         if(this.utilisee){
             return null;
         }
         this.utilisee = true;
+        this.clef = new Clef(this.trouverNomOriginal(), this.getMonde());
         return this.clef;
     }
 
     public void activerAvec(Objet objet) throws ActivationImpossibleAvecObjetException {
         if(! activableAvec(objet)){
-            throw new ActivationImpossibleAvecObjetException(String.format("Activation impossible entre l'objet %s et la serrure %s", objet.getNom(), this.getNom()));
+            throw new ActivationImpossibleAvecObjetException(String.format("Activation impossible entre l'objet %s (ca aurait du etre %s )et la serrure %s", objet.getNom(), this.clef.getNom(),this.getNom()));
         }
         this.activer();
     }
 
     public boolean activableAvec(Objet objet){
-        if(objet == null){
-            return (objet instanceof Clef)&&(this.clef.getNom().equals(objet.getNom()));
-        }
-        return false;
+        return (objet instanceof Clef) && (this.clef != null) && this.clef.getNom().equals(objet.getNom());
     }
+
 
     public void activer(){
         if(this.getEtat().equals(Etat.VERROUILLE)){
@@ -66,6 +84,10 @@ public class Serrure extends Objet implements Activable{
 
     public Etat getEtat(){
         return this.etat;
+    }
+
+    public Monde getMonde(){
+        return this.monde;
     }
 }
 

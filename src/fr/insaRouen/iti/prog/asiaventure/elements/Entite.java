@@ -6,7 +6,7 @@ import fr.insaRouen.iti.prog.asiaventure.EntiteDejaDansUnAutreMondeException;;
 
 
 public abstract class Entite {
-    private final Monde monde;
+    protected final Monde monde;
     public final String nom;
 
     public Entite(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
