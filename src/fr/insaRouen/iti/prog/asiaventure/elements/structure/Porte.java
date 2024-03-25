@@ -35,6 +35,10 @@ public class Porte extends ElementStructurel implements Activable {
         this.pieceB.addPorte(this);
     }
 
+    public void casser() {
+        this.casse = true;
+    }
+
     public boolean activableAvec(Objet obj) {
         return (obj instanceof Clef && obj != null && this.serrure != null) || (obj instanceof PiedDeBiche && obj != null);
     }

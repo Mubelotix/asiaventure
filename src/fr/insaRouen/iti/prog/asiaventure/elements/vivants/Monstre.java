@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
@@ -19,7 +20,7 @@ public class Monstre extends Vivant implements Executable {
         super(nom, monde, pointsVie, pointsForce, piece);
     }
     
-    public void executer() throws PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException, ObjetAbsentDeLaPieceException {
+    public void executer() throws PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException, ObjetAbsentDeLaPieceException, ActivationImpossibleException {
         if (this.estMort()) { return; }
 
         // Déposer tous ses objets
@@ -29,9 +30,12 @@ public class Monstre extends Vivant implements Executable {
         }
         
         // Changer de pièce
-        List<Porte> portes = this.getPiece().getPortes().values().stream().filter(p->p.getEtat()==Etat.OUVERT).collect(Collectors.toList());
+        List<Porte> portes = this.getPiece().getPortes().values().stream().filter(p->p.getEtat()!=Etat.VERROUILLE).collect(Collectors.toList());
         if (!portes.isEmpty()) {
             Porte porte = portes.get((int) (Math.random() * portes.size()));
+            if (porte.getEtat() == Etat.FERME) {
+                porte.casser();
+            }
             this.franchir(porte);
         }
 
