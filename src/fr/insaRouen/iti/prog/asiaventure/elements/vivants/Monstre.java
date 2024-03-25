@@ -22,12 +22,6 @@ public class Monstre extends Vivant implements Executable {
     
     public void executer() throws PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException, ObjetAbsentDeLaPieceException, ActivationImpossibleException {
         if (this.estMort()) { return; }
-
-        // Déposer tous ses objets
-        List<String> nomsObj = this.getObjets().keySet().stream().collect(Collectors.toList());
-        for (String nom : nomsObj) {
-            this.deposer(nom);
-        }
         
         // Changer de pièce
         List<Porte> portes = this.getPiece().getPortes().values().stream().filter(p->p.getEtat()!=Etat.VERROUILLE).collect(Collectors.toList());
@@ -43,9 +37,13 @@ public class Monstre extends Vivant implements Executable {
         this.setPointsVie(this.getPointsVie() - 1);
         if (this.estMort()) { return; }
 
-        // Prendre tous les objets
-        nomsObj = this.getPiece().getObjets().keySet().stream().collect(Collectors.toList());
-        for (String nom : nomsObj) {
+        // Déposer et prendre les objets
+        List<String> objetsADeposer = this.getObjets().keySet().stream().collect(Collectors.toList());
+        List<String> objetsAPrendre = this.getPiece().getObjets().keySet().stream().collect(Collectors.toList());
+        for (String nom : objetsADeposer) {
+            this.deposer(nom);
+        }
+        for (String nom : objetsAPrendre) {
             try {
                 this.prendre(nom);
             } catch(ObjetNonDeplacableException e) {

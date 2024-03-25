@@ -44,11 +44,11 @@ public class TestMonstre {
         monstre.executer();
         assertThat(monstre.getPiece().getNom(), IsEqual.equalTo("piece2"));
         assertThat(monstre.getPointsVie(), IsEqual.equalTo(0));
-        assertThat(monstre.getObjets().size(), IsEqual.equalTo(0));
+        assertThat(monstre.getObjets().size(), IsEqual.equalTo(1));
 
         monstre.executer();
         assertThat(monstre.getPiece().getNom(), IsEqual.equalTo("piece2"));
         assertThat(monstre.getPointsVie(), IsEqual.equalTo(0));
-        assertThat(monstre.getObjets().size(), IsEqual.equalTo(0));
+        assertThat(monstre.getObjets().size(), IsEqual.equalTo(1));
     }
 }
