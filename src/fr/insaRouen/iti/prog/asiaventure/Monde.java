@@ -25,7 +25,7 @@ public class Monde{
     }
 
     public Set<String> getAllNomsEntites() {
-        if(this.entites.isEmpty()){
+        if (this.entites.isEmpty()) {
             return null;
         }
         return this.entites.keySet();

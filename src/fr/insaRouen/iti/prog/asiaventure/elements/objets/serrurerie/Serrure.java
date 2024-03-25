@@ -16,12 +16,10 @@ public class Serrure extends Objet implements Activable{
     private Etat etat = Etat.VERROUILLE;
     private static int numero = 0;
     private Clef clef;
-    private static String chercherNom ;
     private boolean utilisee = false;
 
     /**
      * Constructeur de Serrure 
-     * 
      */
     public Serrure(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
         super(nom, monde);
@@ -33,30 +31,23 @@ public class Serrure extends Objet implements Activable{
         this.clef = creerClef();
         System.out.println(String.format("%s", this.getMonde().getAllNomsEntites()));
         ++numero;
-
     }
 
     public Clef getClef(){
         return this.clef;
     }
 
-    public String trouverNomOriginal(){
-        chercherNom = String.format("cle_%d", numero);
-        System.out.println(String.format("%s", this.getMonde().getAllNomsEntites()));
-        while(this.getMonde().getAllNomsEntites().contains(chercherNom)){
-            ++numero;
-            chercherNom = String.format("cle_%d", numero);
-
-        }
-        return chercherNom;
-    }
-
-    public final Clef creerClef() throws NomDEntiteDejaUtiliseDansLeMondeException{
+    public final Clef creerClef() {
         if(this.utilisee){
             return null;
         }
         this.utilisee = true;
-        this.clef = new Clef(this.trouverNomOriginal(), this.getMonde());
+        numero++;
+        try {
+            this.clef = new Clef(String.format("clef_%d", numero), this.getMonde());
+        } catch (NomDEntiteDejaUtiliseDansLeMondeException e) {
+            return this.creerClef();
+        }
         return this.clef;
     }
 

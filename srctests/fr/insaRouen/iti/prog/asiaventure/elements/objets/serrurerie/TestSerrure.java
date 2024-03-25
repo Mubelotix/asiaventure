@@ -31,7 +31,7 @@ public class TestSerrure {
         System.out.println("debut");
         Serrure serrure = new Serrure(monde);
         Serrure serrure2 = new Serrure(monde);
-        Clef clefdifferente = new Clef("cle_2", monde);
+        Clef clefdifferente = new Clef("cle_0", monde);
         Clef clef2 = serrure2.getClef();
         System.out.println("fin");
         
