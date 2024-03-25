@@ -27,7 +27,7 @@ public class TestPorte {
         Piece pA = new Piece("pA", monde);
         Piece pB = new Piece("pB", monde);
         Serrure serrure = new Serrure("serrure", monde);
-        Clef clef = serrure.getClef();
+        Clef clef = serrure.creerClef();
         Porte porte_verrouillee = new Porte("porte", monde, serrure, pA, pB);
 
         assertThat(porte_verrouillee.getEtat(), equalTo(Etat.VERROUILLE));

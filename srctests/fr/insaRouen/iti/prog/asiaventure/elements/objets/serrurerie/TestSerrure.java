@@ -16,7 +16,7 @@ public class TestSerrure {
     public void testSerrure() throws ASIAventureException {
         Monde monde = new Monde("monde");
         Serrure serrure = new Serrure("serrure", monde);
-        Clef clef = serrure.getClef();
+        Clef clef = serrure.creerClef();
 
         assertThat(serrure.getEtat(), equalTo(Etat.VERROUILLE));
         serrure.activerAvec(clef);
@@ -28,12 +28,10 @@ public class TestSerrure {
     @Test
     public void testSerrureMauvaiseClef() throws ASIAventureException {
         Monde monde = new Monde("monde");
-        System.out.println("debut");
         Serrure serrure = new Serrure(monde);
         Serrure serrure2 = new Serrure(monde);
         Clef clefdifferente = new Clef("cle_0", monde);
-        Clef clef2 = serrure2.getClef();
-        System.out.println("fin");
+        Clef clef2 = serrure2.creerClef();
         
 
         assertThat(serrure.getEtat(), equalTo(Etat.VERROUILLE));

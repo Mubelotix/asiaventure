@@ -23,31 +23,21 @@ public class Serrure extends Objet implements Activable{
      */
     public Serrure(String nom, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
         super(nom, monde);
-        this.clef = creerClef();
+        this.clef = Clef.creer(this.monde);
     }
 
     public Serrure (Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
         super(String.format("serrure_%d", numero), monde);
-        this.clef = creerClef();
-        System.out.println(String.format("%s", this.getMonde().getAllNomsEntites()));
+        this.clef = Clef.creer(this.monde);
         ++numero;
     }
 
-    public Clef getClef(){
-        return this.clef;
-    }
 
     public final Clef creerClef() {
         if(this.utilisee){
             return null;
         }
         this.utilisee = true;
-        numero++;
-        try {
-            this.clef = new Clef(String.format("clef_%d", numero), this.getMonde());
-        } catch (NomDEntiteDejaUtiliseDansLeMondeException e) {
-            return this.creerClef();
-        }
         return this.clef;
     }
 
