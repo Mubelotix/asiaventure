@@ -1,4 +1,4 @@
-package fr.insaRouen.iti.prog.asiaventure.elements.objets;
+package fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -28,11 +28,16 @@ public class TestSerrure {
     @Test
     public void testSerrureMauvaiseClef() throws ASIAventureException {
         Monde monde = new Monde("monde");
+        System.out.println("debut");
         Serrure serrure = new Serrure(monde);
         Serrure serrure2 = new Serrure(monde);
+        Clef clefdifferente = new Clef("cle_2", monde);
         Clef clef2 = serrure2.getClef();
+        System.out.println("fin");
+        
 
         assertThat(serrure.getEtat(), equalTo(Etat.VERROUILLE));
         assertThat(serrure.activableAvec(clef2), is(false));
+        
     }
 }

@@ -3,7 +3,7 @@ package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 import org.junit.Test;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
-import fr.insaRouen.iti.prog.asiaventure.elements.objets.Clef;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Clef;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Serrure;
 
 import static org.hamcrest.MatcherAssert.assertThat;

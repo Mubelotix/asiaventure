@@ -5,7 +5,6 @@ import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleAvecObjetException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
-import fr.insaRouen.iti.prog.asiaventure.elements.objets.Clef;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 
 import java.util.Set;
@@ -32,6 +31,7 @@ public class Serrure extends Objet implements Activable{
     public Serrure (Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException{
         super(String.format("serrure_%d", numero), monde);
         this.clef = creerClef();
+        System.out.println(String.format("%s", this.getMonde().getAllNomsEntites()));
         ++numero;
 
     }
@@ -42,8 +42,10 @@ public class Serrure extends Objet implements Activable{
 
     public String trouverNomOriginal(){
         chercherNom = String.format("cle_%d", numero);
+        System.out.println(String.format("%s", this.getMonde().getAllNomsEntites()));
         while(this.getMonde().getAllNomsEntites().contains(chercherNom)){
-            chercherNom = String.format("cle_%d", ++numero);
+            ++numero;
+            chercherNom = String.format("cle_%d", numero);
 
         }
         return chercherNom;
@@ -89,5 +91,6 @@ public class Serrure extends Objet implements Activable{
     public Monde getMonde(){
         return this.monde;
     }
+
 }
 
