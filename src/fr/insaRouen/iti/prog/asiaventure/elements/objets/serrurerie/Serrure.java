@@ -7,8 +7,6 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.Activable;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 
-import java.util.Set;
-
 /**
  * Classe représentant une serrure 
  */
