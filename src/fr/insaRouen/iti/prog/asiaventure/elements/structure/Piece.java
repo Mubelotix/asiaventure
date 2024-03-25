@@ -1,5 +1,6 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.structure;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -110,22 +111,22 @@ public class Piece extends ElementStructurel {
     /** Récupère tous les objet de la pièce.
      * @return Les objets de la pièce.
      */
-    public Map<String, Objet> getObjets() {
-        return Collections.unmodifiableMap(this.objets);
+    public Collection<Objet> getObjets() {
+        return Collections.unmodifiableCollection(this.objets.values());
     }
 
     /** Récupère toutes les portes de la pièce.
      * @return Les portes de la pièce.
      */
-    public Map<String, Porte> getPortes() {
-        return Collections.unmodifiableMap(this.portes);
+    public Collection<Porte> getPortes() {
+        return Collections.unmodifiableCollection(this.portes.values());
     }
 
     /** Récupère tous les vivants de la pièce.
      * @return Les vivants de la pièce.
      */
-    public Map<String, Vivant> getVivants() {
-        return Collections.unmodifiableMap(this.vivants);
+    public Collection<Vivant> getVivants() {
+        return Collections.unmodifiableCollection(this.vivants.values());
     }
 
     /** Retire un objet de la pièce.

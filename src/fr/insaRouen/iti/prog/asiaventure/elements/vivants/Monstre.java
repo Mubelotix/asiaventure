@@ -8,6 +8,7 @@ import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeExcepti
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationImpossibleException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
+import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
@@ -24,7 +25,7 @@ public class Monstre extends Vivant implements Executable {
         if (this.estMort()) { return; }
         
         // Changer de pièce
-        List<Porte> portes = this.getPiece().getPortes().values().stream().filter(p->p.getEtat()!=Etat.VERROUILLE).collect(Collectors.toList());
+        List<Porte> portes = this.getPiece().getPortes().stream().filter(p->p.getEtat()!=Etat.VERROUILLE).collect(Collectors.toList());
         if (!portes.isEmpty()) {
             Porte porte = portes.get((int) (Math.random() * portes.size()));
             if (porte.getEtat() == Etat.FERME) {
@@ -39,13 +40,13 @@ public class Monstre extends Vivant implements Executable {
 
         // Déposer et prendre les objets
         List<String> objetsADeposer = this.getObjets().keySet().stream().collect(Collectors.toList());
-        List<String> objetsAPrendre = this.getPiece().getObjets().keySet().stream().collect(Collectors.toList());
+        List<Objet> objetsAPrendre = this.getPiece().getObjets().stream().collect(Collectors.toList());
         for (String nom : objetsADeposer) {
             this.deposer(nom);
         }
-        for (String nom : objetsAPrendre) {
+        for (Objet obj : objetsAPrendre) {
             try {
-                this.prendre(nom);
+                this.prendre(obj);
             } catch(ObjetNonDeplacableException e) {
                 // Laisser l'objet où il est
             }

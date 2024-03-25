@@ -17,6 +17,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 import static org.hamcrest.core.Is.is;
 
+import java.util.Collection;
 import java.util.Map;
 
 import javax.naming.OperationNotSupportedException;
@@ -81,8 +82,8 @@ public class TestPiece {
         Vivant vivant1 = new Vivant("vivant1", this.monde, 42, 1, this.piece1);
         this.piece1.entrer(vivant1);
 
-        Map<String, Vivant> vivants = this.piece1.getVivants();
-        vivants.remove(vivant1.getNom());
+        Collection<Vivant> vivants = this.piece1.getVivants();
+        vivants.remove(vivant1);
         assertThat(this.piece1.contientVivant("vivant1"), is(true));
     }
 
