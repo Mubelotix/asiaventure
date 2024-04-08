@@ -70,9 +70,9 @@ public class Simulateur {
     }
 
     private static void construitPorte(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
-        String nom = s.next();
-        Piece piece1 = monde.getPiece(s.next());
-        Piece piece2 = monde.getPiece(s.next());
+        String nom = s.next().replaceAll("\"", "");
+        Piece piece1 = monde.getPiece(s.next().replaceAll("\"", ""));
+        Piece piece2 = monde.getPiece(s.next().replaceAll("\"", ""));
         new Porte(nom, monde, piece1, piece2);
     }
 
@@ -105,6 +105,6 @@ public class Simulateur {
     }
 
     public String toString() {
-        return "Simulateur(monde: " + this.monde + ", conditionsDeFin: " + this.conditionsDeFin + ")";
+        return "Simulateur(monde: " + this.monde + ", conditionsDeFin: [])";
     }
 }
