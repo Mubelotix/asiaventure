@@ -34,22 +34,22 @@ public class Simulateur implements java.io.Serializable {
         while (s.hasNext()) {
             switch (s.next()) {
                 case "Monde":
-                    monde = Simulateur.construitMonde(s);
+                    monde = construitMonde(s);
                     break;
                 case "Piece":
-                    Simulateur.construitPiece(s, monde);
+                    construitPiece(s, monde);
                     break;
                 case "Porte":
-                    Simulateur.construitPorte(s, monde);
+                    construitPorte(s, monde);
                     break;
                 case "PorteSerrure":
-                    Simulateur.construitPorteSerrure(s, monde);
+                    construitPorteSerrure(s, monde);
                     break;
                 case "Clef":
-                    Simulateur.construitClef(s, monde);
+                    construitClef(s, monde);
                     break;
                 case "JoueurHumain":
-                    Simulateur.construitJoueurHumain(s, monde);
+                    construitJoueurHumain(s, monde);
                     break;
                 default:
                     break;
@@ -60,24 +60,24 @@ public class Simulateur implements java.io.Serializable {
         this.conditionsDeFin = new Objet[0];
     }
 
-    private static Monde construitMonde(Scanner s) {
+    private Monde construitMonde(Scanner s) {
         String nom = s.next().replaceAll("\"", "");
         return new Monde(nom);
     }
 
-    private static void construitPiece(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+    private void construitPiece(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         String nom = s.next().replaceAll("\"", "");
         new Piece(nom, monde);
     }
 
-    private static void construitPorte(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+    private void construitPorte(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         String nom = s.next().replaceAll("\"", "");
         Piece piece1 = monde.getPiece(s.next().replaceAll("\"", ""));
         Piece piece2 = monde.getPiece(s.next().replaceAll("\"", ""));
         new Porte(nom, monde, piece1, piece2);
     }
 
-    private static void construitPorteSerrure(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+    private void construitPorteSerrure(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         String nom = s.next().replaceAll("\"", "");
         Piece piece1 = monde.getPiece(s.next().replaceAll("\"", ""));
         Piece piece2 = monde.getPiece(s.next().replaceAll("\"", ""));
@@ -85,7 +85,7 @@ public class Simulateur implements java.io.Serializable {
         new Porte(nom, monde, serrure, piece1, piece2);
     }
 
-    private static void construitClef(Scanner s, Monde monde) {
+    private void construitClef(Scanner s, Monde monde) {
         Porte porte = monde.getPorte(s.next().replaceAll("\"", ""));
         Serrure serrure = porte.getSerrure();
         Clef clef = serrure.creerClef();
@@ -93,7 +93,7 @@ public class Simulateur implements java.io.Serializable {
         piece.deposer(clef);
     }
 
-    private static void construitJoueurHumain(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+    private void construitJoueurHumain(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         String nom = s.next().replaceAll("\"", "");
         int pointVie = s.nextInt();
         int pointForce = s.nextInt();
