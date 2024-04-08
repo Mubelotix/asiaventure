@@ -1,11 +1,15 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
+
 import java.util.Map;
 import java.util.Set;
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Monde{
+public class Monde implements Serializable {
     private final String nom;
     private Map<String, Entite> entites = new HashMap<>();
     
@@ -18,10 +22,23 @@ public class Monde{
     }
 
     public Entite getEntite(String nom) {
-        if(this.entites.isEmpty()){
-            return null;
-        }
         return this.entites.get(nom);
+    }
+
+    public Piece getPiece(String nom) {
+        Entite entite = this.getEntite(nom);
+        if (entite instanceof Piece) {
+            return (Piece) entite;
+        }
+        return null;
+    }
+
+    public Porte getPorte(String nom) {
+        Entite entite = this.getEntite(nom);
+        if (entite instanceof Porte) {
+            return (Porte) entite;
+        }
+        return null;
     }
 
     public Set<String> getAllNomsEntites() {

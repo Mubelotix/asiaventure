@@ -102,7 +102,7 @@ public class Porte extends ElementStructurel implements Activable {
         }
     }
 
-    public Object getSerrure() {
+    public Serrure getSerrure() {
         return this.serrure;
     }
 
