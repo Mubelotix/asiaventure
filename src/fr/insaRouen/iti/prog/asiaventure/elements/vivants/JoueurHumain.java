@@ -19,7 +19,7 @@ public class JoueurHumain extends Vivant{
         this.ordre = ordre;
     }
 
-    public void executer(){
+    public void executer() throws CommandeImpossiblePourLeVivantException, Throwable{
 
     }
 
