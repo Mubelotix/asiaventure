@@ -40,4 +40,8 @@ public class JoueurHumain extends Vivant{
     void commandeOuvrirPorte(String nomPorte, String nomObjet) throws ActivationException, PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException {
         this.franchir(nomPorte, nomObjet);
     }
+
+    void commandeOuvrirPorte(String nomPorte) throws ActivationException, PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException {
+        this.franchir(nomPorte);
+    }
 }
