@@ -37,8 +37,7 @@ public class JoueurHumain extends Vivant{
         this.franchir(nomObjet);
     }
 
-    void commandeOuvrirPorte(String nomObjet) throws ActivationException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException {
-        //this.entrer(nomObjet);
+    void commandeOuvrirPorte(String nomPorte, String nomObjet) throws ActivationException, PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException {
+        this.franchir(nomPorte, nomObjet);
     }
-
 }
