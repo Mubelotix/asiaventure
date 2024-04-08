@@ -2,10 +2,10 @@ package fr.insaRouen.iti.prog.asiaventure.elements;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import java.io.Serializable;
 import fr.insaRouen.iti.prog.asiaventure.EntiteDejaDansUnAutreMondeException;;
 
-
-public abstract class Entite {
+public abstract class Entite implements Serializable {
     protected final Monde monde;
     public final String nom;
 
