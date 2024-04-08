@@ -13,8 +13,8 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.JoueurHumain;
 
 public class Simulateur {
-    private final Monde monde;
-    private final Objet[] conditionsDeFin;
+    private Monde monde;
+    private Objet[] conditionsDeFin;
 
     public Simulateur(Monde monde, Objet... conditionsDeFin) {
         this.monde = monde;

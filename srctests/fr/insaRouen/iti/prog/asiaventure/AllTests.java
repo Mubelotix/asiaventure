@@ -10,6 +10,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.AllTestElements;
 @SuiteClasses({
     AllTestElements.class,
     TestMonde.class,
+    TestSimulateur.class,
 })
 
 public class AllTests {}
