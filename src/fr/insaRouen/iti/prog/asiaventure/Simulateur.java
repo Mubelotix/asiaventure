@@ -60,44 +60,44 @@ public class Simulateur {
     }
 
     private static Monde construitMonde(Scanner s) {
-        String nom = s.next();
+        String nom = s.next().replaceAll("\"", "");
         return new Monde(nom);
     }
 
     private static void construitPiece(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
-        String nom = s.next();
+        String nom = s.next().replaceAll("\"", "");
         new Piece(nom, monde);
     }
 
     private static void construitPorte(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         String nom = s.next();
-        String piece1 = s.next();
-        String piece2 = s.next();
-        new Porte(nom, monde, monde.getPiece(piece1), monde.getPiece(piece2));
+        Piece piece1 = monde.getPiece(s.next());
+        Piece piece2 = monde.getPiece(s.next());
+        new Porte(nom, monde, piece1, piece2);
     }
 
     private static void construitPorteSerrure(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
-        String nom = s.next();
-        String piece1 = s.next();
-        String piece2 = s.next();
-        new Porte(nom, monde, new Serrure(monde), monde.getPiece(piece1), monde.getPiece(piece2));
+        String nom = s.next().replaceAll("\"", "");
+        Piece piece1 = monde.getPiece(s.next().replaceAll("\"", ""));
+        Piece piece2 = monde.getPiece(s.next().replaceAll("\"", ""));
+        Serrure serrure = new Serrure(monde);
+        new Porte(nom, monde, serrure, piece1, piece2);
     }
 
     private static void construitClef(Scanner s, Monde monde) {
-        String nom_porte = s.next();
-        String nom_piece = s.next();
-        Porte porte = monde.getPorte(nom_porte);
+        Porte porte = monde.getPorte(s.next().replaceAll("\"", ""));
         Serrure serrure = porte.getSerrure();
         Clef clef = serrure.creerClef();
-        monde.getPiece(nom_piece).deposer(clef);
+        Piece piece = monde.getPiece(s.next().replaceAll("\"", ""));
+        piece.deposer(clef);
     }
 
     private static void construitJoueurHumain(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
-        String nom = s.next();
+        String nom = s.next().replaceAll("\"", "");
         int pointVie = s.nextInt();
         int pointForce = s.nextInt();
-        String piece = s.next();
-        new JoueurHumain(nom, monde, pointVie, pointForce, monde.getPiece(piece));
+        Piece piece = monde.getPiece(s.next().replaceAll("\"", ""));
+        new JoueurHumain(nom, monde, pointVie, pointForce, piece);
     }
 
     public void enregister(ObjectOutputStream oos) throws IOException {
