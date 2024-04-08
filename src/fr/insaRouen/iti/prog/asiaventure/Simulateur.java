@@ -10,6 +10,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Serrure;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Clef;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
+import fr.insaRouen.iti.prog.asiaventure.elements.vivants.JoueurHumain;
 
 public class Simulateur {
     private final Monde monde;
@@ -91,12 +92,12 @@ public class Simulateur {
         monde.getPiece(nom_piece).deposer(clef);
     }
 
-    private static void construitJoueurHumain(Scanner s, Monde monde) {
+    private static void construitJoueurHumain(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         String nom = s.next();
         int pointVie = s.nextInt();
         int pointForce = s.nextInt();
         String piece = s.next();
-        // TODO: new JoueurHumain(nom, monde, pointVie, pointForce, monde.getPiece(piece));
+        new JoueurHumain(nom, monde, pointVie, pointForce, monde.getPiece(piece));
     }
 
     public void enregister(ObjectOutputStream oos) throws IOException {

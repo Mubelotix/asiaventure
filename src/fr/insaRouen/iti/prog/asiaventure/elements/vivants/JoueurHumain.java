@@ -1,10 +1,12 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
+import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
 
@@ -35,8 +37,8 @@ public class JoueurHumain extends Vivant{
         this.franchir(nomObjet);
     }
 
-    void commandeOuvrirPorte(String nomObjet) throws ActivationException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException{
-        this.entrer(nomObjet);
+    void commandeOuvrirPorte(String nomObjet) throws ActivationException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException {
+        //this.entrer(nomObjet);
     }
 
 }
