@@ -28,35 +28,32 @@ public class Simulateur implements java.io.Serializable {
     }
 
     public Simulateur(Reader reader) throws NomDEntiteDejaUtiliseDansLeMondeException {
-        Monde monde = null;
-
         Scanner s = new Scanner(reader);
         while (s.hasNext()) {
             switch (s.next()) {
                 case "Monde":
-                    monde = construitMonde(s);
+                    this.monde = construitMonde(s);
                     break;
                 case "Piece":
-                    construitPiece(s, monde);
+                    construitPiece(s, this.monde);
                     break;
                 case "Porte":
-                    construitPorte(s, monde);
+                    construitPorte(s, this.monde);
                     break;
                 case "PorteSerrure":
-                    construitPorteSerrure(s, monde);
+                    construitPorteSerrure(s, this.monde);
                     break;
                 case "Clef":
-                    construitClef(s, monde);
+                    construitClef(s, this.monde);
                     break;
                 case "JoueurHumain":
-                    construitJoueurHumain(s, monde);
+                    construitJoueurHumain(s, this.monde);
                     break;
                 default:
                     break;
             }
         }
 
-        this.monde = monde;
         this.conditionsDeFin = new Objet[0];
     }
 
