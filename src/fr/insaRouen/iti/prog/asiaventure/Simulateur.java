@@ -12,7 +12,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.JoueurHumain;
 
-public class Simulateur {
+public class Simulateur implements java.io.Serializable {
     private Monde monde;
     private Objet[] conditionsDeFin;
 
@@ -22,8 +22,9 @@ public class Simulateur {
     }
 
     public Simulateur(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-        this.monde = (Monde) ois.readObject();
-        this.conditionsDeFin = new Objet[0];
+        Simulateur deserialized = (Simulateur) ois.readObject();
+        this.monde = deserialized.monde;
+        this.conditionsDeFin = deserialized.conditionsDeFin;
     }
 
     public Simulateur(Reader reader) throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -101,7 +102,7 @@ public class Simulateur {
     }
 
     public void enregister(ObjectOutputStream oos) throws IOException {
-        oos.writeObject(this.monde);
+        oos.writeObject(this);
     }
 
     public String toString() {
