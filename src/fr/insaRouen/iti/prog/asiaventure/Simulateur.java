@@ -103,6 +103,6 @@ public class Simulateur implements java.io.Serializable {
     }
 
     public String toString() {
-        return "Simulateur(monde: " + this.monde + ", conditionsDeFin: [])";
+        return String.format("Simulateur(monde: %s,  conditionsDeFin: [])", this.monde);
     }
 }
