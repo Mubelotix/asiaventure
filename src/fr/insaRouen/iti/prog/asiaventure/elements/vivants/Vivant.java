@@ -107,7 +107,7 @@ public /*abstract*/ class Vivant extends Entite {
     public void franchir(String nomPorte, String nomObjet) throws PorteFermeException, PorteInexistanteDansLaPieceException, ActivationException {
         Porte porte = this.piece.getPorte(nomPorte);
         Objet obj = this.getObjet(nomObjet);
-        if (!porte.getEtat().equals(Etat.OUVERT)) {
+        if (porte.getEtat().equals(Etat.VERROUILLE) || porte.getEtat().equals(Etat.FERME)) {
             throw new PorteFermeException();
         }
         porte.activerAvec(obj);
