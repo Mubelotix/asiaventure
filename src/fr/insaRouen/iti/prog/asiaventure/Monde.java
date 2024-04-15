@@ -42,9 +42,6 @@ public class Monde implements Serializable {
     }
 
     public Set<String> getAllNomsEntites() {
-        if (this.entites.isEmpty()) {
-            return null;
-        }
         return this.entites.keySet();
     }
 
