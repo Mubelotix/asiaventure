@@ -11,6 +11,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Clef;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.JoueurHumain;
+import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 public class Simulateur implements java.io.Serializable {
     private Monde monde;
@@ -48,6 +49,9 @@ public class Simulateur implements java.io.Serializable {
                     break;
                 case "JoueurHumain":
                     construitJoueurHumain(s, this.monde);
+                    break;
+                case "ConditionDeFinVivantDansPiece":
+                    construitConditionDeFinVivantDansPiece(s, this.monde);
                     break;
                 default:
                     break;
@@ -96,6 +100,19 @@ public class Simulateur implements java.io.Serializable {
         int pointForce = s.nextInt();
         Piece piece = monde.getPiece(s.next().replaceAll("\"", ""));
         new JoueurHumain(nom, monde, pointVie, pointForce, piece);
+    }
+
+    private void construitConditionDeFinVivantDansPiece(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+        String etat_str = s.next();
+        EtatDuJeu etat;
+        if (etat_str.equals("SUCCES")) {
+            etat = EtatDuJeu.SUCCES;
+        } else {
+            etat = EtatDuJeu.ECHEC;
+        }
+        Vivant vivant = (Vivant) monde.getEntite(s.next().replaceAll("\"", ""));
+        Piece piece = (Piece) monde.getEntite(s.next().replaceAll("\"", ""));
+        new ConditionDeFinVivantDansPiece(etat, vivant, piece);
     }
 
     public void enregister(ObjectOutputStream oos) throws IOException {
