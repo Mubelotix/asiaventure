@@ -30,22 +30,26 @@ public class JoueurHumain extends Vivant implements Executable {
         this.ordre = ordre;
     }
 
+    private Method getMethod(String commande, List<String> args) throws NoSuchMethodException{
+        Class<?>[] argTypes = new Class<?>[args.size()];
+        Arrays.fill(argTypes, String.class);
+        return this.getClass().getDeclaredMethod(String.format("commande%s", commande), argTypes);
+    }
+
     public void executer() throws CommandeImpossiblePourLeVivantException, Throwable{
         Scanner s = new Scanner(this.ordre);
 
-        String nom_methode = String.format("commande%s", s.next());
+        String commande = s.next();
         List<String> args = new ArrayList<String>();
         while(s.hasNext()){
             args.add(s.next());
         }
-        Class<?>[] argTypes = new Class<?>[args.size()];
-        Arrays.fill(argTypes, String.class);
 
         try{
-            Method methode = this.getClass().getDeclaredMethod(nom_methode, argTypes);
+            Method methode = this.getMethod(commande, args);
             methode.invoke(this, args.toArray());
-        } catch(NoSuchMethodException e){
-            throw new CommandeImpossiblePourLeVivantException(String.format("La commande %s n'existe pas", nom_methode));
+        } catch(NoSuchMethodException e) {
+            throw new CommandeImpossiblePourLeVivantException(String.format("La commande %s n'existe pas", commande));
         } catch(InvocationTargetException e1) {
             throw e1.getTargetException();
         } finally {
