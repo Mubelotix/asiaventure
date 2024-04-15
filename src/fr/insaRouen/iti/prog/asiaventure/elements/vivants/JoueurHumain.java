@@ -43,7 +43,7 @@ public class JoueurHumain extends Vivant implements Executable {
             Method methode = this.getClass().getDeclaredMethod(nom_methode, argTypes);
             methode.invoke(this, args.toArray());
         } catch(NoSuchMethodException e){
-            throw new CommandeImpossiblePourLeVivantException("la commande n'existe pas");
+            System.out.println("la commande n'existe pas");
         } catch(Throwable e1) {
             System.out.println(e1.getCause().toString());
         } finally {
