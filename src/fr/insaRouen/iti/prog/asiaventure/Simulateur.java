@@ -197,7 +197,7 @@ public class Simulateur implements java.io.Serializable {
                 Executable executable = (Executable)entite;
                 try {
                     executable.executer();
-                } catch(ASIAventureException e) {
+                } catch(Exception e) {
                     System.out.println(e.toString());
                 }
             }
