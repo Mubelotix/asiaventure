@@ -1,7 +1,7 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
 public class ConditionDeFinConjonctionConditionDeFin extends ConditionDeFin {
-    ConditionDeFin[] cfs;
+    private ConditionDeFin[] cfs;
 
     public ConditionDeFinConjonctionConditionDeFin(EtatDuJeu etatDuJeu, ConditionDeFin... cfs) {
         super(etatDuJeu);

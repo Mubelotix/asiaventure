@@ -4,8 +4,8 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 public class ConditionDeFinVivantDansPiece extends ConditionDeFin {
-    Vivant vivant;
-    Piece piece;
+    private Vivant vivant;
+    private Piece piece;
     
     ConditionDeFinVivantDansPiece(EtatDuJeu etatConditionVerifiee, Vivant vivant, Piece piece) {
         super(etatConditionVerifiee);

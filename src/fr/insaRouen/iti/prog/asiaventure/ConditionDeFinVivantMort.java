@@ -3,7 +3,7 @@ package fr.insaRouen.iti.prog.asiaventure;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 public class ConditionDeFinVivantMort extends ConditionDeFin {
-    Vivant vivant;
+    private Vivant vivant;
     
     public ConditionDeFinVivantMort(EtatDuJeu etatConditionVerifiee, Vivant vivant) {
         super(etatConditionVerifiee);
