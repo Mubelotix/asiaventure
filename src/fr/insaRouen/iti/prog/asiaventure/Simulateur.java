@@ -129,61 +129,13 @@ public class Simulateur implements java.io.Serializable {
         oos.writeObject(this.conditionsDeFin);
     }
 
-    private String generatePlayerInfo(JoueurHumain joueur) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Joueur ");
-        sb.append(joueur.getNom());
-
-        Set<String> objets = joueur.getObjets().keySet();
-        if (objets.size() > 0) {
-            sb.append(" portant ");
-            for (String objet : objets) {
-                sb.append(objet);
-                sb.append(", ");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        
-        sb.append(" dans ");
-        sb.append(joueur.getPiece().getNom());
-
-        Collection<Objet> objetsPiece = joueur.getPiece().getObjets();
-        if (objetsPiece.size() > 0) {
-            sb.append(" contenant ");
-            for (Objet objet : objetsPiece) {
-                sb.append(objet.getNom());
-                sb.append(", ");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-
-        Collection<Porte> portes = joueur.getPiece().getPortes();
-        if (portes.size() > 0) {
-            sb.append(" avec les portes ");
-            for (Porte porte : portes) {
-                sb.append(porte.getNom());
-                Etat etat = porte.getEtat();
-                sb.append("[");
-                sb.append(etat);
-                sb.append("]");
-                sb.append(", ");
-            }
-            sb.deleteCharAt(sb.length() - 1);
-            sb.deleteCharAt(sb.length() - 1);
-        }
-
-        return sb.toString();
-    }
-
     public EtatDuJeu executerUnTour() throws Throwable {
         // pour chaque joueur humain, afficher sa situation et lui demander de saisir un ordre.
         for (String nom : monde.getAllNomsEntites()) {
             Entite entite = monde.getEntite(nom);
             if (entite instanceof JoueurHumain) {
                 JoueurHumain joueur = (JoueurHumain)entite;
-                System.out.println(String.format("%s\nVeuillez saisir un ordre", this.generatePlayerInfo(joueur)));
+                System.out.println(String.format("%s\nVeuillez saisir un ordre", joueur.toString()));
                 Scanner stdin = new Scanner(System.in);
                 String ordre = stdin.nextLine();
                 joueur.setOrdre(ordre);
@@ -197,7 +149,7 @@ public class Simulateur implements java.io.Serializable {
                 Executable executable = (Executable)entite;
                 try {
                     executable.executer();
-                } catch(Exception e) {
+                } catch(ASIAventureException e) {
                     System.out.println(e.toString());
                 }
             }
