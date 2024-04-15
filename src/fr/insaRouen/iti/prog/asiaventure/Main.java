@@ -18,6 +18,10 @@ public class Main {
             System.out.println("--- Menu ---\n\t1/ jouer\n\t2/ charger un fichier de description\n\t3/ sauver la partie actuelle\n\t4/ charger une partie\n\t5/ quitter");
             switch (stdin.nextInt()) {
                 case 1:
+                    if (s == null) {
+                        System.out.println("Création d'un monde par défaut");
+                        s = new Simulateur(new Monde("Monde"));
+                    }
                     while (true) {
                         s.executerUnTour();
                         System.out.println("Souhaitez vous rejouer?");
