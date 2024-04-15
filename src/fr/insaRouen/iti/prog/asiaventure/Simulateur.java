@@ -137,8 +137,8 @@ public class Simulateur implements java.io.Serializable {
                 System.out.println(sb.toString());
                 
                 System.out.println("Veuillez saisir un ordre");
-                BufferedReader buffer=new BufferedReader(new java.io.InputStreamReader(System.in));
-                String ordre = buffer.readLine();
+                Scanner stdin = new Scanner(System.in);
+                String ordre = stdin.next();
                 joueur.setOrdre(ordre);
             }
         }

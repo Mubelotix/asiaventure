@@ -1,5 +1,6 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,7 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws ASIAventureException, Exception {
+    public static void main(String[] args) throws ASIAventureException, Exception, Throwable {
         Simulateur s = null;
 
         Scanner stdin = new Scanner(System.in);
@@ -17,11 +18,14 @@ public class Main {
             System.out.println("--- Menu ---\n\t1/ jouer\n\t2/ charger un fichier de description\n\t3/ sauver la partie actuelle\n\t4/ charger une partie\n\t5/ quitter");
             switch (stdin.nextInt()) {
                 case 1:
-                    if (s == null) {
-                        System.out.println("Création d'un monde par défaut");
-                        s = new Simulateur(new Monde("monde"));
+                    while (true) {
+                        s.executerUnTour();
+                        System.out.println("Souhaitez vous rejouer?");
+                        String ordre = stdin.next();
+                        if (!ordre.trim().equals("oui")) {
+                            break;
+                        }
                     }
-                    System.out.println("Non implémenté");
                     break;
                 case 2:
                     System.out.println("Entrez le chemin vers le fichier de description");
