@@ -34,9 +34,8 @@ public class Simulateur implements java.io.Serializable {
     }
 
     public Simulateur(ObjectInputStream ois) throws IOException, ClassNotFoundException {
-        Simulateur deserialized = (Simulateur) ois.readObject();
-        this.monde = deserialized.monde;
-        this.conditionsDeFin = deserialized.conditionsDeFin;
+        this.monde = (Monde) ois.readObject();
+        this.conditionsDeFin = (ArrayList<ConditionDeFin>) ois.readObject();
     }
 
     public Simulateur(Reader reader) throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -63,7 +62,7 @@ public class Simulateur implements java.io.Serializable {
                     construitJoueurHumain(s, this.monde);
                     break;
                 case "ConditionDeFinVivantDansPiece":
-                    this.conditionsDeFin.add(construitConditionDeFinVivantDansPiece(s, this.monde));
+                    construitConditionDeFinVivantDansPiece(s, this.monde);
                     break;
                 default:
                     break;
@@ -112,7 +111,7 @@ public class Simulateur implements java.io.Serializable {
         new JoueurHumain(nom, monde, pointVie, pointForce, piece);
     }
 
-    private ConditionDeFin construitConditionDeFinVivantDansPiece(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+    private void construitConditionDeFinVivantDansPiece(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         String etat_str = s.next();
         EtatDuJeu etat;
         if (etat_str.equals("SUCCES")) {
@@ -122,11 +121,12 @@ public class Simulateur implements java.io.Serializable {
         }
         Vivant vivant = (Vivant) monde.getEntite(s.next().replaceAll("\"", ""));
         Piece piece = (Piece) monde.getEntite(s.next().replaceAll("\"", ""));
-        return new ConditionDeFinVivantDansPiece(etat, vivant, piece);
+        this.conditionsDeFin.add(new ConditionDeFinVivantDansPiece(etat, vivant, piece));
     }
 
     public void enregister(ObjectOutputStream oos) throws IOException {
-        oos.writeObject(this);
+        oos.writeObject(this.monde);
+        oos.writeObject(this.conditionsDeFin);
     }
 
     private String generatePlayerInfo(JoueurHumain joueur) {
