@@ -10,7 +10,10 @@ public class ConditionDeFinVivantPossedeObjets extends ConditionDeFin {
     ConditionDeFinVivantPossedeObjets(EtatDuJeu etatConditionVerifiee, Vivant vivant, Objet[] objets) {
         super(etatConditionVerifiee);
         this.vivant = vivant;
-        this.objets = objets;
+        this.objets = new Objet[objets.length];
+        for (int i = 0; i < objets.length; i++) {
+            this.objets[i] = objets[i];
+        }
     }
 
     @Override

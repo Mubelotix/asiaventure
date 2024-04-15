@@ -5,7 +5,10 @@ public class ConditionDeFinConjonctionConditionDeFin extends ConditionDeFin {
 
     public ConditionDeFinConjonctionConditionDeFin(EtatDuJeu etatDuJeu, ConditionDeFin... cfs) {
         super(etatDuJeu);
-        this.cfs = cfs;
+        this.cfs = new ConditionDeFin[cfs.length];
+        for (int i = 0; i < cfs.length; i++) {
+            this.cfs[i] = cfs[i];
+        }
     }
 
     @Override
