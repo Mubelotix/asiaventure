@@ -41,9 +41,9 @@ public class JoueurHumain extends Vivant{
                         commandeOuvrirPorte(nomPorte);
                     }
                 default:
+                    throw new CommandeImpossiblePourLeVivantException("cette commande n'existe pas");
             }
         }catch(CommandeImpossiblePourLeVivantException e){
-            System.out.println(String.format("commande n'existe pas : %s", e));
         }catch(Throwable e1){
             System.out.println(String.format("Cause exception : %s", e1.getCause()));
         }
