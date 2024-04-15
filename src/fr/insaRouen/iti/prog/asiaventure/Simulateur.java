@@ -1,10 +1,10 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -22,12 +22,15 @@ import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 public class Simulateur implements java.io.Serializable {
     private Monde monde;
-    private ConditionDeFin[] conditionsDeFin;
+    private ArrayList<ConditionDeFin> conditionsDeFin;
     private EtatDuJeu etatDuJeu;
 
     public Simulateur(Monde monde, ConditionDeFin... conditionsDeFin) {
         this.monde = monde;
-        this.conditionsDeFin = conditionsDeFin;
+        this.conditionsDeFin = new ArrayList<ConditionDeFin>();
+        for (ConditionDeFin cdf : conditionsDeFin) {
+            this.conditionsDeFin.add(cdf);
+        }
     }
 
     public Simulateur(ObjectInputStream ois) throws IOException, ClassNotFoundException {
@@ -38,6 +41,7 @@ public class Simulateur implements java.io.Serializable {
 
     public Simulateur(Reader reader) throws NomDEntiteDejaUtiliseDansLeMondeException {
         Scanner s = new Scanner(reader);
+        this.conditionsDeFin = new ArrayList<ConditionDeFin>();
         while (s.hasNext()) {
             switch (s.next()) {
                 case "Monde":
@@ -59,14 +63,12 @@ public class Simulateur implements java.io.Serializable {
                     construitJoueurHumain(s, this.monde);
                     break;
                 case "ConditionDeFinVivantDansPiece":
-                    construitConditionDeFinVivantDansPiece(s, this.monde);
+                    this.conditionsDeFin.add(construitConditionDeFinVivantDansPiece(s, this.monde));
                     break;
                 default:
                     break;
             }
         }
-
-        this.conditionsDeFin = new ConditionDeFin[0];
     }
 
     private Monde construitMonde(Scanner s) {
@@ -110,7 +112,7 @@ public class Simulateur implements java.io.Serializable {
         new JoueurHumain(nom, monde, pointVie, pointForce, piece);
     }
 
-    private void construitConditionDeFinVivantDansPiece(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
+    private ConditionDeFin construitConditionDeFinVivantDansPiece(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
         String etat_str = s.next();
         EtatDuJeu etat;
         if (etat_str.equals("SUCCES")) {
@@ -120,7 +122,7 @@ public class Simulateur implements java.io.Serializable {
         }
         Vivant vivant = (Vivant) monde.getEntite(s.next().replaceAll("\"", ""));
         Piece piece = (Piece) monde.getEntite(s.next().replaceAll("\"", ""));
-        new ConditionDeFinVivantDansPiece(etat, vivant, piece);
+        return new ConditionDeFinVivantDansPiece(etat, vivant, piece);
     }
 
     public void enregister(ObjectOutputStream oos) throws IOException {
@@ -197,6 +199,7 @@ public class Simulateur implements java.io.Serializable {
         for (ConditionDeFin cdf : this.conditionsDeFin) {
             this.etatDuJeu = cdf.verifierCondition();
             if (this.etatDuJeu != EtatDuJeu.ENCOURS) {
+                System.out.println(this.etatDuJeu);
                 return this.etatDuJeu;
             }
         }
