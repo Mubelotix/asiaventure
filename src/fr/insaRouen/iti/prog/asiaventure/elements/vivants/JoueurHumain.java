@@ -1,5 +1,6 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
+import java.util.Scanner;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
@@ -22,6 +23,30 @@ public class JoueurHumain extends Vivant{
     }
 
     public void executer() throws CommandeImpossiblePourLeVivantException, Throwable{
+        Scanner s = new Scanner(this.ordre);
+        try{
+            switch(s.next()){
+                case "Prendre":
+                    commandePrendre(s.next());
+                case "Poser":
+                    commandePoser(s.next());
+                case "Franchir":
+                    commandeOuvrirPorte(s.next());
+                case "OuvrirPorte":
+                    String nomPorte = s.next();
+                    if(s.hasNext()){
+                        String nomObjet = s.next();
+                        commandeOuvrirPorte(nomPorte, nomObjet);
+                    }else{
+                        commandeOuvrirPorte(nomPorte);
+                    }
+                default:
+            }
+        }catch(CommandeImpossiblePourLeVivantException e){
+            System.out.println(String.format("commande n'existe pas : %s", e));
+        }catch(Throwable e1){
+            System.out.println(String.format("Cause exception : %s", e1.getCause()));
+        }
 
     }
 
