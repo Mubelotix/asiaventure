@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Reader;
+import java.util.Collection;
 import java.util.Scanner;
 
+import java.util.Set;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
 import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
@@ -134,9 +136,44 @@ public class Simulateur implements java.io.Serializable {
                 StringBuilder sb = new StringBuilder();
                 sb.append("Joueur ");
                 sb.append(joueur.getNom());
-                System.out.println(sb.toString());
+
+                Set<String> objets = joueur.getObjets().keySet();
+                if (objets.size() > 0) {
+                    sb.append(" portant ");
+                    for (String objet : objets) {
+                        sb.append(objet);
+                        sb.append(", ");
+                    }
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.deleteCharAt(sb.length() - 1);
+                }
                 
-                System.out.println("Veuillez saisir un ordre");
+                sb.append(" dans ");
+                sb.append(joueur.getPiece().getNom());
+
+                Collection<Objet> objetsPiece = joueur.getPiece().getObjets();
+                if (objetsPiece.size() > 0) {
+                    sb.append(" contenant ");
+                    for (Objet objet : objetsPiece) {
+                        sb.append(objet.getNom());
+                        sb.append(", ");
+                    }
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.deleteCharAt(sb.length() - 1);
+                }
+
+                Collection<Porte> portes = joueur.getPiece().getPortes();
+                if (portes.size() > 0) {
+                    sb.append(" avec les portes ");
+                    for (Porte porte : portes) {
+                        sb.append(porte.getNom());
+                        sb.append(", ");
+                    }
+                    sb.deleteCharAt(sb.length() - 1);
+                    sb.deleteCharAt(sb.length() - 1);
+                }
+                
+                System.out.println(String.format("%s\nVeuillez saisir un ordre", sb.toString()));
                 Scanner stdin = new Scanner(System.in);
                 String ordre = stdin.nextLine();
                 joueur.setOrdre(ordre);
