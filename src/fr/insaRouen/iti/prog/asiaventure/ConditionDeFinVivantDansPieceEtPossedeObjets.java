@@ -4,40 +4,31 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
-public class ConditionDeFinVivantDansPieceEtPossedeObjets extends ConditionDeFin {
-    //Vivant vivant;
-    //Piece piece;
-    //Objet[] objets;
-    ConditionDeFinConjonctionConditionDeFin cdf;
-    
+public class ConditionDeFinVivantDansPieceEtPossedeObjets extends ConditionDeFinConjonctionConditionDeFin {
     ConditionDeFinVivantDansPieceEtPossedeObjets(EtatDuJeu etatConditionVerifiee, Vivant vivant, Piece piece, Objet[] objets) {
-        super(etatConditionVerifiee);
-        this.cdf = new ConditionDeFinConjonctionConditionDeFin(
+        super(etatConditionVerifiee,
+        new ConditionDeFinVivantDansPiece(
             etatConditionVerifiee,
-            new ConditionDeFinVivantDansPiece(
-                etatConditionVerifiee,
-                vivant,
-                piece
-            ),
-            new ConditionDeFinVivantPossedeObjets(
-                etatConditionVerifiee,
-                vivant,
-                objets
-            )
-        );
+            vivant,
+            piece
+        ),
+        new ConditionDeFinVivantPossedeObjets(
+            etatConditionVerifiee,
+            vivant,
+            objets
+        ));
     }
-
-    @Override
-    public EtatDuJeu verifierCondition() {
-        //for (Objet objet : this.objets) {
-        //    if (!this.vivant.possede(objet)) {
-        //        return EtatDuJeu.ENCOURS;
-        //    }
-        //}
-        //if (this.vivant.getPiece().getNom().equals(this.piece.getNom())) {
-        //    return this.getEtatConditionVerifiee();
-        //}
-        //return EtatDuJeu.ENCOURS;
-        return this.cdf.verifierCondition();
-    }
+    
+    //@Override
+    //public EtatDuJeu verifierCondition() {
+    //    for (Objet objet : this.objets) {
+    //        if (!this.vivant.possede(objet)) {
+    //            return EtatDuJeu.ENCOURS;
+    //        }
+    //    }
+    //    if (this.vivant.getPiece().getNom().equals(this.piece.getNom())) {
+    //        return this.getEtatConditionVerifiee();
+    //    }
+    //    return EtatDuJeu.ENCOURS;
+    //}
 }
