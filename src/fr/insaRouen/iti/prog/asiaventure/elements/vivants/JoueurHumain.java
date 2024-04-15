@@ -1,6 +1,7 @@
 package fr.insaRouen.iti.prog.asiaventure.elements.vivants;
 
 import java.util.Scanner;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ArrayList;
@@ -31,21 +32,22 @@ public class JoueurHumain extends Vivant implements Executable {
 
     public void executer() throws CommandeImpossiblePourLeVivantException, Throwable{
         Scanner s = new Scanner(this.ordre);
-        try{
-            String nom_methode = String.format("commande%s", s.next());
-            List<String> args = new ArrayList<String>();
-            while(s.hasNext()){
-                args.add(s.next());
-            }
-            Class<?>[] argTypes = new Class<?>[args.size()];
-            Arrays.fill(argTypes, String.class);
 
+        String nom_methode = String.format("commande%s", s.next());
+        List<String> args = new ArrayList<String>();
+        while(s.hasNext()){
+            args.add(s.next());
+        }
+        Class<?>[] argTypes = new Class<?>[args.size()];
+        Arrays.fill(argTypes, String.class);
+
+        try{
             Method methode = this.getClass().getDeclaredMethod(nom_methode, argTypes);
             methode.invoke(this, args.toArray());
         } catch(NoSuchMethodException e){
-            System.out.println("la commande n'existe pas");
-        } catch(Throwable e1) {
-            System.out.println(e1.getCause().toString());
+            throw new CommandeImpossiblePourLeVivantException(String.format("La commande %s n'existe pas", nom_methode));
+        } catch(InvocationTargetException e1) {
+            throw e1.getTargetException();
         } finally {
             s.close();
         }

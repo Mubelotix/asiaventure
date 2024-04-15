@@ -191,7 +191,11 @@ public class Simulateur implements java.io.Serializable {
             Entite entite = monde.getEntite(nom);
             if (entite instanceof Executable) {
                 Executable executable = (Executable)entite;
-                executable.executer();
+                try {
+                    executable.executer();
+                } catch(ASIAventureException e) {
+                    System.out.println(e.toString());
+                }
             }
         }
 
