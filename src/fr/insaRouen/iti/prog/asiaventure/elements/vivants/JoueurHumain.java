@@ -36,7 +36,7 @@ public class JoueurHumain extends Vivant implements Executable {
         return this.getClass().getDeclaredMethod(String.format("commande%s", commande), argTypes);
     }
 
-    public void executer() throws CommandeImpossiblePourLeVivantException, Throwable{
+    public void executer() throws CommandeImpossiblePourLeVivantException, Throwable {
         Scanner s = new Scanner(this.ordre);
 
         String commande = s.next();
@@ -48,10 +48,10 @@ public class JoueurHumain extends Vivant implements Executable {
         try{
             Method methode = this.getMethod(commande, args);
             methode.invoke(this, args.toArray());
-        } catch(NoSuchMethodException e) {
-            throw new CommandeImpossiblePourLeVivantException(String.format("La commande %s n'existe pas", commande));
         } catch(InvocationTargetException e1) {
             throw e1.getTargetException();
+        } catch(Exception e) {
+            throw new CommandeImpossiblePourLeVivantException(String.format("La commande %s ne peut pas être utilisée", commande));
         } finally {
             s.close();
         }
