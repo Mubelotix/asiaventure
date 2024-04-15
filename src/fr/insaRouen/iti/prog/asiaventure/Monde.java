@@ -1,12 +1,14 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
+import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 
 import java.util.Map;
 import java.util.Set;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Monde implements Serializable {
@@ -43,6 +45,14 @@ public class Monde implements Serializable {
 
     public Set<String> getAllNomsEntites() {
         return this.entites.keySet();
+    }
+
+    public Collection<Executable> getExecutables() {
+        return this.entites.values().stream().filter(entite -> entite instanceof Executable).map(entite -> (Executable) entite).toList();
+    }
+
+    public Collection<Entite> getEntites() {
+        return this.entites.values();
     }
 
     private boolean nomEntiteDejaUtilise(Entite entite){

@@ -128,8 +128,7 @@ public class Simulateur implements java.io.Serializable {
 
     public EtatDuJeu executerUnTour() throws Throwable {
         // pour chaque joueur humain, afficher sa situation et lui demander de saisir un ordre.
-        for (String nom : monde.getAllNomsEntites()) {
-            Entite entite = monde.getEntite(nom);
+        for (Entite entite : monde.getEntites()) {
             if (entite instanceof JoueurHumain) {
                 JoueurHumain joueur = (JoueurHumain)entite;
                 System.out.println(String.format("%s\nVeuillez saisir un ordre", joueur.toString()));
@@ -139,15 +138,11 @@ public class Simulateur implements java.io.Serializable {
         }
 
         // pour chaque Executable appeler la m´ethode executer.
-        for (String nom : monde.getAllNomsEntites()) {
-            Entite entite = monde.getEntite(nom);
-            if (entite instanceof Executable) {
-                Executable executable = (Executable)entite;
-                try {
-                    executable.executer();
-                } catch(ASIAventureException e) {
-                    System.out.println(e.toString());
-                }
+        for (Executable executable : monde.getExecutables()) {
+            try {
+                executable.executer();
+            } catch(ASIAventureException e) {
+                System.out.println(e.toString());
             }
         }
 
