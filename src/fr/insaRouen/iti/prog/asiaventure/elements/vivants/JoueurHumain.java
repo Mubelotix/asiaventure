@@ -43,7 +43,7 @@ public class JoueurHumain extends Vivant implements Executable {
             Method methode = this.getClass().getDeclaredMethod(nom_methode, argTypes);
             methode.invoke(this, args.toArray());
         } catch(Throwable e1) {
-            System.out.println(String.format("Cause exception : %s %s", e1, e1.getCause()));
+            System.out.println(e1.getCause().toString());
         } finally {
             s.close();
         }
