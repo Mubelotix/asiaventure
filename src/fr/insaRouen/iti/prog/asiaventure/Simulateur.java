@@ -138,7 +138,7 @@ public class Simulateur implements java.io.Serializable {
                 
                 System.out.println("Veuillez saisir un ordre");
                 Scanner stdin = new Scanner(System.in);
-                String ordre = stdin.next();
+                String ordre = stdin.nextLine();
                 joueur.setOrdre(ordre);
             }
         }

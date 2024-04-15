@@ -4,6 +4,9 @@ import java.util.Scanner;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import fr.insaRouen.iti.prog.asiaventure.ASIAventureException;
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
@@ -13,8 +16,9 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPiece
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
+import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
 
-public class JoueurHumain extends Vivant{
+public class JoueurHumain extends Vivant implements Executable {
     private String ordre;
     
     public JoueurHumain(String nom, Monde monde, int pointsVie, int pointsForce, Piece piece, Objet... objets) throws NomDEntiteDejaUtiliseDansLeMondeException{
@@ -28,35 +32,21 @@ public class JoueurHumain extends Vivant{
     public void executer() throws CommandeImpossiblePourLeVivantException, Throwable{
         Scanner s = new Scanner(this.ordre);
         try{
-            //switch(s.next()){
-            //    case "Prendre":
-            //        commandePrendre(s.next());
-            //    case "Poser":
-            //        commandePoser(s.next());
-            //    case "Franchir":
-            //        commandeOuvrirPorte(s.next());
-            //    case "OuvrirPorte":
-            //        String nomPorte = s.next();
-            //        if(s.hasNext()){
-            //            String nomObjet = s.next();
-            //            commandeOuvrirPorte(nomPorte, nomObjet);
-            //        }else{
-            //            commandeOuvrirPorte(nomPorte);
-            //        }
-            //    default:
-            //        throw new CommandeImpossiblePourLeVivantException("cette commande n'existe pas");
-            //}
-            Method methode = this.getClass().getDeclaredMethod(String.format("commande%s", s.next()));
-            List<String> arg = new ArrayList<String>();
+            String nom_methode = String.format("commande%s", s.next());
+            List<String> args = new ArrayList<String>();
             while(s.hasNext()){
-                arg.add(s.next());
+                args.add(s.next());
             }
-            methode.invoke(this, arg);
+            Class<?>[] argTypes = new Class<?>[args.size()];
+            Arrays.fill(argTypes, String.class);
 
-        }catch(Throwable e1){
-            System.out.println(String.format("Cause exception : %s", e1.getCause()));
+            Method methode = this.getClass().getDeclaredMethod(nom_methode, argTypes);
+            methode.invoke(this, args.toArray());
+        } catch(Throwable e1) {
+            System.out.println(String.format("Cause exception : %s %s", e1, e1.getCause()));
+        } finally {
+            s.close();
         }
-
     }
 
     void commandePrendre(String nomObjet) throws ObjetAbsentDeLaPieceException, ObjetNonDeplacableException{
