@@ -14,6 +14,7 @@ import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteInexistanteDans
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.ObjetAbsentDeLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
+import fr.insaRouen.iti.prog.asiaventure.elements.structure.Porte;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.ActivationException;
 import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
@@ -70,10 +71,12 @@ public class JoueurHumain extends Vivant implements Executable {
     }
 
     void commandeOuvrirPorte(String nomPorte, String nomObjet) throws ActivationException, PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException {
-        this.franchir(nomPorte, nomObjet);
+        Porte porte = (Porte) this.getMonde().getEntite(nomPorte);
+        porte.activerAvec(this.getObjet(nomObjet));
     }
 
     void commandeOuvrirPorte(String nomPorte) throws ActivationException, PorteFermeException, PorteInexistanteDansLaPieceException, ObjetNonPossedeParLeVivantException {
-        this.franchir(nomPorte);
+        Porte porte = (Porte) this.getMonde().getEntite(nomPorte);
+        porte.activer();
     }
 }

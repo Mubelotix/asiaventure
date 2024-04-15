@@ -83,7 +83,7 @@ public class Simulateur implements java.io.Serializable {
         String nom = s.next().replaceAll("\"", "");
         Piece piece1 = monde.getPiece(s.next().replaceAll("\"", ""));
         Piece piece2 = monde.getPiece(s.next().replaceAll("\"", ""));
-        new Porte(nom, monde, piece1, piece2);
+        new Porte(nom, monde, piece1, piece2, true);
     }
 
     private void construitPorteSerrure(Scanner s, Monde monde) throws NomDEntiteDejaUtiliseDansLeMondeException {
@@ -167,6 +167,10 @@ public class Simulateur implements java.io.Serializable {
                     sb.append(" avec les portes ");
                     for (Porte porte : portes) {
                         sb.append(porte.getNom());
+                        Etat etat = porte.getEtat();
+                        sb.append("[");
+                        sb.append(etat);
+                        sb.append("]");
                         sb.append(", ");
                     }
                     sb.deleteCharAt(sb.length() - 1);
