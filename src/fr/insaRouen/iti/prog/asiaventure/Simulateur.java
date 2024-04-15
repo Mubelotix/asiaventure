@@ -5,14 +5,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
-import java.util.Set;
 import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
-import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
 import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
-import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Serrure;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Clef;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.Piece;
@@ -24,6 +20,7 @@ public class Simulateur implements java.io.Serializable {
     private Monde monde;
     private ArrayList<ConditionDeFin> conditionsDeFin;
     private EtatDuJeu etatDuJeu;
+    Scanner stdin = new Scanner(System.in);
 
     public Simulateur(Monde monde, ConditionDeFin... conditionsDeFin) {
         this.monde = monde;
@@ -136,8 +133,7 @@ public class Simulateur implements java.io.Serializable {
             if (entite instanceof JoueurHumain) {
                 JoueurHumain joueur = (JoueurHumain)entite;
                 System.out.println(String.format("%s\nVeuillez saisir un ordre", joueur.toString()));
-                Scanner stdin = new Scanner(System.in);
-                String ordre = stdin.nextLine();
+                String ordre = this.stdin.nextLine();
                 joueur.setOrdre(ordre);
             }
         }

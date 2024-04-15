@@ -10,19 +10,11 @@ public class ConditionDeFinConjonctionConditionDeFin extends ConditionDeFin {
 
     @Override
     public EtatDuJeu verifierCondition() {
-        boolean verifie = true;
         for (ConditionDeFin cf : this.cfs) {
-            EtatDuJeu etat = cf.verifierCondition();
-            if (etat == EtatDuJeu.ECHEC) {
-                return EtatDuJeu.ECHEC;
-            } else if (etat == EtatDuJeu.ENCOURS) {
-                verifie = false;
+            if (cf.verifierCondition() == EtatDuJeu.ENCOURS) {
+                return EtatDuJeu.ENCOURS;
             }
         }
-        if (verifie) {
-            return this.getEtatConditionVerifiee();
-        } else {
-            return EtatDuJeu.ENCOURS;
-        }
+        return this.getEtatConditionVerifiee();
     }
 }
