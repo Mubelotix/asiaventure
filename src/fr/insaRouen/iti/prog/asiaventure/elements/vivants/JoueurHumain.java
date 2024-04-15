@@ -13,6 +13,8 @@ import java.util.Collection;
 
 import fr.insaRouen.iti.prog.asiaventure.Monde;
 import fr.insaRouen.iti.prog.asiaventure.NomDEntiteDejaUtiliseDansLeMondeException;
+import fr.insaRouen.iti.prog.asiaventure.ASIAventureException;
+
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteFermeException;
 import fr.insaRouen.iti.prog.asiaventure.elements.structure.PorteInexistanteDansLaPieceException;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableException;
@@ -41,7 +43,7 @@ public class JoueurHumain extends Vivant implements Executable {
         return this.getClass().getDeclaredMethod(String.format("commande%s", commande), argTypes);
     }
 
-    public void executer() throws CommandeImpossiblePourLeVivantException, Throwable {
+    public void executer() throws ASIAventureException {
         Scanner s = new Scanner(this.ordre);
 
         String commande = s.next();
@@ -54,7 +56,7 @@ public class JoueurHumain extends Vivant implements Executable {
             Method methode = this.getMethod(commande, args);
             methode.invoke(this, args.toArray());
         } catch(InvocationTargetException e1) {
-            throw e1.getTargetException();
+            throw (ASIAventureException)e1.getTargetException();
         } catch(Exception e) {
             throw new CommandeImpossiblePourLeVivantException(String.format("La commande %s ne peut pas être utilisée", commande));
         } finally {
