@@ -1,10 +1,15 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Reader;
 import java.util.Scanner;
+
+import fr.insaRouen.iti.prog.asiaventure.elements.Entite;
+import fr.insaRouen.iti.prog.asiaventure.elements.Etat;
+import fr.insaRouen.iti.prog.asiaventure.elements.Executable;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.Objet;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Serrure;
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.serrurerie.Clef;
@@ -15,9 +20,10 @@ import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
 
 public class Simulateur implements java.io.Serializable {
     private Monde monde;
-    private Objet[] conditionsDeFin;
+    private ConditionDeFin[] conditionsDeFin;
+    private EtatDuJeu etatDuJeu;
 
-    public Simulateur(Monde monde, Objet... conditionsDeFin) {
+    public Simulateur(Monde monde, ConditionDeFin... conditionsDeFin) {
         this.monde = monde;
         this.conditionsDeFin = conditionsDeFin;
     }
@@ -58,7 +64,7 @@ public class Simulateur implements java.io.Serializable {
             }
         }
 
-        this.conditionsDeFin = new Objet[0];
+        this.conditionsDeFin = new ConditionDeFin[0];
     }
 
     private Monde construitMonde(Scanner s) {
@@ -117,6 +123,43 @@ public class Simulateur implements java.io.Serializable {
 
     public void enregister(ObjectOutputStream oos) throws IOException {
         oos.writeObject(this);
+    }
+
+    public EtatDuJeu executerUnTour() throws Throwable {
+        // pour chaque joueur humain, afficher sa situation et lui demander de saisir un ordre.
+        for (String nom : monde.getAllNomsEntites()) {
+            Entite entite = monde.getEntite(nom);
+            if (entite instanceof JoueurHumain) {
+                JoueurHumain joueur = (JoueurHumain)entite;
+                StringBuilder sb = new StringBuilder();
+                sb.append("Joueur ");
+                sb.append(joueur.getNom());
+                System.out.println(sb.toString());
+                
+                System.out.println("Veuillez saisir un ordre");
+                BufferedReader buffer=new BufferedReader(new java.io.InputStreamReader(System.in));
+                String ordre = buffer.readLine();
+                joueur.setOrdre(ordre);
+            }
+        }
+
+        // pour chaque Executable appeler la m´ethode executer.
+        for (String nom : monde.getAllNomsEntites()) {
+            Entite entite = monde.getEntite(nom);
+            if (entite instanceof Executable) {
+                Executable executable = (Executable)entite;
+                executable.executer();
+            }
+        }
+
+        // v´erifier chaque condition de fin et retourner ENCOURS si aucune n’est v´erifi´ee, sinon retourner l’´etat.
+        for (ConditionDeFin cdf : this.conditionsDeFin) {
+            this.etatDuJeu = cdf.verifierCondition();
+            if (this.etatDuJeu != EtatDuJeu.ENCOURS) {
+                return this.etatDuJeu;
+            }
+        }
+        return this.etatDuJeu;
     }
 
     public String toString() {
