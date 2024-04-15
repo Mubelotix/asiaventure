@@ -98,7 +98,7 @@ public /*abstract*/ class Vivant extends Entite {
     public void franchir(String nomPorte) throws PorteFermeException, PorteInexistanteDansLaPieceException {
         Porte porte = this.piece.getPorte(nomPorte);
         if (!porte.getEtat().equals(Etat.OUVERT)) {
-            throw new PorteFermeException();
+            throw new PorteFermeException("La porte n'est pas ouverte");
         }
         Piece piece2 = porte.getPieceAutreCote(this.piece);
         this.entrer(piece2);
@@ -108,7 +108,7 @@ public /*abstract*/ class Vivant extends Entite {
         Porte porte = this.piece.getPorte(nomPorte);
         Objet obj = this.getObjet(nomObjet);
         if (porte.getEtat().equals(Etat.VERROUILLE) || porte.getEtat().equals(Etat.FERME)) {
-            throw new PorteFermeException();
+            throw new PorteFermeException("La porte est verrrouillée ou fermée");
         }
         porte.activerAvec(obj);
         Piece piece2 = porte.getPieceAutreCote(this.piece);
