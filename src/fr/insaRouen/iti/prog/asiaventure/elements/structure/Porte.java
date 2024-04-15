@@ -61,9 +61,9 @@ public class Porte extends ElementStructurel implements Activable {
                 this.ouvert = true;
                 break;
             case VERROUILLE:
-                break;
+                throw new ActivationImpossibleException("La porte est verrouillée.");
             case CASSE:
-                break;
+                throw new ActivationImpossibleException("La porte est cassée.");
             default:
                 throw new ActivationImpossibleException("La porte est dans un état imprévu.");
         }
