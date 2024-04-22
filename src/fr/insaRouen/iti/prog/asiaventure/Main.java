@@ -1,6 +1,5 @@
 package fr.insaRouen.iti.prog.asiaventure;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

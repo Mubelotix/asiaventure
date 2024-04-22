@@ -14,14 +14,8 @@ import fr.insaRouen.iti.prog.asiaventure.elements.objets.ObjetNonDeplacableExcep
 import fr.insaRouen.iti.prog.asiaventure.elements.objets.PiedDeBiche;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.ObjetNonPossedeParLeVivantException;
 import fr.insaRouen.iti.prog.asiaventure.elements.vivants.Vivant;
-
 import static org.hamcrest.core.Is.is;
-
 import java.util.Collection;
-import java.util.Map;
-
-import javax.naming.OperationNotSupportedException;
-
 import java.lang.UnsupportedOperationException;
 
 class ObjetTest extends Objet {
