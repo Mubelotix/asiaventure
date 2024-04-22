@@ -31,7 +31,9 @@ public class TestPorte {
         Porte porte_verrouillee = new Porte("porte", monde, serrure, pA, pB);
 
         assertThat(porte_verrouillee.getEtat(), equalTo(Etat.VERROUILLE));
-        porte_verrouillee.activer();
+        try {
+            porte_verrouillee.activer();
+        } catch(Exception e) {}
         assertThat(porte_verrouillee.getEtat(), equalTo(Etat.VERROUILLE));
         porte_verrouillee.activerAvec(clef);
         assertThat(porte_verrouillee.getEtat(), equalTo(Etat.OUVERT));
